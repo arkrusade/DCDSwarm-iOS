@@ -12,6 +12,7 @@
 		AD6B91DA1D6F8E62005B77A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91D91D6F8E62005B77A9 /* LoginViewController.swift */; };
 		AD6B91DC1D6F8F49005B77A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91DB1D6F8F49005B77A9 /* Constants.swift */; };
 		AD6B91DE1D6F96EE005B77A9 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91DD1D6F96EE005B77A9 /* ErrorHandling.swift */; };
+		AD6B91E61D6FA66D005B77A9 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91E51D6FA66D005B77A9 /* Keys.swift */; };
 		ADA986F71D6A642300C26E6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA986F61D6A642300C26E6B /* AppDelegate.swift */; };
 		ADA986F91D6A642300C26E6B /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA986F81D6A642300C26E6B /* HomeworkViewController.swift */; };
 		ADA986FC1D6A642300C26E6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA986FA1D6A642300C26E6B /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 		AD6B91D91D6F8E62005B77A9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AD6B91DB1D6F8F49005B77A9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AD6B91DD1D6F96EE005B77A9 /* ErrorHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
+		AD6B91E51D6FA66D005B77A9 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		ADA986F31D6A642300C26E6B /* dcdsnotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dcdsnotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA986F61D6A642300C26E6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADA986F81D6A642300C26E6B /* HomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeworkViewController.swift; path = ../HomeworkViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				ADA986FD1D6A642300C26E6B /* Assets.xcassets */,
 				ADA986FF1D6A642300C26E6B /* LaunchScreen.storyboard */,
 				ADA987021D6A642300C26E6B /* Info.plist */,
+				AD6B91E51D6FA66D005B77A9 /* Keys.swift */,
 			);
 			path = dcdsnotify;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADA986F91D6A642300C26E6B /* HomeworkViewController.swift in Sources */,
+				AD6B91E61D6FA66D005B77A9 /* Keys.swift in Sources */,
 				AD6B91D81D6F876F005B77A9 /* WelcomeViewController.swift in Sources */,
 				AD6B91DE1D6F96EE005B77A9 /* ErrorHandling.swift in Sources */,
 				AD6B91D31D6F85FC005B77A9 /* CalendarHelper.swift in Sources */,
