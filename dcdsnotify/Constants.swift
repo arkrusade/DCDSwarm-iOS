@@ -12,12 +12,12 @@ class Constants {
 	static let invalidLoginURL = NSURL(string: "https://www.dcds.edu/userlogin.cfm?do=login&p=413")!
 	static let homeURL = NSURL(string: "https://www.dcds.edu")!
 	static let homeworkWeekURL = NSURL(string: "http://www.dcds.edu/page.cfm?p=8256&period=week")!
-	static let homeworkDayURLWithLinks = NSURL(string: "http://www.dcds.edu/page.cfm?p=8256")!
-	static let homeworkDay = NSURL(string: "http://www.dcds.edu/page.cfm?p=8256&start=05/25/2013&period=week")!
+	static let homeworkDay = NSURL(string: "https://www.dcds.edu/page.cfm?p=8256&start=11/08/2013&period=day")!
 	static let homeworkYear = NSURL(string: "http://www.dcds.edu/page.cfm?p=8256&start=01/21/2013&period=year")!
-	static let homeworkYearWithLinks = NSURL(string: "http://www.dcds.edu/page.cfm?p=8256&start=01/21/2014&period=year")!
 	
 	struct Segues {
 		static let LoginToHomeworkView = "LoginToHomeworkView"
 	}
+	
+	
 }

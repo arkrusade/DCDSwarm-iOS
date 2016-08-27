@@ -1,0 +1,113 @@
+//
+//  CalendarHelper.swift
+//  dcdsnotify
+//
+//  Created by Clara Hwang on 8/25/16.
+//  Copyright © 2016 orctech. All rights reserved.
+//
+
+import Foundation
+
+class CalendarHelper {
+	static func processCalendarStringDay(htmlString: NSString) -> Day
+	{
+		
+		let emptyStart = "<li class=\"listempty\">"
+		let emptyEnd = "</li>"
+		guard (try? htmlString.crop(emptyStart, end: emptyEnd)) == nil else{
+			let dayStart = "thisDate: {ts '"
+			let dayEnd = "'} start:"
+			let dateFormatter = NSDateFormatter()
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+			let date = dateFormatter.dateFromString(try! htmlString.cropExclusive(dayStart, end: dayEnd))
+			let emptyDay = Day(activities: [Activity(classString: "", title: "There are no events to display", desc: "")], date: date)
+			return emptyDay
+		}
+		
+		//NOTE: caldata divides months
+		//nothing divides weeks
+		//every day divided by class="listcap"
+		//every class divided by eventobj
+		
+		//MARK: Day divider
+		let dayStartString = "<span class=\"listcap\">"
+		let dayEndString = "</div>"//TODO: will not work on week or greater periods
+		var croppedDayString = try? htmlString.cropExclusive(dayStartString, end: dayEndString)
+		
+		
+		let dateString: String = try! croppedDayString!.cropExclusive("\n\t\t\t\t", end: "\n") as String
+		let thisDate: NSDate? = NSDate.dateFormatterDashed().dateFromString(dateString)
+		let tempDay = Day(date: thisDate)
+		tempDay.activities = []
+//		htmlString = htmlString.cropExclusive(dayStartString)
+		//TODO: for use with parsing week
+		
+		
+		//MARK: Activity Divider
+		let activityStartString = "<ul class=\"eventobj "
+		let activityEndString = "<!-- end eventobj -->"
+		
+		
+		var croppedActivity = try? (croppedDayString!.cropExclusive(activityStartString, end: activityEndString))
+		croppedDayString = try? croppedDayString!.cropExclusive(activityStartString)
+		
+		
+		while let okActivity = croppedActivity {
+			
+			
+			var activityTitle = "Title not found"
+			let activityClass: String
+			var activityDesc = ""
+
+			//MARK: parsing Title
+
+			let activityString = try! okActivity.crop("etitle")
+			if okActivity.containsString("calendar3659") {
+				activityTitle = try! activityString.cropExclusive("\">", end: "/span")
+				
+				var tempClassString = activityTitle
+				
+				activityTitle = try! activityTitle.cropEndExclusive("(")
+				if activityTitle.containsString("<br") {
+					tempClassString = try! tempClassString.cropExclusive("<br").cropExclusive("(")
+					activityTitle = try! activityTitle.cropEndExclusive("<")
+
+				}
+				
+				activityClass = try! tempClassString.cropExclusive("(", end: ")<")
+				
+			}
+				
+			else {
+				if okActivity.hasPrefix("calendar4790") {
+					
+					activityTitle = try! activityString.cropExclusive("</span>")
+					
+				}
+				else {//if (okActivity.hasPrefix("calendar3500")) {//linked
+					activityTitle = try! activityString.cropExclusive("title=").cropExclusive(">", end: "</span")
+				}
+				activityClass = try! activityTitle.cropEnd(":")
+				activityTitle = try! activityTitle.cropExclusive(": ")
+			}
+		
+			//MARK: parsing Desc
+			var activityDescData = try! activityString.cropExclusive("</span>")
+			while(activityDescData.containsString("<span")) {
+				activityDescData = try! activityDescData.cropExclusive("<span")
+				activityDesc += (try! activityDescData.cropExclusive(">", end: "</span") as String) + "\n"
+			}
+			
+			tempDay.activities!.append(Activity(classString: activityClass, title: activityTitle, desc: activityDesc))
+			
+			//while loop logic
+			croppedActivity = try? (croppedDayString!.cropExclusive(activityStartString, end: activityEndString))
+			croppedDayString = try? croppedDayString!.cropExclusive(activityStartString)
+
+
+		}
+		
+		return tempDay
+	}
+}
+

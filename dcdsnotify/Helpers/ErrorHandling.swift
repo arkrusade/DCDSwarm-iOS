@@ -30,7 +30,7 @@ struct ErrorHandling {
 		window.rootViewController?.presentViewControllerFromTopViewController(alert, animated: true, completion: nil)
 	}
 	static func defaultErrorHandler(error: NSError) {
-		let alert = UIAlertController(title: ErrorTitle, message: error.description, preferredStyle: UIAlertControllerStyle.Alert)
+		let alert = UIAlertController(title: ErrorTitle, message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
 		alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: nil))
 		
 		let window = UIApplication.sharedApplication().windows[0]

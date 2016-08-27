@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Welcome View Controller-->
@@ -95,16 +96,24 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BLt-iS-EFz">
+                                <rect key="frame" x="290" y="392" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99538427591323853" green="0.87520486116409302" blue="0.20220634341239929" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" cyan="0.0068302303552627563" magenta="0.082725897431373596" yellow="0.9189370450557478" black="0.01263231597840786" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                         <constraints>
                             <constraint firstItem="c37-ZI-ev1" firstAttribute="centerX" secondItem="Xdy-G8-yTW" secondAttribute="centerX" id="XUL-xz-4MA"/>
                             <constraint firstItem="c37-ZI-ev1" firstAttribute="centerY" secondItem="Xdy-G8-yTW" secondAttribute="centerY" id="Zqu-J3-CVc"/>
+                            <constraint firstItem="BLt-iS-EFz" firstAttribute="top" secondItem="byr-Zz-FoF" secondAttribute="bottom" id="mP2-rn-2hb"/>
+                            <constraint firstItem="BLt-iS-EFz" firstAttribute="centerX" secondItem="byr-Zz-FoF" secondAttribute="centerX" id="suB-Pw-bfg"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="PasswordTextField" destination="STK-5A-AGu" id="kjt-3d-3oK"/>
                         <outlet property="UsernameTextField" destination="dHp-jT-Vet" id="U59-h1-szk"/>
+                        <outlet property="activityIndicator" destination="BLt-iS-EFz" id="EAV-ic-1xc"/>
+                        <outlet property="vertStackView" destination="c37-ZI-ev1" id="nro-KH-9x8"/>
                         <segue destination="mJA-R2-8tx" kind="show" identifier="LoginToHomeworkView" id="7dY-YG-MHd"/>
                     </connections>
                 </viewController>
@@ -112,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="570" y="311"/>
         </scene>
-        <!--Today's Date-->
+        <!--Homework View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeworkViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Homework View Controller" id="BYZ-38-t0r" customClass="HomeworkViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -124,36 +133,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pDo-lR-T22">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pDo-lR-T22">
+                                <rect key="frame" x="0.0" y="4" width="600" height="596"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ejL-qJ-xhA">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" id="ejL-qJ-xhA" customClass="ActivityTableViewCell" customModule="dcdsnotify" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ejL-qJ-xhA" id="zlr-tx-XoT">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-J5-zOE">
-                                                    <rect key="frame" x="290" y="12" width="20" height="20"/>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xcl-xn-m3Y">
+                                                    <rect key="frame" x="290" y="25" width="20" height="20"/>
                                                 </activityIndicatorView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="QBM-fo-Rhm">
+                                                    <rect key="frame" x="38" y="8" width="524" height="53"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bk2-cQ-zix">
+                                                            <rect key="frame" x="0.0" y="0.0" width="524" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD0-pr-n1v">
+                                                            <rect key="frame" x="0.0" y="36" width="524" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xcl-xn-m3Y" firstAttribute="centerY" secondItem="zlr-tx-XoT" secondAttribute="centerY" id="2Ln-PQ-Y0h"/>
+                                                <constraint firstItem="QBM-fo-Rhm" firstAttribute="top" secondItem="zlr-tx-XoT" secondAttribute="topMargin" id="6C3-3R-VaX"/>
+                                                <constraint firstItem="QBM-fo-Rhm" firstAttribute="leading" secondItem="zlr-tx-XoT" secondAttribute="leadingMargin" constant="30" id="KQa-nb-mBV"/>
+                                                <constraint firstItem="xcl-xn-m3Y" firstAttribute="centerX" secondItem="zlr-tx-XoT" secondAttribute="centerX" id="cqZ-kR-fN8"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="QBM-fo-Rhm" secondAttribute="trailing" constant="30" id="pOH-Pp-ykC"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="QBM-fo-Rhm" secondAttribute="bottom" id="yva-Sa-Gsb"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="xcl-xn-m3Y" id="e3l-kK-mq7"/>
+                                            <outlet property="descLabel" destination="kD0-pr-n1v" id="Byt-rY-XOJ"/>
+                                            <outlet property="titleLabel" destination="Bk2-cQ-zix" id="fXi-Re-S7M"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="V2P-aw-18d"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="CLH-hh-vxc"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="pDo-lR-T22" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="FTQ-sE-bQ2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pDo-lR-T22" secondAttribute="bottom" id="aNQ-VO-TjI"/>
+                            <constraint firstItem="pDo-lR-T22" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-60" id="mEE-x5-zOv"/>
                             <constraint firstAttribute="trailing" secondItem="pDo-lR-T22" secondAttribute="trailing" id="nIT-Ow-2No"/>
                             <constraint firstItem="pDo-lR-T22" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="q4p-Zs-aRL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Today's Date" id="9yk-lu-d0O"/>
                     <connections>
+                        <outlet property="tableView" destination="pDo-lR-T22" id="PgS-nK-iEC"/>
                         <outlet property="titleBar" destination="9yk-lu-d0O" id="gkf-u3-7e2"/>
                     </connections>
                 </viewController>
