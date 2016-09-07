@@ -16,7 +16,7 @@ class ActivityTableViewCell: UITableViewCell {
 	var activity: Activity? {
 		didSet {
 			self.titleLabel?.text = activity?.title
-			self.descLabel?.text = activity?.description
+			self.descLabel?.text = activity?.subtitle
 		}
 	}
 	

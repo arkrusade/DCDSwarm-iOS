@@ -13,25 +13,27 @@ class LoginViewController: UIViewController {
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var UsernameTextField: UITextField!
 	@IBOutlet weak var PasswordTextField: UITextField!
-
+	var login: Credentials!
 	@IBOutlet weak var vertStackView: UIStackView!
 	override func viewDidLoad() {
-//		let path = NSBundle.mainBundle().pathForResource("keys", ofType: "txt")
-//		let fileText = try? String(contentsOfFile: path?)
-//		print(fileText)
-		if let username = Keys.username{
-			UsernameTextField.text = username
-			PasswordTextField.text = Keys.password!
-			onLoginButtonTap(self)
-		}
+		super.viewDidLoad()
 		activityIndicator.hidesWhenStopped = true
 		activityIndicator.stopAnimating()
+		
+	}
+	override func viewDidAppear(animated: Bool) {
+		if login.username != nil {
+			UsernameTextField.text = login.username
+			PasswordTextField.text = login.password
+			onLoginButtonTap(self)
+		}
 	}
 	@IBAction func onLoginButtonTap(sender: AnyObject) {
+//		performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: nil)
+//		return
+
+		//TODO: make better offline
 		
-		
-		// Do any additional setup after loading the view, typically from a nib.
-		//TODO: make login image a loading thingy
 		guard UsernameTextField.text != "" || PasswordTextField.text != "" else {
 			NSOperationQueue.mainQueue().addOperationWithBlock {
 				print("empty text")
@@ -51,16 +53,22 @@ class LoginViewController: UIViewController {
 		let postString = "do=login&p=413&username=\(UsernameTextField.text!)&password=\(PasswordTextField.text!)&submit=login"
 		request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
 		let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-//			self.activityIndicator.stopAnimating()
-			guard error == nil && data != nil else {                                                          // check for fundamental networking error
+
+			NSOperationQueue.mainQueue().addOperationWithBlock {
+				self.activityIndicator.stopAnimating()
+			}
+			
+			guard error == nil && data != nil else {// check for fundamental networking error
 				print("error=\(error)")
+
 				ErrorHandling.defaultErrorHandler(error!)
 				return
 			}
 			
-			if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+			if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 { // check for http errors
 				print("statusCode should be 200, but is \(httpStatus.statusCode)")
 				print("response = \(response)")
+				return
 			}
 			
 			//MARK: Login Check
@@ -71,7 +79,6 @@ class LoginViewController: UIViewController {
 				//TODO: check for parents too
 				NSOperationQueue.mainQueue().addOperationWithBlock {
 					print("Failed Login")
-					self.activityIndicator.stopAnimating()
 					ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Please enter a valid username and password combination")
 					
 				}
@@ -79,7 +86,7 @@ class LoginViewController: UIViewController {
 			}
 
 			NSOperationQueue.mainQueue().addOperationWithBlock {
-				self.activityIndicator.stopAnimating()
+				CacheHelper.storeLogin(self.UsernameTextField.text!, password: self.PasswordTextField.text!)
 				self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
 			}
 			
@@ -95,7 +102,7 @@ class LoginViewController: UIViewController {
 			print("seguing to HomeworkViewController")
 			let nav = segue.destinationViewController as! UINavigationController
 			let vc = nav.topViewController as! HomeworkViewController
-			vc.currentDay = Day(date: NSDate.dateFormatterSlashed().dateFromString("01/28/2013"))
+			vc.currentDay = Day(date: NSDate())
 			//TODO: change from hardcoding
 		}
 	}

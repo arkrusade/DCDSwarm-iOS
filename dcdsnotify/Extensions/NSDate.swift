@@ -37,10 +37,13 @@ extension NSDate {
 		)
 		return tomorrow
 	}
+	func asSlashedDate() -> String {
+		return NSDate.dateFormatterSlashed().stringFromDate(self)
+	}
 	static func dateFormatterSlashed() -> NSDateFormatter
 	{
 		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "MM/dd/yyy"
+		dateFormatter.dateFormat = "MM/dd/yyyy"
 		return dateFormatter
 	}
 	static func dateFormatterSlashedAndDay() -> NSDateFormatter {

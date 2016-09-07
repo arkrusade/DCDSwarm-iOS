@@ -30,7 +30,7 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
 			cell.activity = currentDay?.activities?[indexPath.section]
 		}
 		else {
-			cell.activity = Activity(classString: "", title: "", desc: "Pull to load")
+			cell.activity = Activity(classString: "", title: "", subtitle: "Loading")
 			cell.activityIndicator.startAnimating()
 		}
 		return cell

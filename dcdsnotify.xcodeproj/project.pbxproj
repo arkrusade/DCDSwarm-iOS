@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD053AC61D7A2F0600CBAB8C /* CustomSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD053AC51D7A2F0600CBAB8C /* CustomSegues.swift */; };
+		AD053AC81D7A349C00CBAB8C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD053AC71D7A349C00CBAB8C /* AppState.swift */; };
+		AD053ACF1D7A428100CBAB8C /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AD053ACE1D7A428100CBAB8C /* KeychainWrapper.m */; };
 		AD6B91D81D6F876F005B77A9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91D71D6F876F005B77A9 /* WelcomeViewController.swift */; };
 		AD6B91DA1D6F8E62005B77A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91D91D6F8E62005B77A9 /* LoginViewController.swift */; };
 		AD6B91DC1D6F8F49005B77A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91DB1D6F8F49005B77A9 /* Constants.swift */; };
@@ -18,8 +21,8 @@
 		AD6B91F81D6FB3D9005B77A9 /* Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91F71D6FB3D9005B77A9 /* Crop.swift */; };
 		AD6B91FA1D6FC1A3005B77A9 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91F91D6FC1A3005B77A9 /* Day.swift */; };
 		AD6B91FC1D6FCA19005B77A9 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91FB1D6FCA19005B77A9 /* NSDate.swift */; };
-		AD6B92001D6FDA52005B77A9 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91FF1D6FDA52005B77A9 /* Keys.swift */; };
 		AD6B92041D700CA8005B77A9 /* HVCTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B92031D700CA8005B77A9 /* HVCTableViewExtension.swift */; };
+		AD6B92081D7227D1005B77A9 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B92071D7227D1005B77A9 /* CacheHelper.swift */; };
 		ADA986F71D6A642300C26E6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA986F61D6A642300C26E6B /* AppDelegate.swift */; };
 		ADA986FC1D6A642300C26E6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA986FA1D6A642300C26E6B /* Main.storyboard */; };
 		ADA986FE1D6A642300C26E6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA986FD1D6A642300C26E6B /* Assets.xcassets */; };
@@ -30,6 +33,11 @@
 /* Begin PBXFileReference section */
 		945AB9C34798FC1F45F04474 /* Pods_dcdsnotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dcdsnotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DA0CA4FF5E7EC646F6BBB2 /* Pods-dcdsnotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dcdsnotify.release.xcconfig"; path = "Pods/Target Support Files/Pods-dcdsnotify/Pods-dcdsnotify.release.xcconfig"; sourceTree = "<group>"; };
+		AD053AC51D7A2F0600CBAB8C /* CustomSegues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegues.swift; sourceTree = "<group>"; };
+		AD053AC71D7A349C00CBAB8C /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AD053ACD1D7A428100CBAB8C /* dcdsnotify-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "dcdsnotify-Bridging-Header.h"; path = "KeychainWrapper/dcdsnotify-Bridging-Header.h"; sourceTree = "<group>"; };
+		AD053ACE1D7A428100CBAB8C /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		AD053AD01D7A428800CBAB8C /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		AD6B91D71D6F876F005B77A9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AD6B91D91D6F8E62005B77A9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AD6B91DB1D6F8F49005B77A9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -41,8 +49,8 @@
 		AD6B91F71D6FB3D9005B77A9 /* Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
 		AD6B91F91D6FC1A3005B77A9 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		AD6B91FB1D6FCA19005B77A9 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
-		AD6B91FF1D6FDA52005B77A9 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		AD6B92031D700CA8005B77A9 /* HVCTableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HVCTableViewExtension.swift; sourceTree = "<group>"; };
+		AD6B92071D7227D1005B77A9 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		ADA986F31D6A642300C26E6B /* dcdsnotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dcdsnotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA986F61D6A642300C26E6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADA986FB1D6A642300C26E6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,6 +78,23 @@
 				945AB9C34798FC1F45F04474 /* Pods_dcdsnotify.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD053AC41D7A2EFD00CBAB8C /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				AD053AC51D7A2F0600CBAB8C /* CustomSegues.swift */,
+			);
+			path = Segues;
+			sourceTree = "<group>";
+		};
+		AD053AC91D7A41CF00CBAB8C /* KeychainWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				AD053AD01D7A428800CBAB8C /* KeychainWrapper.h */,
+				AD053ACE1D7A428100CBAB8C /* KeychainWrapper.m */,
+			);
+			path = KeychainWrapper;
 			sourceTree = "<group>";
 		};
 		AD6B91D61D6F8759005B77A9 /* View Controllers */ = {
@@ -105,6 +130,7 @@
 			children = (
 				AD6B91F21D6FAC87005B77A9 /* CalendarHelper.swift */,
 				AD6B91F31D6FAC87005B77A9 /* ErrorHandling.swift */,
+				AD6B92071D7227D1005B77A9 /* CacheHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -139,14 +165,17 @@
 		ADA986F51D6A642300C26E6B /* dcdsnotify */ = {
 			isa = PBXGroup;
 			children = (
-				AD6B91FF1D6FDA52005B77A9 /* Keys.swift */,
+				AD053ACD1D7A428100CBAB8C /* dcdsnotify-Bridging-Header.h */,
+				AD053AC91D7A41CF00CBAB8C /* KeychainWrapper */,
+				AD053AC41D7A2EFD00CBAB8C /* Segues */,
+				ADA986F61D6A642300C26E6B /* AppDelegate.swift */,
+				AD053AC71D7A349C00CBAB8C /* AppState.swift */,
+				AD6B91DB1D6F8F49005B77A9 /* Constants.swift */,
 				AD6B91F61D6FB3CE005B77A9 /* Extensions */,
 				AD6B91F11D6FAC87005B77A9 /* Helpers */,
 				AD6B91EA1D6FAB93005B77A9 /* Models */,
 				AD6B91E71D6FAAC7005B77A9 /* Views */,
-				AD6B91DB1D6F8F49005B77A9 /* Constants.swift */,
 				AD6B91D61D6F8759005B77A9 /* View Controllers */,
-				ADA986F61D6A642300C26E6B /* AppDelegate.swift */,
 				ADA986FA1D6A642300C26E6B /* Main.storyboard */,
 				ADA986FD1D6A642300C26E6B /* Assets.xcassets */,
 				ADA986FF1D6A642300C26E6B /* LaunchScreen.storyboard */,
@@ -288,11 +317,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD6B91EC1D6FAB9E005B77A9 /* Activity.swift in Sources */,
+				AD6B92081D7227D1005B77A9 /* CacheHelper.swift in Sources */,
 				AD6B91F41D6FAC87005B77A9 /* CalendarHelper.swift in Sources */,
 				AD6B91FA1D6FC1A3005B77A9 /* Day.swift in Sources */,
+				AD053AC61D7A2F0600CBAB8C /* CustomSegues.swift in Sources */,
 				AD6B91F81D6FB3D9005B77A9 /* Crop.swift in Sources */,
-				AD6B92001D6FDA52005B77A9 /* Keys.swift in Sources */,
+				AD053AC81D7A349C00CBAB8C /* AppState.swift in Sources */,
 				AD6B91F01D6FAC7F005B77A9 /* HomeworkViewController.swift in Sources */,
+				AD053ACF1D7A428100CBAB8C /* KeychainWrapper.m in Sources */,
 				AD6B91D81D6F876F005B77A9 /* WelcomeViewController.swift in Sources */,
 				AD6B91F51D6FAC87005B77A9 /* ErrorHandling.swift in Sources */,
 				AD6B91DA1D6F8E62005B77A9 /* LoginViewController.swift in Sources */,
@@ -416,6 +448,7 @@
 			baseConfigurationReference = F8AD11B85DC4FC7D7B2C2ED6 /* Pods-dcdsnotify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = dcdsnotify/Info.plist;
@@ -423,6 +456,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.orctech.dcdsnotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "dcdsnotify/KeychainWrapper/dcdsnotify-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -431,6 +466,7 @@
 			baseConfigurationReference = 94DA0CA4FF5E7EC646F6BBB2 /* Pods-dcdsnotify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = dcdsnotify/Info.plist;
@@ -438,6 +474,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.orctech.dcdsnotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "dcdsnotify/KeychainWrapper/dcdsnotify-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -21,3 +21,4 @@ class Constants {
 	
 	
 }
+public let DAYS_KEY = "daysKey"
