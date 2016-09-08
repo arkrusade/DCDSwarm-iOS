@@ -11,9 +11,14 @@ import Foundation
 
 class HomeworkViewController: UIViewController {
 	
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var titleBar: UINavigationItem!
+	@IBOutlet weak var yesterdayButton: UIButton!
+	@IBOutlet weak var tomorrowButton: UIButton!
+	@IBOutlet weak var topConstraint: NSLayoutConstraint!
 	
+	var portalTask: NSURLSessionDataTask?
 	var lastLoaded: NSDate?
 	var tomorrow: HomeworkViewController!
 	var yesterday: HomeworkViewController?
@@ -28,10 +33,15 @@ class HomeworkViewController: UIViewController {
 			}
 		}
 	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		configureNavigation()
+		configureNavigationBar()
+		
+		self.view.bringSubviewToFront(yesterdayButton)
+		self.view.bringSubviewToFront(tomorrowButton)
+		
+		activityIndicator.hidesWhenStopped = true
+		activityIndicator.stopAnimating()
 		loadActivities()
 		self.tableView.reloadData()
 		
@@ -66,27 +76,38 @@ class HomeworkViewController: UIViewController {
 		loadActivities()
 	}
 	
-	func configureNavigation()
+	func configureNavigationBar()
 	{
 		let nextPeriodItem = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: #selector(nextPeriod(_: )))
 		let prevPeriodItem = UIBarButtonItem(title: "Previous", style: .Plain, target: self, action: #selector(prevPeriod(_: )))
 		//TODO: settings
+		
+		yesterdayButton.addTarget(self, action: #selector(prevPeriod(_: )), forControlEvents: .TouchUpInside)
+		tomorrowButton.addTarget(self, action: #selector(nextPeriod(_: )), forControlEvents: .TouchUpInside)
+
 		self.navigationItem.rightBarButtonItem = nextPeriodItem
 		self.navigationItem.leftBarButtonItem = prevPeriodItem
-		
+		topConstraint.constant = -(self.navigationController?.navigationBar.frame.height)! - UIApplication.sharedApplication().statusBarFrame.size.height
+
 	}
 	
 	func loadActivities() {
-		if let day = CacheHelper.sharedInstance.retrieveDay(currentDay?.date ?? NSDate())
+		activityIndicator.stopAnimating()
+
+		if let day = CacheHelper.sharedInstance.retrieveDay(currentDay?.date ?? NSDate())//if in cache, use that; else, clear the day to show activity loader
 		{
 			self.currentDay = day
+		}
+		else {
+			self.currentDay?.activities = nil
+			tableView.reloadData()
 		}
 		//TODO: also send request after some refresh button
 		
 		//			self.currentDay = Day.emptyDay(NSDate()
 		let homeworkURL = (currentDay?.date ?? NSDate()).toDCDSURL()
-		let atask = NSURLSession.sharedSession().dataTaskWithURL(homeworkURL!, completionHandler: { (data, response, error) -> Void in
-			
+		portalTask = NSURLSession.sharedSession().dataTaskWithURL(homeworkURL!, completionHandler: { (data, response, error) -> Void in
+			self.activityIndicator.stopAnimating()
 			guard error == nil && data != nil else {                                                          // check for fundamental networking error
 				print("\(error)")
 				ErrorHandling.defaultErrorHandler("Network Error", desc: "No connection")
@@ -118,11 +139,17 @@ class HomeworkViewController: UIViewController {
 			self.lastLoaded = NSDate() //TODO: make this didSet of currentDay?
 			CacheHelper.sharedInstance.addDay(self.currentDay)
 		})
-		atask.resume()
+		portalTask!.resume()
 		
 	}
 	
+	//TODO: maybe stuff
+	/*
+	search
+	set due dates on calendar
+	notifs
 	
+*/
 	
 	func respondToSwipeGesture(gesture: UIGestureRecognizer) {
 		
@@ -132,7 +159,7 @@ class HomeworkViewController: UIViewController {
 			switch swipeGesture.direction {
 			case UISwipeGestureRecognizerDirection.Right:
 				print("Swiped right")
-				CacheHelper.clearDays()
+//				CacheHelper.clearDays()
 				
 				prevPeriod(self)
 				
@@ -142,22 +169,22 @@ class HomeworkViewController: UIViewController {
 			case UISwipeGestureRecognizerDirection.Left:
 				print("Swiped left")
 				nextPeriod(self)
-				let toViewController = yesterday
-				let fromViewController = self
-				
-				let containerView = fromViewController.view.superview
-				let screenBounds = UIScreen.mainScreen().bounds
-				
-				let finalToFrame = screenBounds
-				let finalFromFrame = CGRectOffset(finalToFrame, 0, screenBounds.size.height)
-				toViewController!.loadView()
-				toViewController!.view.frame = CGRectOffset(finalToFrame, 0, -screenBounds.size.height)
-				containerView?.addSubview(toViewController!.view)
-				
-				UIView.animateWithDuration(0.5, animations: {
-					toViewController!.view.frame = finalToFrame
-					fromViewController.view.frame = finalFromFrame
-				})
+//				let toViewController = yesterday
+//				let fromViewController = self
+//				
+//				let containerView = fromViewController.view.superview
+//				let screenBounds = UIScreen.mainScreen().bounds
+//				
+//				let finalToFrame = screenBounds
+//				let finalFromFrame = CGRectOffset(finalToFrame, 0, screenBounds.size.height)
+//				toViewController!.loadView()
+//				toViewController!.view.frame = CGRectOffset(finalToFrame, 0, -screenBounds.size.height)
+//				containerView?.addSubview(toViewController!.view)
+//				
+//				UIView.animateWithDuration(0.5, animations: {
+//					toViewController!.view.frame = finalToFrame
+//					fromViewController.view.frame = finalFromFrame
+//				})
 				
 				
 			case UISwipeGestureRecognizerDirection.Up:
