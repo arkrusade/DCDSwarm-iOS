@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 class Constants {
 	static let userLoginURL = NSURL(string: "https://www.dcds.edu/userlogin.cfm")!
 	static let invalidLoginURL = NSURL(string: "https://www.dcds.edu/userlogin.cfm?do=login&p=413")!
@@ -17,8 +18,13 @@ class Constants {
 	
 	struct Segues {
 		static let LoginToHomeworkView = "LoginToHomeworkView"
+		static let HomeworkToSettings = "HomeworkToSettings"
 	}
-	
+	struct Images {
+		static let settings = UIImage(named: "settings")!
+		static let rightCarat = UIImage(named: "right_carat")!
+		static let leftCarat = UIImage(named: "left_carat")!
+	}
 	
 }
 public let DAYS_KEY = "daysKey"

@@ -28,6 +28,13 @@ class LoginViewController: UIViewController {
 			onLoginButtonTap(self)
 		}
 	}
+	
+	@IBAction func viewTapped(sender: AnyObject) {
+		self.UsernameTextField.resignFirstResponder()
+		self.PasswordTextField.resignFirstResponder()
+	}
+	
+	
 	@IBAction func onLoginButtonTap(sender: AnyObject) {
 //		performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: nil)
 //		return
@@ -44,24 +51,41 @@ class LoginViewController: UIViewController {
 
 		}
 		
+		
+		NSURLSession.sharedSession()
+		
+		
+		
 		let url = Constants.userLoginURL
 		activityIndicator.startAnimating()
-
 		
 		let request = NSMutableURLRequest(URL: url)
 		request.HTTPMethod = "POST"
 		let postString = "do=login&p=413&username=\(UsernameTextField.text!)&password=\(PasswordTextField.text!)&submit=login"
 		request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+		
 		let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
 
 			NSOperationQueue.mainQueue().addOperationWithBlock {
 				self.activityIndicator.stopAnimating()
 			}
-			
+			guard error?.code != -999 else {
+				//cancelled task
+				return
+			}
+			guard error?.code != -1009 else {
+				print("no internet")
+				NSOperationQueue.mainQueue().addOperationWithBlock {
+					ErrorHandling.defaultErrorHandler(error!)
+				}
+				return
+			}
 			guard error == nil && data != nil else {// check for fundamental networking error
 				print("error=\(error)")
 
-				ErrorHandling.defaultErrorHandler(error!)
+				NSOperationQueue.mainQueue().addOperationWithBlock {
+					ErrorHandling.defaultErrorHandler(error!)
+				}
 				return
 			}
 			
@@ -87,7 +111,10 @@ class LoginViewController: UIViewController {
 
 			NSOperationQueue.mainQueue().addOperationWithBlock {
 				CacheHelper.storeLogin(self.UsernameTextField.text!, password: self.PasswordTextField.text!)
+				self.UsernameTextField.text = ""
+				self.PasswordTextField.text = ""
 				self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
+				
 			}
 			
 		}
@@ -102,7 +129,8 @@ class LoginViewController: UIViewController {
 			print("seguing to HomeworkViewController")
 			let nav = segue.destinationViewController as! UINavigationController
 			let vc = nav.topViewController as! HomeworkViewController
-			vc.currentDay = Day(date: NSDate())
+			vc.activitiesDay = Day(date: NSDate())
+			vc.currentDay = NSDate()
 			//TODO: change from hardcoding
 		}
 	}

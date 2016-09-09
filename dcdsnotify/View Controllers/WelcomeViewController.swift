@@ -16,6 +16,15 @@ class WelcomeViewController: UIViewController {
 	override func viewDidLoad() {
 		
 	}
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		login = (nil, nil)
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+//		fatalError("init(coder:) has not been implemented")
+		super.init(coder: aDecoder)
+	}
 	override func viewDidAppear(animated: Bool) {
 		login = CacheHelper.retrieveLogin()
 		if login.username != nil {
@@ -27,7 +36,6 @@ class WelcomeViewController: UIViewController {
 	}
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "WelcomeToLogin" {
-			self.loadViewIfNeeded()
 			let vc = segue.destinationViewController as! LoginViewController
 			vc.login = login
 		}

@@ -9,18 +9,22 @@
 import Foundation
 
 class CalendarHelper {
-	static func processCalendarStringDay(htmlString: NSString) -> Day
+	static func processCalendarString(htmlString: NSString) -> Day
+		//TODO: add param for diff calendar lengths
 	{
-		
+		//MARK: set date
 		let emptyStart = "<li class=\"listempty\">"
 		let emptyEnd = "</li>"
+		
+		let dayStart = "thisDate: {ts '"
+		let dayEnd = "'} start:"
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		let date = dateFormatter.dateFromString(try! htmlString.cropExclusive(dayStart, end: dayEnd) ?? "") ?? NSDate()
+
+		//MARK: check for empty day
 		guard (try? htmlString.crop(emptyStart, end: emptyEnd)) == nil else{
-			let dayStart = "thisDate: {ts '"
-			let dayEnd = "'} start:"
-			let dateFormatter = NSDateFormatter()
-			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-			let date = dateFormatter.dateFromString(try! htmlString.cropExclusive(dayStart, end: dayEnd) ?? "") ?? NSDate()
-			//TODO: remove hotfix
+						//TODO: remove hotfix
 			let emptyDay = Day.emptyDay(date)
 			return emptyDay
 		}
@@ -42,17 +46,12 @@ class CalendarHelper {
 		
 		
 		//MARK: Day divider
+		
 		let dayStartString = "<span class=\"listcap"
 		let dayEndString = "</div>"//TODO: will not work on week or greater periods
 		var dayString = try? htmlString.cropExclusive(dayStartString, end: dayEndString).cropExclusive(">")
 		
-		
-		var dateString: String = try! dayString!.cropExclusive("\n", end: "\n") as String
-		while dateString.hasPrefix("\t") {
-			dateString = try! dateString.cropExclusive("\t")
-		}
-		let thisDate: NSDate? = NSDate.dateFormatterDashed().dateFromString(dateString)
-		let tempDay = Day(date: thisDate)
+		let tempDay = Day(date: date)
 		tempDay.activities = []
 		
 		
@@ -95,11 +94,11 @@ class CalendarHelper {
 				
 			}
 				
-//			else if okActivity.hasPrefix("4790") {
-//				activityTitle = try! activityString.cropExclusive("</span>")
-//				activityClass = try! activityTitle.cropEnd(":")
-//				activityTitle = try! activityTitle.cropExclusive(": ")
-//			}
+				//			else if okActivity.hasPrefix("4790") {
+				//				activityTitle = try! activityString.cropExclusive("</span>")
+				//				activityClass = try! activityTitle.cropEnd(":")
+				//				activityTitle = try! activityTitle.cropExclusive(": ")
+				//			}
 			else if (okActivity.hasPrefix("3500")) {
 				activityTitle = try! activityString.cropExclusive("title=").cropExclusive(">", end: "</span")
 				activityClass = try! activityTitle.cropEnd(":")
@@ -115,20 +114,26 @@ class CalendarHelper {
 					tempClass.removeAtIndex(tempClass.endIndex.predecessor())
 					activityClass = tempClass
 					activityTitle = try! activityTitle.cropExclusive("): ", end: "</")
-				}
-					
-				//not linked
-				else if okActivity.containsString("<span class=\"eventcon\">")//find event content
-				{
-					let tempActivity = try! okActivity.cropExclusive("id=\"e_")
-					let activityID = try! tempActivity.cropEndExclusive("\">")
-					
-					activityClass = try! (tempActivity.cropExclusive("\">", end: "): ") + ")" ?? "Failed Activity")
-					activityTitle = try! (tempActivity.cropExclusive("): ", end: "</span>") ?? "Failed Title")
 					
 					if activityTitle.containsString("<br") {
 						activityTitle = try! activityTitle.cropEndExclusive("<br")
 					}
+				}
+					
+					//not linked
+				else if okActivity.containsString("<span class=\"eventcon\">")//find event content
+				{
+					let tempActivity = try! okActivity.cropExclusive("id=\"e_")
+					let activityID = try! tempActivity.cropEndExclusive("\">")
+					//TODO: organize activities by class and use id
+					activityClass = try! (tempActivity.cropExclusive("\">", end: "): ") + ")" ?? "Failed Activity")
+					activityTitle = try! (tempActivity.cropExclusive("): ", end: "</span>") ?? "Failed Title")
+					
+					
+					if activityTitle.containsString("<br") {
+						activityTitle = try! activityTitle.cropEndExclusive("<br")
+					}
+					
 				}
 				else {
 					activityClass = "Could not find activity"
@@ -155,7 +160,7 @@ class CalendarHelper {
 					//bye carats
 					activityDescData.removeRange(asdf)
 					//replace with newline
-					activityDescData.insertContentsOf("\n".characters, at: startIndex)
+					//					activityDescData.insertContentsOf("\n".characters, at: startIndex)
 				}
 				activityDesc += (activityDescData) + "\n"
 			}

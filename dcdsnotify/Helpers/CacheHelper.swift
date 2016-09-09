@@ -13,6 +13,11 @@ class CacheHelper {
 	static let sharedInstance = CacheHelper()
 	let MyKeychainWrapper = KeychainWrapper()
 
+	static func clearAll() {
+		clearDays()
+		clearLogin()
+		clearNotifs()
+	}
 	static func clearDays() {
 		NSUserDefaults.standardUserDefaults().removeObjectForKey(DAYS_KEY)
 	}
@@ -25,7 +30,7 @@ class CacheHelper {
 		NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
 		NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasLoginKey")
 	}
-	static func retrieveLogin() -> Credentials
+	static func retrieveLogin() -> Credentials//TODO: should return optional
 	{
 		let username = NSUserDefaults.standardUserDefaults().stringForKey("username")
 		let pass = sharedInstance.MyKeychainWrapper.myObjectForKey(kSecValueData) as? String
