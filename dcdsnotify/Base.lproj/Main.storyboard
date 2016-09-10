@@ -9,7 +9,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="zFV-NB-k0b">
             <objects>
-                <viewController id="bvW-Sm-2dG" customClass="WelcomeViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Welcome" id="bvW-Sm-2dG" customClass="WelcomeViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ULe-J4-Rnk"/>
                         <viewControllerLayoutGuide type="bottom" id="ZTU-cR-uTk"/>
@@ -73,7 +73,10 @@
                                                     <constraint firstAttribute="width" constant="125" id="Cxe-jO-xJV"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="djG-bU-WW7" id="gRv-Ry-Gle"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -89,7 +92,10 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="STK-5A-AGu">
                                                 <rect key="frame" x="84" y="0.0" width="125" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="djG-bU-WW7" id="mDC-k5-Xnz"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -134,7 +140,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PbB-50-inC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="4Be-JT-b3R">
+                <tapGestureRecognizer cancelsTouchesInView="NO" delaysTouchesEnded="NO" id="4Be-JT-b3R">
                     <connections>
                         <action selector="viewTapped:" destination="djG-bU-WW7" id="YVe-j9-V2Q"/>
                     </connections>
@@ -175,32 +181,37 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" id="ejL-qJ-xhA" customClass="ActivityTableViewCell" customModule="dcdsnotify" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="240" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" id="ejL-qJ-xhA" customClass="ActivityTableViewCell" customModule="dcdsnotify" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ejL-qJ-xhA" id="zlr-tx-XoT">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="240" tableViewCell="ejL-qJ-xhA" id="zlr-tx-XoT">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xcl-xn-m3Y">
                                                     <rect key="frame" x="290" y="25" width="20" height="20"/>
                                                 </activityIndicatorView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="QBM-fo-Rhm">
+                                                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="240" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="QBM-fo-Rhm">
                                                     <rect key="frame" x="8" y="8" width="554" height="53"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bk2-cQ-zix">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bk2-cQ-zix">
                                                             <rect key="frame" x="0.0" y="0.0" width="554" height="17"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD0-pr-n1v">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD0-pr-n1v">
                                                             <rect key="frame" x="0.0" y="38" width="554" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="kD0-pr-n1v" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Bk2-cQ-zix" secondAttribute="bottom" constant="10" id="ibm-dA-DYH"/>
+                                                        <constraint firstItem="Bk2-cQ-zix" firstAttribute="top" secondItem="QBM-fo-Rhm" secondAttribute="top" id="ife-VE-Waz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="kD0-pr-n1v" secondAttribute="bottom" id="mwV-lE-t0Z"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -280,28 +291,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBr-PV-t5Q">
-                                <rect key="frame" x="277" y="285" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9J-07-Wun">
-                                <rect key="frame" x="277" y="360" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9J-07-Wun">
+                                <rect key="frame" x="276" y="285" width="48" height="30"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="onLogoutButtonTap:" destination="13W-QF-NeJ" eventType="touchUpInside" id="pFM-j7-cDy"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications soon to come!" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mL-t3-n7g">
+                                <rect key="frame" x="196" y="381" width="209" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZBr-PV-t5Q" firstAttribute="centerY" secondItem="gYi-DI-hbI" secondAttribute="centerY" id="75E-KK-6AW"/>
-                            <constraint firstItem="b9J-07-Wun" firstAttribute="top" secondItem="ZBr-PV-t5Q" secondAttribute="bottom" constant="45" id="Kwl-T8-8S7"/>
-                            <constraint firstItem="ZBr-PV-t5Q" firstAttribute="centerX" secondItem="gYi-DI-hbI" secondAttribute="centerX" id="MMf-4i-6yx"/>
-                            <constraint firstItem="b9J-07-Wun" firstAttribute="centerX" secondItem="ZBr-PV-t5Q" secondAttribute="centerX" id="xdz-7E-iot"/>
+                            <constraint firstItem="7mL-t3-n7g" firstAttribute="centerX" secondItem="b9J-07-Wun" secondAttribute="centerX" id="OCI-Ys-F2F"/>
+                            <constraint firstItem="b9J-07-Wun" firstAttribute="centerX" secondItem="gYi-DI-hbI" secondAttribute="centerX" id="PDp-m7-1z9"/>
+                            <constraint firstItem="7mL-t3-n7g" firstAttribute="top" secondItem="b9J-07-Wun" secondAttribute="bottom" constant="66" id="PO8-v3-wIF"/>
+                            <constraint firstItem="b9J-07-Wun" firstAttribute="centerY" secondItem="gYi-DI-hbI" secondAttribute="centerY" id="Xq3-yU-V80"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="clearAllButton" destination="ZBr-PV-t5Q" id="Kzr-CD-cU0"/>
                         <outlet property="logoutButton" destination="b9J-07-Wun" id="Csf-Ph-B63"/>
                     </connections>
                 </viewController>

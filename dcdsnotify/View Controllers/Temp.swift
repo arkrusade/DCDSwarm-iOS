@@ -19,17 +19,9 @@ class Temp: UIViewController {
 	@IBOutlet weak var clearAllButton: UIButton!
 	
 	@IBAction func onLogoutButtonTap(sender: AnyObject) {
-		logout()
+		AppState.sharedInstance.logout(self)
 	}
 	@IBOutlet weak var logoutButton: UIButton!
 	
-	func logout() {
-		self.dismissViewControllerAnimated(false, completion: nil)
-		CacheHelper.clearLogin()
-		let window = UIApplication.sharedApplication().keyWindow
-		let vc = WelcomeViewController()
-		vc.login = (nil, nil)
-		window?.rootViewController = vc
-
-	}
+	
 }

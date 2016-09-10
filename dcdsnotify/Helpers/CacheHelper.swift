@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 class CacheHelper {
-	//TODO: log out shoudl clear this
 	static let sharedInstance = CacheHelper()
 	let MyKeychainWrapper = KeychainWrapper()
 

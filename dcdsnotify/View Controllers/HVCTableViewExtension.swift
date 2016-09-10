@@ -28,11 +28,18 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
 			cell.activityIndicator.hidesWhenStopped = true
 			cell.activityIndicator.stopAnimating()
 			cell.activity = activitiesDay?.activities?[indexPath.section]
+			
 		}
 		else {
 			cell.activity = Activity(classString: "", title: "", subtitle: "Loading")
 			cell.activityIndicator.startAnimating()
 		}
 		return cell
+	}
+	func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return UITableViewAutomaticDimension
+	}
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return UITableViewAutomaticDimension
 	}
 }

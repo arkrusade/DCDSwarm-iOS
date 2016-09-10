@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 	
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var UsernameTextField: UITextField!
@@ -19,14 +19,34 @@ class LoginViewController: UIViewController {
 		super.viewDidLoad()
 		activityIndicator.hidesWhenStopped = true
 		activityIndicator.stopAnimating()
+		PasswordTextField.returnKeyType = .Go
+		
 		
 	}
+	
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		if UsernameTextField.isFirstResponder()
+		{
+			PasswordTextField.becomeFirstResponder()
+			return true
+		}
+		else if PasswordTextField.isFirstResponder()
+		{
+			PasswordTextField.resignFirstResponder()
+			onLoginButtonTap(self)
+			return true
+		}
+		return false
+	}
+	
+	
 	override func viewDidAppear(animated: Bool) {
 		if login.username != nil {
 			UsernameTextField.text = login.username
 			PasswordTextField.text = login.password
 			onLoginButtonTap(self)
 		}
+		
 	}
 	
 	@IBAction func viewTapped(sender: AnyObject) {
@@ -38,13 +58,11 @@ class LoginViewController: UIViewController {
 	@IBAction func onLoginButtonTap(sender: AnyObject) {
 //		performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: nil)
 //		return
-
-		//TODO: make better offline
 		
 		guard UsernameTextField.text != "" || PasswordTextField.text != "" else {
 			NSOperationQueue.mainQueue().addOperationWithBlock {
 				print("empty text")
-				ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Please enter a valid username and password combination")
+				ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "You must enter a username/password")
 				
 			}
 			return
@@ -125,13 +143,11 @@ class LoginViewController: UIViewController {
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == Constants.Segues.LoginToHomeworkView
 		{
-			//TODO: set 'Welcome user.id!'
 			print("seguing to HomeworkViewController")
 			let nav = segue.destinationViewController as! UINavigationController
 			let vc = nav.topViewController as! HomeworkViewController
 			vc.activitiesDay = Day(date: NSDate())
 			vc.currentDay = NSDate()
-			//TODO: change from hardcoding
 		}
 	}
 }

@@ -23,32 +23,19 @@ struct ErrorHandling {
 	*/
 	static func delayedFeatureAlert()
 	{
-		let alert = UIAlertController(title: DelayedFeatureTitle, message: DelayedFeatureMessage, preferredStyle: UIAlertControllerStyle.Alert)
-		alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: nil))
-		
-		let window = UIApplication.sharedApplication().windows[0]
-		window.rootViewController?.presentViewControllerFromTopViewController(alert, animated: true, completion: nil)
+		ErrorHandling.defaultErrorHandler(DelayedFeatureTitle, desc: DelayedFeatureMessage)
 	}
 	static func defaultErrorHandler(error: NSError) {
-		let alert = UIAlertController(title: ErrorTitle, message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-		alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: nil))
-		
-		let window = UIApplication.sharedApplication().windows[0]
-		window.rootViewController?.presentViewControllerFromTopViewController(alert, animated: true, completion: nil)
-	}
-	static func defaultErrorHandler(desc: String) {
-		let alert = UIAlertController(title: ErrorTitle, message: desc, preferredStyle: UIAlertControllerStyle.Alert)
-		alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: nil))
-		
-		let window = UIApplication.sharedApplication().windows[0]
-		window.rootViewController?.presentViewControllerFromTopViewController(alert, animated: true, completion: nil)
+		ErrorHandling.defaultErrorHandler(ErrorTitle, desc: error.localizedDescription)
 	}
 	static func defaultErrorHandler(title: String, desc: String) {
 		let alert = UIAlertController(title: title, message: desc, preferredStyle: UIAlertControllerStyle.Alert)
 		alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: nil))
 		
 		let window = UIApplication.sharedApplication().windows[0]
-		window.rootViewController?.presentViewControllerFromTopViewController(alert, animated: true, completion: nil)
+		NSOperationQueue.mainQueue().addOperationWithBlock {
+			window.rootViewController?.presentViewControllerFromTopViewController(alert, animated: true, completion: nil)
+		}
 	}
 }
 

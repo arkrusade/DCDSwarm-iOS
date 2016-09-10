@@ -66,7 +66,7 @@ extension NSDate {
 		let baseURLString = "https://www.dcds.edu/page.cfm?p=8256"
 		
 		return NSURL(string: baseURLString + "&start=\(NSDate.dateFormatterSlashed().stringFromDate(self))")
-		//TODO: add period
+		//TODO: add period of calendar
 		//define as enum
 	}
 }

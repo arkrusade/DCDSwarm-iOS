@@ -157,6 +157,7 @@ class HomeworkViewController: UIViewController {
 			if !PortalHelper.checkLoggedIn(urlContent as String) {
 				let login = CacheHelper.retrieveLogin()
 				guard login.username != nil else {
+					AppState.sharedInstance.logout(self)
 					return
 				}
 				let request = NSMutableURLRequest(URL: Constants.userLoginURL)
@@ -167,15 +168,10 @@ class HomeworkViewController: UIViewController {
 					
 					
 					guard error == nil && data != nil else {// check for fundamental networking error
-						print("error=\(error)")
-						
-						ErrorHandling.defaultErrorHandler(error!)
 						return
 					}
 					
 					if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 { // check for http errors
-						print("statusCode should be 200, but is \(httpStatus.statusCode)")
-						print("response = \(response)")
 						return
 					}
 					
@@ -185,12 +181,10 @@ class HomeworkViewController: UIViewController {
 					let loginCheck = try? (urlContentString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit"))
 					guard loginCheck == "STUDENT PORTAL" else {
 						//TODO: check for parents too
-						NSOperationQueue.mainQueue().addOperationWithBlock {
 							print("Failed Login")
-//							ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Please enter a valid username and password combination")
-							//TODO: should signout here
+							ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Did you change your password?")
 							
-						}
+						
 						return
 					}
 					
