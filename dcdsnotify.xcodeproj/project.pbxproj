@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36F936F21D91A1C6007BCF21 /* dcdsnotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dcdsnotify.entitlements; sourceTree = "<group>"; };
 		945AB9C34798FC1F45F04474 /* Pods_dcdsnotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dcdsnotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DA0CA4FF5E7EC646F6BBB2 /* Pods-dcdsnotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dcdsnotify.release.xcconfig"; path = "Pods/Target Support Files/Pods-dcdsnotify/Pods-dcdsnotify.release.xcconfig"; sourceTree = "<group>"; };
 		AD053AC71D7A349C00CBAB8C /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -170,6 +171,7 @@
 		ADA986F51D6A642300C26E6B /* dcdsnotify */ = {
 			isa = PBXGroup;
 			children = (
+				36F936F21D91A1C6007BCF21 /* dcdsnotify.entitlements */,
 				ADA986F61D6A642300C26E6B /* AppDelegate.swift */,
 				AD053AC71D7A349C00CBAB8C /* AppState.swift */,
 				AD6B91DB1D6F8F49005B77A9 /* Constants.swift */,
@@ -233,6 +235,11 @@
 					ADA986F21D6A642300C26E6B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = F83KA8FTRJ;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -457,6 +464,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = dcdsnotify/dcdsnotify.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = dcdsnotify/Info.plist;
@@ -476,6 +484,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = dcdsnotify/dcdsnotify.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = dcdsnotify/Info.plist;

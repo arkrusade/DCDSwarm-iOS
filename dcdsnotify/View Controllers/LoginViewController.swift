@@ -50,8 +50,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 	}
 	
 	@IBAction func viewTapped(sender: AnyObject) {
+
 		self.UsernameTextField.resignFirstResponder()
 		self.PasswordTextField.resignFirstResponder()
+        
 	}
 	
 	
@@ -62,7 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 		guard UsernameTextField.text != "" || PasswordTextField.text != "" else {
 			NSOperationQueue.mainQueue().addOperationWithBlock {
 				print("empty text")
-				ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "You must enter a username/password")
+				ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "You must enter a username/password", sender: self)
 				
 			}
 			return
@@ -94,7 +96,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 			guard error?.code != -1009 else {
 				print("no internet")
 				NSOperationQueue.mainQueue().addOperationWithBlock {
-					ErrorHandling.defaultErrorHandler(error!)
+					ErrorHandling.defaultErrorHandler(error!, sender: self)
 				}
 				return
 			}
@@ -102,7 +104,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 				print("error=\(error)")
 
 				NSOperationQueue.mainQueue().addOperationWithBlock {
-					ErrorHandling.defaultErrorHandler(error!)
+					ErrorHandling.defaultErrorHandler(error!, sender: self)
 				}
 				return
 			}
@@ -121,7 +123,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 				//TODO: check for parents too
 				NSOperationQueue.mainQueue().addOperationWithBlock {
 					print("Failed Login")
-					ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Please enter a valid username and password combination")
+					ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Please enter a valid username and password combination", sender: self)
 					
 				}
 				return

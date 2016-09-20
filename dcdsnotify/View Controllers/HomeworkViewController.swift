@@ -131,7 +131,7 @@ class HomeworkViewController: UIViewController {
 			}
 			guard error == nil && data != nil else {                                                          // check for fundamental networking error
 				print("\(error)")
-				ErrorHandling.defaultErrorHandler("Network Error", desc: (error?.localizedDescription)!)
+				ErrorHandling.defaultErrorHandler("Network Error", desc: (error?.localizedDescription)!, sender: self)
 				return
 			}
 			
@@ -140,14 +140,14 @@ class HomeworkViewController: UIViewController {
 				if httpStatus.statusCode == 404{
 					NSOperationQueue.mainQueue().addOperationWithBlock {
 						print("response = \(response)")
-						ErrorHandling.defaultErrorHandler("Network Error", desc: "Page not found")
+						ErrorHandling.defaultErrorHandler("Network Error", desc: "Page not found", sender: self)
 					}
 					return
 				}
 				else if httpStatus.statusCode == 403 {
 					NSOperationQueue.mainQueue().addOperationWithBlock {
 						print("response = \(response)")
-						ErrorHandling.defaultErrorHandler("Network Error", desc: "Unauthorized Access")
+						ErrorHandling.defaultErrorHandler("Network Error", desc: "Unauthorized Access", sender: self)
 					}
 					return
 				}
@@ -182,7 +182,7 @@ class HomeworkViewController: UIViewController {
 					guard loginCheck == "STUDENT PORTAL" else {
 						//TODO: check for parents too
 							print("Failed Login")
-							ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Did you change your password?")
+							ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Did you change your password?", sender: self)
 							
 						
 						return

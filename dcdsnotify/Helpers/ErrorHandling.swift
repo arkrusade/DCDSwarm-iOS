@@ -20,20 +20,19 @@ struct ErrorHandling {
 	/**
 	This default error handler presents an Alert View on the topmost View Controller
 	*/
-	static func delayedFeatureAlert()
+    static func delayedFeatureAlert(sender: UIViewController)
 	{
-		ErrorHandling.defaultErrorHandler(DelayedFeatureTitle, desc: DelayedFeatureMessage)
+        ErrorHandling.defaultErrorHandler(DelayedFeatureTitle, desc: DelayedFeatureMessage, sender: sender)
 	}
-	static func defaultErrorHandler(error: NSError) {
-		ErrorHandling.defaultErrorHandler(ErrorTitle, desc: error.localizedDescription)
+    static func defaultErrorHandler(error: NSError, sender: UIViewController) {
+		ErrorHandling.defaultErrorHandler(ErrorTitle, desc: error.localizedDescription, sender: sender)
 	}
-	static func defaultErrorHandler(title: String, desc: String) {
+    static func defaultErrorHandler(title: String, desc: String, sender: UIViewController) {
 		let alert = UIAlertController(title: title, message: desc, preferredStyle: UIAlertControllerStyle.Alert)
 		alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: nil))
 		
-		let window = UIApplication.sharedApplication().windows[0]
 		NSOperationQueue.mainQueue().addOperationWithBlock {
-			window.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+			sender.presentViewController(alert, animated: true, completion: nil)
 		}
 	}
 }
