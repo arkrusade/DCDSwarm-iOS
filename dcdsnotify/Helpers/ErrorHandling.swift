@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ConvenienceKit
 
 struct ErrorHandling {
 	
@@ -34,7 +33,7 @@ struct ErrorHandling {
 		
 		let window = UIApplication.sharedApplication().windows[0]
 		NSOperationQueue.mainQueue().addOperationWithBlock {
-			window.rootViewController?.presentViewControllerFromTopViewController(alert, animated: true, completion: nil)
+			window.rootViewController?.presentViewController(alert, animated: true, completion: nil)
 		}
 	}
 }
