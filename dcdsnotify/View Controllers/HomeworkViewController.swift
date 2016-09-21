@@ -80,9 +80,8 @@ class HomeworkViewController: UIViewController {
 		loadActivities()
 	}
 	func goToSettings(sender: AnyObject?){
-//		self.performSegueWithIdentifier(Constants.Segues.HomeworkToSettings, sender: self)
-        //TODO: settings
-		self.performSegueWithIdentifier("Temp", sender: self)
+		self.performSegueWithIdentifier(Constants.Segues.HomeworkToSettings, sender: self)
+		//self.performSegueWithIdentifier("Temp", sender: self)
 	}
 	
 	func configureButtons() {
@@ -120,8 +119,9 @@ class HomeworkViewController: UIViewController {
 			tableView.reloadData()
 		}
 		//TODO: also send request after some refresh button
-
-        let homeworkURL = (activitiesDay?.date ?? NSDate()).toDCDSURL()
+		
+		//			self.currentDay = Day.emptyDay(NSDate()
+		let homeworkURL = (activitiesDay?.date ?? NSDate()).toDCDSURL()
 		portalTask?.cancel()
 		portalTask = NSURLSession.sharedSession().dataTaskWithURL(homeworkURL!, completionHandler: { (data, response, error) -> Void in
 			self.activityIndicator.stopAnimating()

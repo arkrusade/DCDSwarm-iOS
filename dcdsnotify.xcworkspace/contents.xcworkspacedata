@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/justinlee/Documents/Swift Projects/dcdsnotify/dcdsnotify/dcdsSwarm.xcodeproj">
+      location = "group:dcdsnotify.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
