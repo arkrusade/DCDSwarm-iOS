@@ -96,7 +96,6 @@ class HomeworkViewController: UIViewController {
 	}
 	func configureNavigationBar()
 	{
-		
 		let settingsButton = UIBarButtonItem(image: Constants.Images.settings, style: .Plain, target: self, action: #selector(goToSettings(_: )))
 		self.navigationItem.rightBarButtonItem = settingsButton
 		
@@ -104,7 +103,6 @@ class HomeworkViewController: UIViewController {
 		self.navigationItem.leftBarButtonItem = todayButton
 		
 		topConstraint.constant = -(self.navigationController?.navigationBar.frame.height)! - UIApplication.sharedApplication().statusBarFrame.size.height
-
 	}
 	
 	func loadActivities() {
@@ -120,7 +118,6 @@ class HomeworkViewController: UIViewController {
 		}
 		//TODO: also send request after some refresh button
 		
-		//			self.currentDay = Day.emptyDay(NSDate()
 		let homeworkURL = (activitiesDay?.date ?? NSDate()).toDCDSURL()
 		portalTask?.cancel()
 		portalTask = NSURLSession.sharedSession().dataTaskWithURL(homeworkURL!, completionHandler: { (data, response, error) -> Void in
@@ -151,14 +148,15 @@ class HomeworkViewController: UIViewController {
 			
 			let urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
 			if !PortalHelper.checkLoggedIn(urlContent as String) {
-				let login = CacheHelper.retrieveLogin()
-				guard login.username != nil else {
+				let checkLogin = CacheHelper.retrieveLogin()
+				guard checkLogin != nil else {
 					AppState.sharedInstance.logout(self)
 					return
 				}
+                let login = checkLogin!
 				let request = NSMutableURLRequest(URL: Constants.userLoginURL)
 				request.HTTPMethod = "POST"
-				let postString = "do=login&p=413&username=\(login.username!)&password=\(login.password!)&submit=login"
+				let postString = "do=login&p=413&username=\(login.username)&password=\(login.password)&submit=login"
 				request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
 				let checkLoginTask = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
 					
@@ -183,14 +181,20 @@ class HomeworkViewController: UIViewController {
 						
 						return
 					}
-					
+                    NSOperationQueue.mainQueue().addOperationWithBlock({
+                        self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
+                        self.lastLoaded = NSDate() //TODO: make this didSet of currentDay?
+                        CacheHelper.sharedInstance.addDay(self.activitiesDay)
+                    })
 					
 				}
 				checkLoginTask.resume()
 			}
-			self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
-			self.lastLoaded = NSDate() //TODO: make this didSet of currentDay?
-			CacheHelper.sharedInstance.addDay(self.activitiesDay)
+            else {
+                self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
+                self.lastLoaded = NSDate() //TODO: make this didSet of currentDay?
+                CacheHelper.sharedInstance.addDay(self.activitiesDay)
+            }
 		})
 		
 		portalTask!.resume()

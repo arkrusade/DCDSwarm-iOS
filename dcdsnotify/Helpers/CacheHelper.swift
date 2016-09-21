@@ -29,18 +29,25 @@ class CacheHelper {
         NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasLoginKey")
     }
-    static func retrieveLogin() -> Credentials//TODO: should return optional
+    static func retrieveLogin() -> Credentials?
     {
-        let username = NSUserDefaults.standardUserDefaults().stringForKey("username")
-        let pass = sharedInstance.MyKeychainWrapper.myObjectForKey(kSecValueData) as? String
-        return (username, pass)
+        if let username = NSUserDefaults.standardUserDefaults().stringForKey("username"), let pass = sharedInstance.MyKeychainWrapper.myObjectForKey(kSecValueData) as? String
+        {
+            return (username, pass)
+        }
+
+        else {
+            return nil
+        }
+    }
+    static func storeLogin(login: Credentials) {
+        storeLogin(login.username, password: login.password)
     }
     static func storeLogin(username: String, password: String) {
-        if !NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey") {
+        if !NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey") {//TODO: beware, will not overwrite
             NSUserDefaults.standardUserDefaults().setValue(username, forKey: "username")
         }
 
-        // 5.
         sharedInstance.MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
         sharedInstance.MyKeychainWrapper.writeToKeychain()
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")

@@ -19,6 +19,7 @@ class Constants {
 	struct Segues {
 		static let LoginToHomeworkView = "LoginToHomeworkView"
 		static let HomeworkToSettings = "HomeworkToSettings"
+        static let WelcomeToLogin = "WelcomeToLogin"
 	}
 	struct Images {
 		static let settings = UIImage(named: "settings")!

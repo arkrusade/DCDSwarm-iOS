@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var UsernameTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
-    var login: Credentials! = ("", nil)
+    var login: Credentials? = nil
     @IBOutlet weak var vertStackView: UIStackView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
 
     override func viewDidAppear(animated: Bool) {
-        if login.username != nil {
+        if let login = login {
             UsernameTextField.text = login.username
             PasswordTextField.text = login.password
             onLoginButtonTap(self)
@@ -57,7 +57,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func didReceiveMemoryWarning() {
-        login = ("",nil)
+        login = nil
         self.UsernameTextField.text = ""
         self.PasswordTextField.text = ""
     }
@@ -72,6 +72,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
 
         }
+
+        login = (self.UsernameTextField.text!, self.PasswordTextField.text!)
 
         let url = Constants.userLoginURL
         activityIndicator.startAnimating()
@@ -95,7 +97,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("error=\(error == nil ? "\(error)" : "data is nil")")
                 if error?.code == -1009 {
                     print("no internet")
-                    if CacheHelper.sharedInstance.hasDays() {
+                    if CacheHelper.sharedInstance.hasDays(), let wasLoggedIn = CacheHelper.retrieveLogin() {
+                        self.login = wasLoggedIn //if has data, 'login' and show data
+
                         break a
                     }
                     else {
@@ -132,7 +136,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.UsernameTextField.text = ""
         self.PasswordTextField.text = ""
-        login = ("",nil)
+        login = nil
         if segue.identifier == Constants.Segues.LoginToHomeworkView
         {
             print("seguing to HomeworkViewController")

@@ -7,22 +7,26 @@
 //
 
 import UIKit
-typealias SettingsAction = (String, () -> Void)
+typealias SettingsAction = (title: String, action: ())
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	let settingsList: [(title: String, list: [String])] = [("Cache Settings", ["Clear Cache","Logout"]),("Notifications", ["Set Notification Time"])]
     //TODO: set current date
 
-	
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var titleBar: UINavigationItem!
 	
 	
 	override func viewDidLoad() {
+
 		titleBar.title = "Settings"
-		
+        topConstraint.constant = -(self.navigationController?.navigationBar.frame.height)! - UIApplication.sharedApplication().statusBarFrame.size.height
 	}
-	
+
+    func logout() {
+
+    }
 	// MARK: TableView Data Source
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return settingsList.count
