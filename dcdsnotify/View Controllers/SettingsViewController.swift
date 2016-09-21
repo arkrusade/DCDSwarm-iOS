@@ -11,6 +11,8 @@ typealias SettingsAction = (String, () -> Void)
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	let settingsList: [(title: String, list: [String])] = [("Cache Settings", ["Clear Cache","Logout"]),("Notifications", ["Set Notification Time"])]
+    //TODO: set current date
+
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var titleBar: UINavigationItem!

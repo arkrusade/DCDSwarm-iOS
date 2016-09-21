@@ -80,8 +80,8 @@ class HomeworkViewController: UIViewController {
 		loadActivities()
 	}
 	func goToSettings(sender: AnyObject?){
-//		self.performSegueWithIdentifier(Constants.Segues.HomeworkToSettings, sender: self)
-		self.performSegueWithIdentifier("Temp", sender: self)
+		self.performSegueWithIdentifier(Constants.Segues.HomeworkToSettings, sender: self)
+		//self.performSegueWithIdentifier("Temp", sender: self)
 	}
 	
 	func configureButtons() {
@@ -138,17 +138,13 @@ class HomeworkViewController: UIViewController {
 			if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
 				print("statusCode should be 200, but is \(httpStatus.statusCode)")
 				if httpStatus.statusCode == 404{
-					NSOperationQueue.mainQueue().addOperationWithBlock {
-						print("response = \(response)")
-						ErrorHandling.defaultErrorHandler("Network Error", desc: "Page not found", sender: self)
-					}
-					return
+                    print("response = \(response)")
+                    ErrorHandling.defaultErrorHandler("Network Error", desc: "Page not found", sender: self)
+                    return
 				}
 				else if httpStatus.statusCode == 403 {
-					NSOperationQueue.mainQueue().addOperationWithBlock {
-						print("response = \(response)")
-						ErrorHandling.defaultErrorHandler("Network Error", desc: "Unauthorized Access", sender: self)
-					}
+                    print("response = \(response)")
+                    ErrorHandling.defaultErrorHandler("Network Error", desc: "Unauthorized Access", sender: self)
 					return
 				}
 			}

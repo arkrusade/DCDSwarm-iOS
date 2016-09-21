@@ -18,7 +18,7 @@ class AppState {
 	}
 	func logout(sender: UIViewController) {
 		NSOperationQueue.mainQueue().addOperationWithBlock({
-			CacheHelper.clearLogin()
+			CacheHelper.clearAll()
 		})
 		
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
