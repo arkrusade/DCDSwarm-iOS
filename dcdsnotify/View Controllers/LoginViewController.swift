@@ -14,6 +14,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var UsernameTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     var login: Credentials! = ("", nil)
+    var task: NSURLSessionTask?
     @IBOutlet weak var vertStackView: UIStackView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func onLoginButtonTap(sender: AnyObject) {
         //		performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: nil)
         //		return
+        if let task = task {
+            task.cancel()
+        }
 
         guard UsernameTextField.text != "" || PasswordTextField.text != "" else {
             print("empty text")
@@ -80,8 +84,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         request.HTTPMethod = "POST"
         let postString = "do=login&p=413&username=\(UsernameTextField.text!)&password=\(PasswordTextField.text!)&submit=login"
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+                task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
 
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.activityIndicator.stopAnimating()
@@ -127,7 +130,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
             }
         }
-        task.resume()
+        task!.resume()
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.UsernameTextField.text = ""
