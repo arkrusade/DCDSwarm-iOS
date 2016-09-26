@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36E1E2931D98C3A000674F91 /* dcdsnotifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */; };
 		AD053AC81D7A349C00CBAB8C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD053AC71D7A349C00CBAB8C /* AppState.swift */; };
 		AD053ACF1D7A428100CBAB8C /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AD053ACE1D7A428100CBAB8C /* KeychainWrapper.m */; };
 		AD053AD21D81F67E00CBAB8C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD053AD11D81F67E00CBAB8C /* SettingsViewController.swift */; };
@@ -33,7 +34,20 @@
 		B1AEE57D26480CF6D892B0CB /* Pods_dcdsnotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 945AB9C34798FC1F45F04474 /* Pods_dcdsnotify.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		36E1E2951D98C3A000674F91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADA986EB1D6A642300C26E6B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADA986F21D6A642300C26E6B;
+			remoteInfo = dcdsnotify;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		36E1E2901D98C3A000674F91 /* dcdsnotifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dcdsnotifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dcdsnotifyTests.swift; sourceTree = "<group>"; };
+		36E1E2941D98C3A000674F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36F936F21D91A1C6007BCF21 /* dcdsnotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dcdsnotify.entitlements; sourceTree = "<group>"; };
 		945AB9C34798FC1F45F04474 /* Pods_dcdsnotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dcdsnotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DA0CA4FF5E7EC646F6BBB2 /* Pods-dcdsnotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dcdsnotify.release.xcconfig"; path = "Pods/Target Support Files/Pods-dcdsnotify/Pods-dcdsnotify.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +82,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		36E1E28D1D98C3A000674F91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADA986F01D6A642300C26E6B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -79,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36E1E2911D98C3A000674F91 /* dcdsnotifyTests */ = {
+			isa = PBXGroup;
+			children = (
+				36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */,
+				36E1E2941D98C3A000674F91 /* Info.plist */,
+			);
+			path = dcdsnotifyTests;
+			sourceTree = "<group>";
+		};
 		7ED9ED767A9E20320868C880 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				ADA986F51D6A642300C26E6B /* dcdsnotify */,
+				36E1E2911D98C3A000674F91 /* dcdsnotifyTests */,
 				ADA986F41D6A642300C26E6B /* Products */,
 				B31A975D7C229B01EC547E03 /* Pods */,
 				7ED9ED767A9E20320868C880 /* Frameworks */,
@@ -161,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				ADA986F31D6A642300C26E6B /* dcdsnotify.app */,
+				36E1E2901D98C3A000674F91 /* dcdsnotifyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,6 +231,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		36E1E28F1D98C3A000674F91 /* dcdsnotifyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 36E1E2971D98C3A000674F91 /* Build configuration list for PBXNativeTarget "dcdsnotifyTests" */;
+			buildPhases = (
+				36E1E28C1D98C3A000674F91 /* Sources */,
+				36E1E28D1D98C3A000674F91 /* Frameworks */,
+				36E1E28E1D98C3A000674F91 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				36E1E2961D98C3A000674F91 /* PBXTargetDependency */,
+			);
+			name = dcdsnotifyTests;
+			productName = dcdsnotifyTests;
+			productReference = 36E1E2901D98C3A000674F91 /* dcdsnotifyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		ADA986F21D6A642300C26E6B /* dcdsnotify */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADA987051D6A642300C26E6B /* Build configuration list for PBXNativeTarget "dcdsnotify" */;
@@ -225,10 +275,15 @@
 		ADA986EB1D6A642300C26E6B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = orctech;
 				TargetAttributes = {
+					36E1E28F1D98C3A000674F91 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = ADA986F21D6A642300C26E6B;
+					};
 					ADA986F21D6A642300C26E6B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = F83KA8FTRJ;
@@ -254,11 +309,19 @@
 			projectRoot = "";
 			targets = (
 				ADA986F21D6A642300C26E6B /* dcdsnotify */,
+				36E1E28F1D98C3A000674F91 /* dcdsnotifyTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		36E1E28E1D98C3A000674F91 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADA986F11D6A642300C26E6B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -320,6 +383,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		36E1E28C1D98C3A000674F91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36E1E2931D98C3A000674F91 /* dcdsnotifyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ADA986EF1D6A642300C26E6B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,6 +420,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		36E1E2961D98C3A000674F91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADA986F21D6A642300C26E6B /* dcdsnotify */;
+			targetProxy = 36E1E2951D98C3A000674F91 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		ADA986FA1D6A642300C26E6B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -369,6 +448,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		36E1E2981D98C3A000674F91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = dcdsnotifyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.orctech.dcdsnotifyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dcdsnotify.app/dcdsnotify";
+			};
+			name = Debug;
+		};
+		36E1E2991D98C3A000674F91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = dcdsnotifyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.orctech.dcdsnotifyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dcdsnotify.app/dcdsnotify";
+			};
+			name = Release;
+		};
 		ADA987031D6A642300C26E6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -439,7 +552,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -502,6 +615,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		36E1E2971D98C3A000674F91 /* Build configuration list for PBXNativeTarget "dcdsnotifyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36E1E2981D98C3A000674F91 /* Debug */,
+				36E1E2991D98C3A000674F91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		ADA986EE1D6A642300C26E6B /* Build configuration list for PBXProject "dcdsnotify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
