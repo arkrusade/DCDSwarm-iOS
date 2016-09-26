@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bvW-Sm-2dG">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -55,73 +55,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="c37-ZI-ev1">
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kF7-jc-g7k">
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zk7-vb-upb">
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dHp-jT-Vet" userLabel="Username Text Field">
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="125" id="Cxe-jO-xJV"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="djG-bU-WW7" id="gRv-Ry-Gle"/>
-                                                </connections>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2S-C2-BUb">
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Fe-Qp-t6q">
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="STK-5A-AGu">
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="djG-bU-WW7" id="mDC-k5-Xnz"/>
-                                                </connections>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byr-Zz-FoF">
-                                        <state key="normal" title="Login">
-                                            <color key="titleColor" red="0.17254901959999999" green="0.66666666669999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onLoginButtonTap:" destination="djG-bU-WW7" eventType="touchUpInside" id="Tn5-2s-9uJ"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="999" constant="125" id="cAT-4a-87D"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="djG-bU-WW7" id="ZGO-KW-5qD"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYP-9X-drl">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kmt-t2-5g6">
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="djG-bU-WW7" id="Nx6-DD-KQd"/>
-                                </connections>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byr-Zz-FoF">
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="0.17254901959999999" green="0.66666666669999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -136,36 +74,65 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ngu-nJ-3Rf">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LCO-3o-pQN">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="K62-Bt-65b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="djG-bU-WW7" id="bV8-hR-Vrm"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kmt-t2-5g6">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="1cu-4R-8qT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="djG-bU-WW7" id="Nx6-DD-KQd"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.99150443077087402" green="0.85754311084747314" blue="0.15896539390087128" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.97313040494918823" green="0.83720004558563232" blue="0.17021144926548004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="I9R-fd-atm" firstAttribute="trailing" secondItem="kmt-t2-5g6" secondAttribute="trailing" id="4IV-LH-ePb"/>
+                            <constraint firstItem="LCO-3o-pQN" firstAttribute="leading" secondItem="Ngu-nJ-3Rf" secondAttribute="trailing" constant="18.5" id="0DC-5g-MbE"/>
                             <constraint firstItem="BLt-iS-EFz" firstAttribute="centerX" secondItem="byr-Zz-FoF" secondAttribute="centerX" id="4JE-aK-K5w"/>
                             <constraint firstItem="byr-Zz-FoF" firstAttribute="top" secondItem="kmt-t2-5g6" secondAttribute="bottom" constant="15" id="5a4-MV-iBa"/>
                             <constraint firstItem="aYP-9X-drl" firstAttribute="centerY" secondItem="kmt-t2-5g6" secondAttribute="centerY" id="8K5-8u-ufd"/>
                             <constraint firstItem="BLt-iS-EFz" firstAttribute="top" secondItem="byr-Zz-FoF" secondAttribute="bottom" constant="1.5" id="Ppf-tW-WIv"/>
-                            <constraint firstItem="I9R-fd-atm" firstAttribute="leading" secondItem="2Rq-Je-E2n" secondAttribute="trailing" constant="15" id="R1e-Sj-WWY"/>
-                            <constraint firstItem="2Rq-Je-E2n" firstAttribute="trailing" secondItem="aYP-9X-drl" secondAttribute="trailing" id="Ty6-pR-gRs"/>
+                            <constraint firstItem="MGc-1H-jcK" firstAttribute="centerX" secondItem="Xdy-G8-yTW" secondAttribute="centerX" id="Ql7-Yr-HMT"/>
                             <constraint firstItem="byr-Zz-FoF" firstAttribute="centerY" secondItem="Xdy-G8-yTW" secondAttribute="centerY" id="W9Y-F7-t7U"/>
+                            <constraint firstItem="kmt-t2-5g6" firstAttribute="leading" secondItem="aYP-9X-drl" secondAttribute="trailing" constant="18.5" id="WYg-v3-aeN"/>
                             <constraint firstItem="MGc-1H-jcK" firstAttribute="centerX" secondItem="byr-Zz-FoF" secondAttribute="centerX" id="ZhO-Vh-c3w"/>
                             <constraint firstItem="kmt-t2-5g6" firstAttribute="leading" secondItem="byr-Zz-FoF" secondAttribute="leading" id="bNV-d0-e4A"/>
-                            <constraint firstItem="I9R-fd-atm" firstAttribute="top" secondItem="MGc-1H-jcK" secondAttribute="bottom" constant="75" id="bao-bg-3aI"/>
-                            <constraint firstItem="2Rq-Je-E2n" firstAttribute="centerY" secondItem="I9R-fd-atm" secondAttribute="centerY" id="brK-oy-5F2"/>
-                            <constraint firstItem="2Rq-Je-E2n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xdy-G8-yTW" secondAttribute="leadingMargin" constant="15" id="cnv-QO-SN7"/>
-                            <constraint firstItem="I9R-fd-atm" firstAttribute="leading" secondItem="kmt-t2-5g6" secondAttribute="leading" id="dsi-g8-WdD"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="I9R-fd-atm" secondAttribute="trailing" constant="30" id="l62-Uk-aPJ"/>
+                            <constraint firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xdy-G8-yTW" secondAttribute="leadingMargin" constant="15" id="cnv-QO-SN7"/>
+                            <constraint firstItem="Ngu-nJ-3Rf" firstAttribute="centerY" secondItem="LCO-3o-pQN" secondAttribute="centerY" id="eh7-KJ-trD"/>
+                            <constraint firstItem="kmt-t2-5g6" firstAttribute="top" secondItem="LCO-3o-pQN" secondAttribute="bottom" constant="26" id="gZx-ni-yY6"/>
+                            <constraint firstItem="Ngu-nJ-3Rf" firstAttribute="trailing" secondItem="aYP-9X-drl" secondAttribute="trailing" id="hbQ-Mn-zjX"/>
+                            <constraint firstItem="LCO-3o-pQN" firstAttribute="top" secondItem="MGc-1H-jcK" secondAttribute="bottom" constant="66.5" id="jkz-WA-xKN"/>
                             <constraint firstItem="byr-Zz-FoF" firstAttribute="centerX" secondItem="Xdy-G8-yTW" secondAttribute="centerX" id="q6S-fO-fuj"/>
-                            <constraint firstItem="kmt-t2-5g6" firstAttribute="top" secondItem="I9R-fd-atm" secondAttribute="bottom" constant="25" id="wic-hl-jhk"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cnv-QO-SN7"/>
+                            </mask>
+                        </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="4Be-JT-b3R" appends="YES" id="Eft-GU-uvZ"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="PasswordTextField" destination="kmt-t2-5g6" id="aKa-dA-txf"/>
-                        <outlet property="UsernameTextField" destination="I9R-fd-atm" id="HHt-md-8Kl"/>
+                        <outlet property="UsernameTextField" destination="LCO-3o-pQN" id="H0l-lB-se4"/>
                         <outlet property="activityIndicator" destination="BLt-iS-EFz" id="EAV-ic-1xc"/>
                         <segue destination="mJA-R2-8tx" kind="show" identifier="LoginToHomeworkView" id="7dY-YG-MHd"/>
                     </connections>
@@ -210,10 +177,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="240" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" id="ejL-qJ-xhA" customClass="ActivityTableViewCell" customModule="dcdsnotify" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="240" tableViewCell="ejL-qJ-xhA" id="zlr-tx-XoT">
-                                            <frame key="frameInset" width="375" height="69"/>
+                                            <frame key="frameInset" width="1000" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xcl-xn-m3Y"/>
@@ -287,52 +254,11 @@
                         <outlet property="topConstraint" destination="gdz-tN-vTR" id="sdw-9D-uaQ"/>
                         <outlet property="yesterdayButton" destination="kx8-Hh-cvI" id="xu7-5e-10t"/>
                         <segue destination="UYD-rJ-tQL" kind="show" identifier="HomeworkToSettings" id="v1x-Vz-niw"/>
-                        <segue destination="13W-QF-NeJ" kind="show" identifier="Temp" id="4Um-0p-VbT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2144.8000000000002" y="310.79460269865069"/>
-        </scene>
-        <!--Temp-->
-        <scene sceneID="qwL-mW-Dnm">
-            <objects>
-                <viewController storyboardIdentifier="secondVCID" id="13W-QF-NeJ" customClass="Temp" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xnJ-DM-eUP"/>
-                        <viewControllerLayoutGuide type="bottom" id="1uW-iU-8U5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gYi-DI-hbI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9J-07-Wun">
-                                <state key="normal" title="Logout"/>
-                                <connections>
-                                    <action selector="onLogoutButtonTap:" destination="13W-QF-NeJ" eventType="touchUpInside" id="pFM-j7-cDy"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications soon to come!" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mL-t3-n7g">
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="7mL-t3-n7g" firstAttribute="centerX" secondItem="b9J-07-Wun" secondAttribute="centerX" id="OCI-Ys-F2F"/>
-                            <constraint firstItem="b9J-07-Wun" firstAttribute="centerX" secondItem="gYi-DI-hbI" secondAttribute="centerX" id="PDp-m7-1z9"/>
-                            <constraint firstItem="7mL-t3-n7g" firstAttribute="top" secondItem="b9J-07-Wun" secondAttribute="bottom" constant="66" id="PO8-v3-wIF"/>
-                            <constraint firstItem="b9J-07-Wun" firstAttribute="centerY" secondItem="gYi-DI-hbI" secondAttribute="centerY" id="Xq3-yU-V80"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="logoutButton" destination="b9J-07-Wun" id="Csf-Ph-B63"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qch-Yh-Qxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3033" y="906"/>
         </scene>
         <!--Settings-->
         <scene sceneID="jCc-bl-t89">
@@ -398,7 +324,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iI-OC-094" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3034" y="247"/>
+            <point key="canvasLocation" x="2751" y="311"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IR4-hP-GqP">
