@@ -10,12 +10,14 @@ import UIKit
 
 class SettingsCell: UITableViewCell {
 	var title: String!
+    var action: ClosureVoid!
 	@IBOutlet weak var settingButton: UIButton!
 	
 	
 	@IBAction func onButtonTap(sender: AnyObject)
 	{
-		let window = UIApplication.sharedApplication().windows[0]
+        action()
+//		let window = UIApplication.sharedApplication().windows[0]
 //		window.rootViewController?.performSegueWithIdentifier(segueID, sender: self)
 	}
 }

@@ -22,7 +22,7 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
 	
 
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableViewCell
+		let cell = tableView.dequeueReusableCellWithIdentifier(Constants.Cells.ActivityCell) as! ActivityTableViewCell
 		if activitiesDay != nil && activitiesDay!.activities != nil
 		{
 			cell.activityIndicator.hidesWhenStopped = true
