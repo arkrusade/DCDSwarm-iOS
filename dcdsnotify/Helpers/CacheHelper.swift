@@ -17,9 +17,10 @@ class CacheHelper {
         clearLogin()
         clearNotifs()
     }
-    static func clearUserCache() {
+    static func clearUserCache(sender: UIViewController) {
         clearDays()
         clearNotifs()
+        ErrorHandling.displayAlert("Cache Cleared!", desc: "", sender: sender, completion: nil)
     }
     static func clearDays() {
         NSUserDefaults.standardUserDefaults().removeObjectForKey(DAYS_KEY)

@@ -74,6 +74,7 @@ class HomeworkViewController: UIViewController {
 
     func goToToday(sender: AnyObject?) {
         let today = NSDate()
+        let locale = NSLocale.currentLocale()
         activitiesDay = Day(date: today)
         loadActivities()
     }

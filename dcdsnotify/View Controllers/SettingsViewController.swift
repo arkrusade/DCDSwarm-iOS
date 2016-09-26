@@ -32,7 +32,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             AppState.sharedInstance.logout(self)
         }
         let clearCacheClosure: ClosureVoid = {ClosureVoid in
-            CacheHelper.clearUserCache()
+            CacheHelper.clearUserCache(self)
         }
 
         let userCategory: SettingsCategory
@@ -80,8 +80,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell", forIndexPath: indexPath) as! SettingsCell
 		//TODO: change cells to constants
-		cell.textLabel?.text = settingsList[indexPath.section].list[indexPath.row].title
-        
+        let setting = settingsList[indexPath.section].list[indexPath.row]
+		cell.textLabel?.text = setting.title
+        cell.action = setting.action
 		cell.backgroundColor = UIColor(colorLiteralRed: 230/256, green: 230/256, blue: 230/256, alpha: 1)
 		return cell
 	}
