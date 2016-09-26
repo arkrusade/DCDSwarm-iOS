@@ -2,7 +2,7 @@
 //  LoginViewController.swift
 //  dcdsnotify
 //
-//  Created by Clara Hwang on 8/25/16.
+//  Created by Peter J. Lee on 8/25/16.
 //  Copyright © 2016 orctech. All rights reserved.
 //
 
@@ -63,18 +63,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func onLoginButtonTap(sender: AnyObject) {
-        //		performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: nil)
-        //		return
 
         guard UsernameTextField.text != "" || PasswordTextField.text != "" else {
             print("empty text")
-            ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "You must enter a username/password", sender: self)
+            ErrorHandling.defaultError("Invalid Username/Password", desc: "You must enter a username/password", sender: self)
             return
 
         }
 
         login = (self.UsernameTextField.text!, self.PasswordTextField.text!)
-
+        //login if cache exists
+        if let cacheLogin = CacheHelper.retrieveLogin(), let enteredLogin = login where cacheLogin == enteredLogin {
+            //if has data, 'login' and show data
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
+            }
+            return
+        }
         let url = Constants.userLoginURL
         activityIndicator.startAnimating()
 
@@ -92,21 +97,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 //cancelled task
                 return
             }
-            a:
-                if error != nil || data == nil {// check for fundamental networking error
+            guard error == nil || data != nil else {// check for fundamental networking error
                 print("error=\(error == nil ? "\(error)" : "data is nil")")
                 if error?.code == -1009 {
-                    print("no internet")
-                    if CacheHelper.sharedInstance.hasDays(), let wasLoggedIn = CacheHelper.retrieveLogin() {
-                        self.login = wasLoggedIn //if has data, 'login' and show data
+                    print("no internet")//dealing with offline
 
-                        break a
-                    }
-                    else {
-                        ErrorHandling.defaultErrorHandler(error!, sender: self)
+//                    else {
+                        ErrorHandling.defaultError(error!, sender: self)
 
                         return
-                    }
+//                    }
+                }
+                else {
+                    ErrorHandling.defaultError(error!, sender: self)
+                    return
                 }
             }
 
@@ -123,7 +127,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             guard loginCheck == "STUDENT PORTAL" else {
                 //TODO: check for parents too
                 print("Failed Login")
-                ErrorHandling.defaultErrorHandler("Invalid Username/Password", desc: "Please enter a valid username and password combination", sender: self)
+                ErrorHandling.defaultError("Invalid Username/Password", desc: "Please enter a valid username and password combination", sender: self)
                 return
             }
             NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -137,14 +141,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.UsernameTextField.text = ""
         self.PasswordTextField.text = ""
         login = nil
+
         if segue.identifier == Constants.Segues.LoginToHomeworkView
         {
             print("seguing to HomeworkViewController")
-            let nav = segue.destinationViewController as! UINavigationController
-            let vc = nav.topViewController as! HomeworkViewController
-            vc.activitiesDay = Day(date: NSDate())
-            vc.currentDay = NSDate()
+            let nav = segue.destinationViewController as? UINavigationController
+            let vc = nav?.topViewController as? HomeworkViewController
+            guard vc != nil else {
+                ErrorHandling.defaultError("Bug!", desc: "Improper segue - \(segue.identifier)", sender: self)
+                return
+            }
+
+            vc!.activitiesDay = Day(date: NSDate())
+            vc!.currentDay = NSDate()
+
         }
+        
     }
 }
 

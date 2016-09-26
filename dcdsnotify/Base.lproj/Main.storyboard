@@ -36,7 +36,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="djG-bU-WW7" kind="show" identifier="WelcomeToLogin" id="fB2-y9-QKy"/>
+                        <segue destination="djG-bU-WW7" kind="show" identifier="SkipWelcome" id="fB2-y9-QKy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3w-Ip-ho3" userLabel="First Responder" sceneMemberID="firstResponder"/>

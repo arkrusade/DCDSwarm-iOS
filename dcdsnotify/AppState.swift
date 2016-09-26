@@ -2,7 +2,7 @@
 //  AppState.swift
 //  dcdsnotify
 //
-//  Created by Clara Hwang on 9/2/16.
+//  Created by Peter J. Lee on 9/2/16.
 //  Copyright © 2016 orctech. All rights reserved.
 //
 
@@ -23,7 +23,7 @@ class AppState {
 		
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let homeVC = storyboard.instantiateViewControllerWithIdentifier("Welcome") as! WelcomeViewController
-		homeVC.login = (nil, nil)
+		homeVC.login = nil
 		let window = UIApplication.sharedApplication().windows[0]
 		sender.dismissViewControllerAnimated(false, completion: nil)
 		window.rootViewController = homeVC

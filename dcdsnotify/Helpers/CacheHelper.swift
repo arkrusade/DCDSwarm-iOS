@@ -2,7 +2,7 @@
 //  CacheHelper.swift
 //  dcdsnotify
 //
-//  Created by Clara Hwang on 8/27/16.
+//  Created by Peter J. Lee on 8/27/16.
 //  Copyright © 2016 orctech. All rights reserved.
 //
 
@@ -15,6 +15,10 @@ class CacheHelper {
     static func clearAll() {
         clearDays()
         clearLogin()
+        clearNotifs()
+    }
+    static func clearUserCache() {
+        clearDays()
         clearNotifs()
     }
     static func clearDays() {

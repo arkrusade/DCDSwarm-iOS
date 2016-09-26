@@ -2,7 +2,7 @@
 //  WelcomeViewController.swift
 //  dcdsnotify
 //
-//  Created by Clara Hwang on 8/25/16.
+//  Created by Peter J. Lee on 8/25/16.
 //  Copyright © 2016 orctech. All rights reserved.
 //
 
@@ -27,14 +27,14 @@ class WelcomeViewController: UIViewController {
 	override func viewDidAppear(animated: Bool) {
 		login = CacheHelper.retrieveLogin()
 		if login != nil {
-			performSegueWithIdentifier("WelcomeToLogin", sender: nil)
+			performSegueWithIdentifier(Constants.Segues.SkipWelcome, sender: nil)
 		}            
 	}
 	@IBAction func onWelcomeButtonTap(sender: AnyObject) {
-		performSegueWithIdentifier("WelcomeToLogin", sender: nil)
+		performSegueWithIdentifier(Constants.Segues.SkipWelcome, sender: nil)
 	}
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if segue.identifier == "WelcomeToLogin" {
+		if segue.identifier == Constants.Segues.SkipWelcome {
 			let vc = segue.destinationViewController as! LoginViewController
 			vc.login = login
 		}

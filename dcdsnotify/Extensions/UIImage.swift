@@ -2,7 +2,7 @@
 //  UIImage.swift
 //  dcdsnotify
 //
-//  Created by Clara Hwang on 9/8/16.
+//  Created by Peter J. Lee on 9/8/16.
 //  Copyright © 2016 orctech. All rights reserved.
 //
 

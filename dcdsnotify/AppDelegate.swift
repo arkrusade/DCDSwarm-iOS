@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  dcdsnotify
 //
-//  Created by Clara Hwang on 8/21/16.
+//  Created by Peter J. Lee on 8/21/16.
 //  Copyright © 2016 orctech. All rights reserved.
 //
 
