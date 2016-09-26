@@ -172,7 +172,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="240" tableViewCell="ejL-qJ-xhA" id="zlr-tx-XoT">
-                                            <frame key="frameInset" width="375" height="70"/>
+                                            <frame key="frameInset" width="375" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xcl-xn-m3Y"/>
@@ -251,11 +251,52 @@
                         <outlet property="topConstraint" destination="gdz-tN-vTR" id="sdw-9D-uaQ"/>
                         <outlet property="yesterdayButton" destination="kx8-Hh-cvI" id="xu7-5e-10t"/>
                         <segue destination="UYD-rJ-tQL" kind="show" identifier="HomeworkToSettings" id="v1x-Vz-niw"/>
+                        <segue destination="13W-QF-NeJ" kind="show" identifier="Temp" id="4Um-0p-VbT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2146" y="311"/>
+        </scene>
+        <!--Temp-->
+        <scene sceneID="qwL-mW-Dnm">
+            <objects>
+                <viewController storyboardIdentifier="secondVCID" id="13W-QF-NeJ" customClass="Temp" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xnJ-DM-eUP"/>
+                        <viewControllerLayoutGuide type="bottom" id="1uW-iU-8U5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gYi-DI-hbI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9J-07-Wun">
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="onLogoutButtonTap:" destination="13W-QF-NeJ" eventType="touchUpInside" id="pFM-j7-cDy"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications soon to come!" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mL-t3-n7g">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="7mL-t3-n7g" firstAttribute="centerX" secondItem="b9J-07-Wun" secondAttribute="centerX" id="OCI-Ys-F2F"/>
+                            <constraint firstItem="b9J-07-Wun" firstAttribute="centerX" secondItem="gYi-DI-hbI" secondAttribute="centerX" id="PDp-m7-1z9"/>
+                            <constraint firstItem="7mL-t3-n7g" firstAttribute="top" secondItem="b9J-07-Wun" secondAttribute="bottom" constant="66" id="PO8-v3-wIF"/>
+                            <constraint firstItem="b9J-07-Wun" firstAttribute="centerY" secondItem="gYi-DI-hbI" secondAttribute="centerY" id="Xq3-yU-V80"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logoutButton" destination="b9J-07-Wun" id="Csf-Ph-B63"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qch-Yh-Qxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3033" y="906"/>
         </scene>
         <!--Settings-->
         <scene sceneID="jCc-bl-t89">

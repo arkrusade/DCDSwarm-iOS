@@ -121,8 +121,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
 
             //MARK: Login Check
-
-            //TODO: why isnt this the other login check
+            
             let urlContentString = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
             let loginCheck = try? (urlContentString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit"))
             guard loginCheck == "STUDENT PORTAL" else {

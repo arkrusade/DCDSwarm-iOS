@@ -56,7 +56,7 @@ class HomeworkViewController: UIViewController {
         super.didReceiveMemoryWarning()
         self.activitiesDay = Day(date: NSDate())
 
-        //TODO: better way to clean memory
+        //TODO: is this right??
         // Dispose of any resources that can be recreated.
     }
 
@@ -171,6 +171,7 @@ class HomeworkViewController: UIViewController {
                 }
                 else {
                     self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
+                    self.lastLoaded = NSDate() //TODO: make this didSet of currentDay?
                     CacheHelper.sharedInstance.addDay(self.activitiesDay)
                 }
             }
@@ -183,7 +184,13 @@ class HomeworkViewController: UIViewController {
 
     }
 
+    //TODO: maybe stuff
+    /*
+     search
+     set due dates on calendar
+     notifs
 
+     */
 
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
 

@@ -14,6 +14,7 @@ typealias ClosureVoid = () -> Void
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var settingsList: [SettingsCategory]! = nil
+    //TODO: set current date action
 
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
 	@IBOutlet weak var tableView: UITableView!
@@ -35,27 +36,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
 
         let userCategory: SettingsCategory
-        userCategory.category = "User Settings"
-
-        let clearCacheSetting: SettingsAction = ("Clear Cache", clearCacheClosure)
+        let clearCacheSetting: SettingsAction = ("Clear Cache", clearCacheClosure
+        )
         let logoutAction: SettingsAction = ("Logout", logoutClosure)
-
+        userCategory.category = "User Settings"
         userCategory.list = [clearCacheSetting, logoutAction]
-
 
         settingsList = [userCategory]
         //,("Notifications", ["Set Notification Time"])]
-        //TODO: notif settings like what to show
-        //report error
-        //about
-        //go to date
-        //block schedule
-        /*
-         search
-         set due dates on calendar
-         notifs
-         
-         */
+
 
     }
 	// MARK: TableView Data Source
@@ -89,10 +78,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier(Constants.Cells.SettingsCell, forIndexPath: indexPath) as! SettingsCell
-        let setting = settingsList[indexPath.section].list[indexPath.row]
-		cell.textLabel?.text = setting.title
-        cell.action = setting.action
+		let cell = tableView.dequeueReusableCellWithIdentifier("SettingsCell", forIndexPath: indexPath) as! SettingsCell
+		//TODO: change cells to constants
+		cell.textLabel?.text = settingsList[indexPath.section].list[indexPath.row].title
+        
 		cell.backgroundColor = UIColor(colorLiteralRed: 230/256, green: 230/256, blue: 230/256, alpha: 1)
 		return cell
 	}

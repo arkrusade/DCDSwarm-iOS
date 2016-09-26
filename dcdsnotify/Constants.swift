@@ -29,10 +29,5 @@ class Constants {
 		static let rightCarat = UIImage(named: "right_carat")!
 		static let leftCarat = UIImage(named: "left_carat")!
 	}
-
-    struct Cells {
-        static let SettingsCell = "SettingsCell"
-        static let ActivityCell = "ActivityCell"
-    }
 	
 }

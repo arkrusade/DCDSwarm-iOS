@@ -10,7 +10,6 @@ import Foundation
 class Day: CustomStringConvertible {
 	var activities: [Activity]? = nil
 	let date: NSDate!
-    var lastLoad: NSDate!//TODO: use this instead of checking for refresh (15 min timer)
 	
 //	var slashedDate: String {
 //		get {
