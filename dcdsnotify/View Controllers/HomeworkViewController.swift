@@ -156,7 +156,10 @@ class HomeworkViewController: UIViewController {
                             //check right page
                             guard PortalHelper.checkLoggedIn(checkLoginString) == true else {
                                 print("Failed Login")
-                                ErrorHandling.defaultError("Invalid Username/Password", desc: "Did you change your password?", sender: self)
+                                ErrorHandling.displayAlert("Invalid Username/Password", desc: "Stored login does not suceed", sender: self, completion: {() -> Void in
+                                        AppState.sharedInstance.logout(self)
+                                    return
+                                })
                                 return
                             }
                         }

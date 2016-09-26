@@ -38,11 +38,7 @@ extension String {
 }
 
 extension NSString {
-	enum CropError: ErrorType {
-		case StartNotContained
-		case EndNotContained
-		
-	}
+	
 	func crop(start: String) throws -> String
 	{
 		let startRange = (self as NSString).rangeOfString(start)

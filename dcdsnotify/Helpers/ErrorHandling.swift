@@ -36,10 +36,21 @@ struct ErrorHandling {
     }
     static func displayAlert(title: String, desc: String, sender: UIViewController, completion: ClosureVoid?) {
         let alert = UIAlertController(title: title, message: desc, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: nil))
+        var handler: ((UIAlertAction) -> Void)?
+        if let completion = completion {
+            handler = {(UIAlertAction) -> Void in
+                completion()
+            }
+        }
+        else
+        {
+            handler = nil
+        }
+        
+        alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: handler))
 
         NSOperationQueue.mainQueue().addOperationWithBlock {
-            sender.presentViewController(alert, animated: true, completion: completion)
+            sender.presentViewController(alert, animated: true, completion: nil)
         }
     }
 }
