@@ -172,7 +172,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="240" tableViewCell="ejL-qJ-xhA" id="zlr-tx-XoT">
-                                            <frame key="frameInset" width="375" height="70"/>
+                                            <frame key="frameInset" width="375" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xcl-xn-m3Y"/>
@@ -192,7 +192,6 @@
                                                     <constraints>
                                                         <constraint firstItem="kD0-pr-n1v" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Bk2-cQ-zix" secondAttribute="bottom" constant="10" id="ibm-dA-DYH"/>
                                                         <constraint firstItem="Bk2-cQ-zix" firstAttribute="top" secondItem="QBM-fo-Rhm" secondAttribute="top" id="ife-VE-Waz"/>
-                                                        <constraint firstAttribute="bottom" secondItem="kD0-pr-n1v" secondAttribute="bottom" id="mwV-lE-t0Z"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
@@ -202,7 +201,7 @@
                                                 <constraint firstItem="QBM-fo-Rhm" firstAttribute="leading" secondItem="zlr-tx-XoT" secondAttribute="leadingMargin" id="KQa-nb-mBV"/>
                                                 <constraint firstItem="xcl-xn-m3Y" firstAttribute="centerX" secondItem="zlr-tx-XoT" secondAttribute="centerX" id="cqZ-kR-fN8"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="QBM-fo-Rhm" secondAttribute="trailing" constant="30" id="pOH-Pp-ykC"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="QBM-fo-Rhm" secondAttribute="bottom" id="yva-Sa-Gsb"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="kD0-pr-n1v" secondAttribute="bottom" id="qcC-Xu-C3g"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -237,9 +236,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="LXD-pf-huN"/>
                                 <exclude reference="YWg-uy-nQt"/>
                                 <exclude reference="mEE-x5-zOv"/>
-                                <exclude reference="LXD-pf-huN"/>
                             </mask>
                         </variation>
                     </view>
