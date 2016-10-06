@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3650C20B1DA6898100882801 /* convertcsv.json in Resources */ = {isa = PBXBuildFile; fileRef = 3650C20A1DA6898100882801 /* convertcsv.json */; };
+		3650C20D1DA68A9900882801 /* DictionarySorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3650C20C1DA68A9900882801 /* DictionarySorting.swift */; };
+		3650C20F1DA696D900882801 /* ExcelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3650C20E1DA696D900882801 /* ExcelHelper.swift */; };
 		36E1E2931D98C3A000674F91 /* dcdsnotifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */; };
 		36E1E29B1D98CBD500674F91 /* CropError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E29A1D98CBD500674F91 /* CropError.swift */; };
 		AD053AC81D7A349C00CBAB8C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD053AC71D7A349C00CBAB8C /* AppState.swift */; };
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3650C20A1DA6898100882801 /* convertcsv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = convertcsv.json; sourceTree = "<group>"; };
+		3650C20C1DA68A9900882801 /* DictionarySorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySorting.swift; sourceTree = "<group>"; };
+		3650C20E1DA696D900882801 /* ExcelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcelHelper.swift; sourceTree = "<group>"; };
 		36E1E2901D98C3A000674F91 /* dcdsnotifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dcdsnotifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dcdsnotifyTests.swift; sourceTree = "<group>"; };
 		36E1E2941D98C3A000674F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 				AD6B91F31D6FAC87005B77A9 /* ErrorHandling.swift */,
 				AD6B92071D7227D1005B77A9 /* CacheHelper.swift */,
 				AD053AD31D8248E700CBAB8C /* PortalHelper.swift */,
+				3650C20E1DA696D900882801 /* ExcelHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -176,6 +183,7 @@
 				AD6B91FB1D6FCA19005B77A9 /* NSDate.swift */,
 				AD053AD51D82503800CBAB8C /* UIImage.swift */,
 				36E1E29A1D98CBD500674F91 /* CropError.swift */,
+				3650C20C1DA68A9900882801 /* DictionarySorting.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -203,6 +211,7 @@
 		ADA986F51D6A642300C26E6B /* dcdsnotify */ = {
 			isa = PBXGroup;
 			children = (
+				3650C20A1DA6898100882801 /* convertcsv.json */,
 				AD053ACD1D7A428100CBAB8C /* dcdsnotify-Bridging-Header.h */,
 				36F936F21D91A1C6007BCF21 /* dcdsnotify.entitlements */,
 				ADA986F61D6A642300C26E6B /* AppDelegate.swift */,
@@ -333,6 +342,7 @@
 				ADA987011D6A642300C26E6B /* LaunchScreen.storyboard in Resources */,
 				ADA986FE1D6A642300C26E6B /* Assets.xcassets in Resources */,
 				ADA986FC1D6A642300C26E6B /* Main.storyboard in Resources */,
+				3650C20B1DA6898100882801 /* convertcsv.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +416,7 @@
 				AD6B91FA1D6FC1A3005B77A9 /* Day.swift in Sources */,
 				AD6B91F81D6FB3D9005B77A9 /* Crop.swift in Sources */,
 				AD053AC81D7A349C00CBAB8C /* AppState.swift in Sources */,
+				3650C20F1DA696D900882801 /* ExcelHelper.swift in Sources */,
 				AD6B91F01D6FAC7F005B77A9 /* HomeworkViewController.swift in Sources */,
 				AD053ACF1D7A428100CBAB8C /* KeychainWrapper.m in Sources */,
 				36E1E29B1D98CBD500674F91 /* CropError.swift in Sources */,
@@ -413,6 +424,7 @@
 				AD6B91F51D6FAC87005B77A9 /* ErrorHandling.swift in Sources */,
 				AD6B91DA1D6F8E62005B77A9 /* LoginViewController.swift in Sources */,
 				ADA986F71D6A642300C26E6B /* AppDelegate.swift in Sources */,
+				3650C20D1DA68A9900882801 /* DictionarySorting.swift in Sources */,
 				AD6B91FC1D6FCA19005B77A9 /* NSDate.swift in Sources */,
 				AD053AD81D825C6400CBAB8C /* SettingsCell.swift in Sources */,
 				AD6B91DC1D6F8F49005B77A9 /* Constants.swift in Sources */,

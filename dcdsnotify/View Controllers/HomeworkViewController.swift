@@ -8,7 +8,17 @@
 
 import UIKit
 import Foundation
-
+struct DaySchedule {
+    var date: NSDate?
+    var blocks: [Block]
+    init() {
+        blocks = []
+    }
+}
+struct Block {
+    var name: String
+    var time: String
+}
 class HomeworkViewController: UIViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -36,6 +46,7 @@ class HomeworkViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureButtons()
+        configureBlockSchedule()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
         loadActivities()
@@ -83,6 +94,74 @@ class HomeworkViewController: UIViewController {
         //self.performSegueWithIdentifier("Temp", sender: self)
     }
 
+
+
+    func configureBlockSchedule() {
+        var fullSchedule: [DaySchedule] = []
+        if let path = NSBundle.mainBundle().pathForResource("convertcsv", ofType: "json")
+        {
+            if let jsonData = NSData(contentsOfFile: path)
+            {
+                do {
+                    if let jsonResult: NSDictionary = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                    {
+                        if let fields: Dictionary = jsonResult as? Dictionary<String, AnyObject>
+                        {
+                            /*
+                             odd i is block numbers
+                             eve i is times
+                            */
+                            var blocksKey = ""
+                            var timesKey = ""
+                            var daySchedule: DaySchedule
+                            var block: Block
+
+                            let field = "FIELD"
+
+                            for i in 1...fields.keys.count/2 {
+                                daySchedule = DaySchedule()
+                                blocksKey = field + "\(2*i-1)"
+                                timesKey = field + "\(2*i)"
+
+                                if let blocks = fields[blocksKey] as? [String] {
+                                    if let times = fields[timesKey] as? [String] {
+                                        let excelDateString: String = blocks[0]
+                                        if let excelNum = Int(excelDateString) {
+                                            daySchedule.date = NSDate.fromExcelDate(excelNum)
+                                        }
+
+                                        for j in 1..<blocks.count {
+                                            block = Block(name: blocks[j], time: times[j])
+                                            if block.name == "Note" && block.time == "" {
+                                                continue
+                                            }
+                                            if (block.name != "" || block.time != "")
+                                            {
+                                                daySchedule.blocks.append(block)
+                                            }
+                                        }
+                                    }
+                                }
+
+                                fullSchedule.append(daySchedule)
+                            }
+
+                        }
+                    }
+                }
+                catch {
+                    ErrorHandling.defaultError("JSON Parsing Error", desc: "failed to parse block schedule", sender: self)
+                }
+            }
+        }
+        for day in fullSchedule {
+            print("Date: \(day.date?.asSlashedDate())")
+            for block in day.blocks {
+                print(block.name + ": " + block.time)
+            }
+        }
+
+    }
     func configureButtons() {
         self.view.bringSubviewToFront(yesterdayButton)
         self.view.bringSubviewToFront(tomorrowButton)

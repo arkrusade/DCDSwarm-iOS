@@ -14,7 +14,25 @@ extension NSDate {
 		dateFormatter.dateFormat = "EEEE"
 		return dateFormatter.stringFromDate(self)
 	}
-	
+
+    static func fromExcelDate(num: Int) -> NSDate?
+    {
+        let excelRefDate = NSCalendar.currentCalendar()
+            .dateByAddingUnit(
+                .Year,
+                value: -101,
+                toDate: NSDate.init(timeIntervalSinceReferenceDate: 0),
+                options: NSCalendarOptions(rawValue: 0)
+        )
+        let date = NSCalendar.currentCalendar()
+            .dateByAddingUnit(
+                .Day,
+                value: num-1,
+                toDate: excelRefDate!,
+                options: NSCalendarOptions(rawValue: 0)
+        )
+        return date
+    }
 	func yesterday() -> NSDate?
 	{
 		let yesterday = NSCalendar.currentCalendar()
