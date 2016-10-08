@@ -13,13 +13,12 @@ class ExcelHelper {
     var loaded = false
 
     func getSchedule(forDay: NSDate) -> DaySchedule?{
-        if !loaded {
+        if !loaded || schedule == nil {
             configureBlockSchedule()
         }
         if let schedule = schedule {
             for day in schedule {
                 if let scheduleDate = day.date
-                    //scheduleDate.asSlashedDate() == "10/01/16"
                 {
                     if scheduleDate.asSlashedDate() == forDay.asSlashedDate() {
                         return day

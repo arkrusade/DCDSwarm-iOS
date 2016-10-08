@@ -152,7 +152,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
 
             vc!.activitiesDay = Day(date: NSDate())
-            vc!.currentDay = NSDate()
 
         }
         

@@ -30,6 +30,7 @@ class Constants {
 		static let settings = UIImage(named: "settings")!
 		static let rightCarat = UIImage(named: "right_carat")!
 		static let leftCarat = UIImage(named: "left_carat")!
+        static let calendar = UIImage(named: "calendar")!
 	}
 	
 }

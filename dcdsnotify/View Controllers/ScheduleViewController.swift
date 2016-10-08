@@ -20,7 +20,8 @@ class ScheduleViewController: UIViewController {
             let emptyBlock: Block = ("Could not", "find schedule")
             daySchedule?.blocks = [emptyBlock]
         }
-        self.titleBar.title = "Schedule for \(date.asSlashedDate())"
+        self.titleBar.title = "Schedule"
+        self.titleBar.backBarButtonItem?.title = "Assignments"
         tableView.reloadData()
     }
 }
@@ -28,15 +29,6 @@ class ScheduleViewController: UIViewController {
 extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
-    }
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            if let date = daySchedule?.date {
-                return "\(date.dayOfTheWeek() ?? "Day")"
-            }
-        }
-        return ""
-
     }
 
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -46,7 +38,7 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
 
 
         if section == 0 {
-            titleView.text = "\(date.dayOfTheWeek() ?? "Day")"
+            titleView.text = "\(date.dayOfTheWeek() ?? "Day") - \(date.asSlashedDate())"
             titleView.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
             let gradient: CAGradientLayer = CAGradientLayer.init(layer: titleView)
             gradient.frame = headerView.bounds
