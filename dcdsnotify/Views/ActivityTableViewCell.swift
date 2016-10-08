@@ -10,7 +10,6 @@ import UIKit
 
 class ActivityTableViewCell: UITableViewCell {
 	
-	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var descLabel: UILabel!
 	var activity: Activity? {

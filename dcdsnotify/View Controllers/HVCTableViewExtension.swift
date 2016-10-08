@@ -25,14 +25,11 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableViewCell
 		if activitiesDay != nil && activitiesDay!.activities != nil
 		{
-			cell.activityIndicator.hidesWhenStopped = true
-			cell.activityIndicator.stopAnimating()
 			cell.activity = activitiesDay?.activities?[indexPath.section]
 			
 		}
 		else {
-			cell.activity = Activity(classString: "", title: "", subtitle: "Loading")
-			cell.activityIndicator.startAnimating()
+			cell.activity = Activity(classString: "", title: "", subtitle: "No Data")
 		}
 		return cell
 	}

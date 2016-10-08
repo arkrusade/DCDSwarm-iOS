@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3621AB431DA8050600CF67CA /* BlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621AB421DA8050600CF67CA /* BlockCell.swift */; };
+		3621AB451DA8063E00CF67CA /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621AB441DA8063E00CF67CA /* ScheduleViewController.swift */; };
+		3621AB471DA80DD900CF67CA /* scheduleDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621AB461DA80DD900CF67CA /* scheduleDay.swift */; };
 		3650C20B1DA6898100882801 /* convertcsv.json in Resources */ = {isa = PBXBuildFile; fileRef = 3650C20A1DA6898100882801 /* convertcsv.json */; };
 		3650C20D1DA68A9900882801 /* DictionarySorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3650C20C1DA68A9900882801 /* DictionarySorting.swift */; };
 		3650C20F1DA696D900882801 /* ExcelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3650C20E1DA696D900882801 /* ExcelHelper.swift */; };
@@ -49,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3621AB421DA8050600CF67CA /* BlockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCell.swift; sourceTree = "<group>"; };
+		3621AB441DA8063E00CF67CA /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		3621AB461DA80DD900CF67CA /* scheduleDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleDay.swift; sourceTree = "<group>"; };
 		3650C20A1DA6898100882801 /* convertcsv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = convertcsv.json; sourceTree = "<group>"; };
 		3650C20C1DA68A9900882801 /* DictionarySorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySorting.swift; sourceTree = "<group>"; };
 		3650C20E1DA696D900882801 /* ExcelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcelHelper.swift; sourceTree = "<group>"; };
@@ -142,6 +148,7 @@
 				AD6B91D71D6F876F005B77A9 /* WelcomeViewController.swift */,
 				AD6B91D91D6F8E62005B77A9 /* LoginViewController.swift */,
 				AD053AD11D81F67E00CBAB8C /* SettingsViewController.swift */,
+				3621AB441DA8063E00CF67CA /* ScheduleViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -151,6 +158,7 @@
 			children = (
 				AD6B91E81D6FAAE8005B77A9 /* ActivityTableViewCell.swift */,
 				AD053AD71D825C6400CBAB8C /* SettingsCell.swift */,
+				3621AB421DA8050600CF67CA /* BlockCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +168,7 @@
 			children = (
 				AD6B91EB1D6FAB9E005B77A9 /* Activity.swift */,
 				AD6B91F91D6FC1A3005B77A9 /* Day.swift */,
+				3621AB461DA80DD900CF67CA /* scheduleDay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -414,7 +423,9 @@
 				AD6B92081D7227D1005B77A9 /* CacheHelper.swift in Sources */,
 				AD6B91F41D6FAC87005B77A9 /* CalendarHelper.swift in Sources */,
 				AD6B91FA1D6FC1A3005B77A9 /* Day.swift in Sources */,
+				3621AB431DA8050600CF67CA /* BlockCell.swift in Sources */,
 				AD6B91F81D6FB3D9005B77A9 /* Crop.swift in Sources */,
+				3621AB471DA80DD900CF67CA /* scheduleDay.swift in Sources */,
 				AD053AC81D7A349C00CBAB8C /* AppState.swift in Sources */,
 				3650C20F1DA696D900882801 /* ExcelHelper.swift in Sources */,
 				AD6B91F01D6FAC7F005B77A9 /* HomeworkViewController.swift in Sources */,
@@ -423,6 +434,7 @@
 				AD6B91D81D6F876F005B77A9 /* WelcomeViewController.swift in Sources */,
 				AD6B91F51D6FAC87005B77A9 /* ErrorHandling.swift in Sources */,
 				AD6B91DA1D6F8E62005B77A9 /* LoginViewController.swift in Sources */,
+				3621AB451DA8063E00CF67CA /* ScheduleViewController.swift in Sources */,
 				ADA986F71D6A642300C26E6B /* AppDelegate.swift in Sources */,
 				3650C20D1DA68A9900882801 /* DictionarySorting.swift in Sources */,
 				AD6B91FC1D6FCA19005B77A9 /* NSDate.swift in Sources */,

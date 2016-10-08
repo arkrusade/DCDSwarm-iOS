@@ -12,7 +12,7 @@ typealias SettingsAction = (title: String, action: ClosureVoid )
 typealias Closure = ()
 typealias ClosureVoid = () -> Void
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UIViewController {
     var settingsList: [SettingsCategory]! = nil
     //TODO: set current date action
 
@@ -31,22 +31,52 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let logoutClosure: ClosureVoid = {() -> Void in
             AppState.sharedInstance.logout(self)
         }
-        let clearCacheClosure: ClosureVoid = {ClosureVoid in
+        let clearCacheClosure: ClosureVoid = { ClosureVoid in
             CacheHelper.clearUserCache(self)
+        }
+        let scheduleClosure: ClosureVoid = { ClosureVoid in
+            self.showSchedule()
         }
 
         let userCategory: SettingsCategory
-        let clearCacheSetting: SettingsAction = ("Clear Cache", clearCacheClosure
-        )
-        let logoutAction: SettingsAction = ("Logout", logoutClosure)
         userCategory.category = "User Settings"
+
+        let clearCacheSetting: SettingsAction = ("Clear Cache", clearCacheClosure)
+        let logoutAction: SettingsAction = ("Logout", logoutClosure)
         userCategory.list = [clearCacheSetting, logoutAction]
 
-        settingsList = [userCategory]
-        //,("Notifications", ["Set Notification Time"])]
 
+        let scheduleCategory: SettingsCategory
+        scheduleCategory.category = "Schedule"
+
+        let scheduleAction: SettingsAction = ("Block Schedule", scheduleClosure)
+        scheduleCategory.list = [scheduleAction]
+
+        settingsList = [userCategory, scheduleCategory]
+        //,("Notifications", ["Set Notification Time"])]
+        //TODO: view in week, month
+        //TODO: add note taking
+        //TODO: add search, blcok numbers, class order
 
     }
+    func showSchedule() {
+        self.performSegueWithIdentifier(Constants.Segues.SettingsToSchedule, sender: self)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let id = segue.identifier {
+            if id == Constants.Segues.SettingsToSchedule {
+                let scheduleVC = segue.destinationViewController as! ScheduleViewController
+                if let hVC = self.navigationController?.viewControllers[0] as? HomeworkViewController {
+
+                    let currentDateOfHVC = hVC.activitiesDay.date
+                    scheduleVC.date = currentDateOfHVC
+                    scheduleVC.daySchedule = ExcelHelper.sharedInstance.getSchedule(currentDateOfHVC)
+                }
+            }
+        }
+    }
+}
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 	// MARK: TableView Data Source
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return settingsList.count

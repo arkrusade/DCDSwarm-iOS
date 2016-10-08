@@ -15,10 +15,7 @@ struct DaySchedule {
         blocks = []
     }
 }
-struct Block {
-    var name: String
-    var time: String
-}
+typealias Block = (name: String, time: String)
 class HomeworkViewController: UIViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -32,10 +29,10 @@ class HomeworkViewController: UIViewController {
     var lastLoaded: NSDate?
     var currentDay: NSDate!
     //TODO: separate activities from date
-    var activitiesDay: Day? {
+    var activitiesDay: Day! {
         didSet {
-            titleBar.title = NSDate.dateFormatterSlashedAndDay().stringFromDate(activitiesDay!.date)
-            if self.isViewLoaded() && activitiesDay?.activities != nil {
+            titleBar.title = NSDate.dateFormatterSlashedAndDay().stringFromDate(activitiesDay.date)
+            if self.isViewLoaded() && activitiesDay.activities != nil {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.tableView.reloadData()
                 }
@@ -46,7 +43,6 @@ class HomeworkViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureButtons()
-        configureBlockSchedule()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
         loadActivities()
@@ -85,90 +81,26 @@ class HomeworkViewController: UIViewController {
 
     func goToToday(sender: AnyObject?) {
         let today = NSDate()
-        let locale = NSLocale.currentLocale()
+//        let locale = NSLocale.currentLocale()
+        //TODO: use this
         activitiesDay = Day(date: today)
         loadActivities()
     }
     func goToSettings(sender: AnyObject?){
         self.performSegueWithIdentifier(Constants.Segues.HomeworkToSettings, sender: self)
-        //self.performSegueWithIdentifier("Temp", sender: self)
     }
 
 
 
-    func configureBlockSchedule() {
-        var fullSchedule: [DaySchedule] = []
-        if let path = NSBundle.mainBundle().pathForResource("convertcsv", ofType: "json")
-        {
-            if let jsonData = NSData(contentsOfFile: path)
-            {
-                do {
-                    if let jsonResult: NSDictionary = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
-                    {
-                        if let fields: Dictionary = jsonResult as? Dictionary<String, AnyObject>
-                        {
-                            /*
-                             odd i is block numbers
-                             eve i is times
-                            */
-                            var blocksKey = ""
-                            var timesKey = ""
-                            var daySchedule: DaySchedule
-                            var block: Block
-
-                            let field = "FIELD"
-
-                            for i in 1...fields.keys.count/2 {
-                                daySchedule = DaySchedule()
-                                blocksKey = field + "\(2*i-1)"
-                                timesKey = field + "\(2*i)"
-
-                                if let blocks = fields[blocksKey] as? [String] {
-                                    if let times = fields[timesKey] as? [String] {
-                                        let excelDateString: String = blocks[0]
-                                        if let excelNum = Int(excelDateString) {
-                                            daySchedule.date = NSDate.fromExcelDate(excelNum)
-                                        }
-
-                                        for j in 1..<blocks.count {
-                                            block = Block(name: blocks[j], time: times[j])
-                                            if block.name == "Note" && block.time == "" {
-                                                continue
-                                            }
-                                            if (block.name != "" || block.time != "")
-                                            {
-                                                daySchedule.blocks.append(block)
-                                            }
-                                        }
-                                    }
-                                }
-
-                                fullSchedule.append(daySchedule)
-                            }
-
-                        }
-                    }
-                }
-                catch {
-                    ErrorHandling.defaultError("JSON Parsing Error", desc: "failed to parse block schedule", sender: self)
-                }
-            }
-        }
-        for day in fullSchedule {
-            print("Date: \(day.date?.asSlashedDate())")
-            for block in day.blocks {
-                print(block.name + ": " + block.time)
-            }
-        }
-
-    }
     func configureButtons() {
         self.view.bringSubviewToFront(yesterdayButton)
         self.view.bringSubviewToFront(tomorrowButton)
+
         let left = Constants.Images.leftCarat.alpha(0.5)
         yesterdayButton.setBackgroundImage(left, forState: .Normal)
         let right = Constants.Images.rightCarat.alpha(0.5)
         tomorrowButton.setBackgroundImage(right, forState: .Normal)
+
         yesterdayButton.addTarget(self, action: #selector(prevPeriod(_:)), forControlEvents: .TouchUpInside)
         tomorrowButton.addTarget(self, action: #selector(nextPeriod(_:)), forControlEvents: .TouchUpInside)
     }
@@ -179,26 +111,33 @@ class HomeworkViewController: UIViewController {
         let todayButton = UIBarButtonItem(title: "Today", style: .Plain, target: self, action: #selector(goToToday(_: )))
         self.navigationItem.leftBarButtonItem = todayButton
 
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.stopAnimating()
+
         topConstraint.constant = -(self.navigationController?.navigationBar.frame.height)! - UIApplication.sharedApplication().statusBarFrame.size.height
     }
 
     func loadActivities() {
-        activityIndicator.stopAnimating()
-
+        if !activityIndicator.isAnimating() {
+            activityIndicator.startAnimating()
+        }
         //while loading, if in cache, use that; else, clear the day to show activity loader
         if let day = CacheHelper.sharedInstance.retrieveDay(activitiesDay?.date ?? NSDate()) {
             self.activitiesDay = day
         }
-        else {
-            self.activitiesDay?.activities = nil
-            tableView.reloadData()
-        }
+        //until task is finished, inserts this before everything else
+        let loadingActivity = Activity(classString: "", title: "Loading", subtitle: "")
+        self.activitiesDay?.activities?.insert(loadingActivity, atIndex: 0)
+        tableView.reloadData()
+
         //TODO: also send request after some refresh button
 
         let homeworkURL = (activitiesDay?.date ?? NSDate()).toDCDSURL()
         portalTask?.cancel()
         portalTask = NSURLSession.sharedSession().dataTaskWithURL(homeworkURL!, completionHandler: { (data, response, error) -> Void in
-            self.activityIndicator.stopAnimating()
+            NSOperationQueue.mainQueue().addOperationWithBlock() {
+                self.activityIndicator.stopAnimating()
+            }
             if let urlContent = PortalHelper.checkResponse(data, response: response, error: error, sender: self)
             {
                 let isAPage = PortalHelper.checkLoggedIn(urlContent)
@@ -211,6 +150,9 @@ class HomeworkViewController: UIViewController {
                 //MARK: Login Checking
                 //if login fails, expires, or otherwise goes to login page again
                 if !isProperPage {
+
+                    let loggingInActivity = Activity(classString: "", title: "Webpage timed out", subtitle: "Logging in again...")
+                    self.activitiesDay?.activities = [loggingInActivity]
                     let checkLogin = CacheHelper.retrieveLogin()
 
                     //logged in without a cached login
@@ -255,10 +197,13 @@ class HomeworkViewController: UIViewController {
                     CacheHelper.sharedInstance.addDay(self.activitiesDay)
                 }
             }
-            else {
-                let errorActivity = Activity(classString: "Error", title: "No data", subtitle: "")
-                self.activitiesDay?.activities = [errorActivity]
-            }
+//            else {
+//                if self.activitiesDay?.activities == nil {
+//                    let errorActivity = Activity(classString: "Error", title: "No data", subtitle: "")
+//                    self.activitiesDay?.activities = [errorActivity]
+//
+//                }
+//            }
         })
         portalTask!.resume()
 

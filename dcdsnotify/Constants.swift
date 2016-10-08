@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 public let DAYS_KEY = "daysKey"
+public let SCHEDULE_KEY = "scheduleKey"
 
 class Constants {
 	static let userLoginURL = NSURL(string: "https://www.dcds.edu/userlogin.cfm")!
@@ -23,6 +24,7 @@ class Constants {
 		static let LoginToHomeworkView = "LoginToHomeworkView"
 		static let HomeworkToSettings = "HomeworkToSettings"
         static let SkipWelcome = "SkipWelcome"
+        static let SettingsToSchedule = "SettingsToSchedule"
 	}
 	struct Images {
 		static let settings = UIImage(named: "settings")!

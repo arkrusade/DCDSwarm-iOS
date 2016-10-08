@@ -12,6 +12,37 @@ class CacheHelper {
     static let sharedInstance = CacheHelper()
     let MyKeychainWrapper = KeychainWrapper()
 
+//    static func storeSchedule(schedule: [DaySchedule]) {
+//
+//    }
+//
+//    static func storeDaySchedule(daySchedule: DaySchedule) {
+//
+//        var scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? Dictionary()
+//        if let day = daySchedule.date {
+//            let dayDict: [Block] = daySchedule.blocks
+//
+//
+//            scheduleDict[day.asSlashedDate()] = dayDict
+//        }
+//        NSUserDefaults.standardUserDefaults().synchronize()
+//
+//    }
+//    static func retrieveSchedule(forDay: NSDate) -> DaySchedule?
+//    {
+//        let scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? [:]
+//        if let dayString = scheduleDict[forDay.asSlashedDate()] {
+//            var activities: [Activity] = []
+//            for values in dayString {
+//                activities.append(Activity(fromValues: values))
+//            }
+//            return Day(activities: activities, date: date)
+//        }
+//
+//        else {
+//            return nil
+//        }
+//    }
     static func clearAll() {
         clearDays()
         clearLogin()

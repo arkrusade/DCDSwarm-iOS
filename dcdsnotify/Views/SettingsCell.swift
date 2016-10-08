@@ -14,10 +14,8 @@ class SettingsCell: UITableViewCell {
 	@IBOutlet weak var settingButton: UIButton!
 	
 	
-	@IBAction func onButtonTap(sender: AnyObject)
-	{
+    @IBAction func onButtonTap(sender: AnyObject) {
         action()
-//		let window = UIApplication.sharedApplication().windows[0]
-//		window.rootViewController?.performSegueWithIdentifier(segueID, sender: self)
-	}
+    }
+
 }
