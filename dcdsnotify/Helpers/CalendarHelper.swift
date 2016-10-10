@@ -110,7 +110,7 @@ class CalendarHelper {
 					activityTitle = try! activityString.cropExclusive("title=\"Click here for event details\">", end: "</span>")//removes beginning crap in activity
 					
 					//separates class name from activity title
-					var tempClass = try! activityTitle.cropEnd("):")
+					var tempClass = try! (activityTitle.cropEnd("):") ?? "Failed Activity")
 					tempClass.removeAtIndex(tempClass.endIndex.predecessor())
 					activityClass = tempClass
 					activityTitle = try! activityTitle.cropExclusive("): ", end: "</")
