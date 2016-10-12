@@ -20,10 +20,10 @@ class CalendarHelper {
 		let dayEnd = "'} start:"
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-		let date = dateFormatter.dateFromString(try! htmlString.cropExclusive(dayStart, end: dayEnd) ?? "") ?? NSDate()
+		let date = dateFormatter.dateFromString( htmlString.cropExclusive(dayStart, end: dayEnd) ?? "") ?? NSDate()
 
 		//MARK: check for empty day
-		guard (try? htmlString.crop(emptyStart, end: emptyEnd)) == nil else{
+		guard (htmlString.crop(emptyStart, end: emptyEnd)) == nil else{
 						//TODO: remove hotfix
 			let emptyDay = Day.emptyDay(date)
 			return emptyDay
@@ -49,8 +49,11 @@ class CalendarHelper {
 		
 		let dayStartString = "<span class=\"listcap"
 		let dayEndString = "</div>"//TODO: will not work on week or greater periods
-		var dayString = try? htmlString.cropExclusive(dayStartString, end: dayEndString).cropExclusive(">")
-		
+        var tempDayString: String? = htmlString.cropExclusive(dayStartString, end: dayEndString)?.cropExclusive(">")
+        guard tempDayString != nil else {
+            return Day.emptyDay(date)
+        }
+        var dayString: String? = tempDayString
 		let tempDay = Day(date: date)
 		tempDay.activities = []
 		
@@ -61,78 +64,82 @@ class CalendarHelper {
 		let activityEndString = "<!-- end eventobj -->"
 		
 		
-		var currentActivity = try? dayString!.cropExclusive(activityStartString, end: activityEndString)//Gets single activity
-		let classID = try? dayString!.cropEndExclusive("\\")//for calendar id of class
-		let activityID = try? dayString!.cropExclusive("\"event_", end: "\\\"")//gets activity ID
+		var currentActivity = dayString!.cropExclusive(activityStartString, end: activityEndString)//Gets single activity
+		let classID = dayString!.cropEndExclusive("\\")//for calendar id of class
+		let activityID = dayString!.cropExclusive("\"event_", end: "\\\"")//gets activity ID
 		//TODO: use activity and class ID
-		dayString = try? dayString!.cropExclusive(activityStartString)//removes currActivity by finding next one
+		dayString = dayString!.cropExclusive(activityStartString)//removes currActivity by finding next one
 		
 		
 		while let okActivity = currentActivity {
 			
 			
-			var activityTitle = "Title not found"
+            var activityTitle: String! = "Title not found"
 			let activityClass: String
 			var activityDesc = ""
 			
 			//MARK: parsing Title
 			
-			let activityString = try! okActivity.crop("etitle")
+            if let activityString =  okActivity.crop("etitle") {
 			if okActivity.hasPrefix("3659") {
-				activityTitle = try! activityString.cropExclusive("\">", end: "/span")
+				activityTitle =  activityString.cropExclusive("\">", end: "/span")
 				
 				var tempClassString = activityTitle
 				
-				activityTitle = try! activityTitle.cropEndExclusive("(")
+				activityTitle =  activityTitle.cropEndExclusive("(")
 				if activityTitle.containsString("<br") {
-					tempClassString = try! tempClassString.cropExclusive("<br").cropExclusive("(")
-					activityTitle = try! activityTitle.cropEndExclusive("<")
+					tempClassString =  tempClassString.cropExclusive("<br")!.cropExclusive("(")!
+					activityTitle =  activityTitle.cropEndExclusive("<")
 					
 				}
 				
-				activityClass = try! tempClassString.cropExclusive("(", end: ")<")
+				activityClass =  tempClassString.cropExclusive("(", end: ")<") ?? "Failed to find class"
 				
 			}
 				
 				//			else if okActivity.hasPrefix("4790") {
-				//				activityTitle = try! activityString.cropExclusive("</span>")
-				//				activityClass = try! activityTitle.cropEnd(":")
-				//				activityTitle = try! activityTitle.cropExclusive(": ")
+				//				activityTitle =  activityString.cropExclusive("</span>")
+				//				activityClass =  activityTitle.cropEnd(":")
+				//				activityTitle =  activityTitle.cropExclusive(": ")
 				//			}
 			else if (okActivity.hasPrefix("3500")) {
-				activityTitle = try! activityString.cropExclusive("title=").cropExclusive(">", end: "</span")
-				activityClass = try! activityTitle.cropEnd(":")
-				activityTitle = try! activityTitle.cropExclusive(": ")
+				activityTitle =  activityString.cropExclusive("title=")?.cropExclusive(">", end: "</span") ?? "Failed title: code 3500"
+                activityClass =  activityTitle.cropEnd(":") ?? "Failed class: code 3500"
+				activityTitle =  activityTitle.cropExclusive(": ") ?? "Failed title: code 3500"
 			}
 			else {
 				//linked
 				if okActivity.containsString("title=\"Click here for event details\">") {
-					activityTitle = try! activityString.cropExclusive("title=\"Click here for event details\">", end: "</span>")//removes beginning crap in activity
+					activityTitle =  activityString.cropExclusive("title=\"Click here for event details\">", end: "</span>")//removes beginning crap in activity
 					
 					//separates class name from activity title
-					var tempClass = try! (activityTitle.cropEnd("):") ?? "Failed Activity")
+					var tempClass =  (activityTitle.cropEnd("):") ?? "Failed Activity")
 					tempClass.removeAtIndex(tempClass.endIndex.predecessor())
 					activityClass = tempClass
-					activityTitle = try! activityTitle.cropExclusive("): ", end: "</")
+					activityTitle =  activityTitle.cropExclusive("): ", end: "</")
 					
 					if activityTitle.containsString("<br") {
-						activityTitle = try! activityTitle.cropEndExclusive("<br")
+						activityTitle =  activityTitle.cropEndExclusive("<br")
 					}
 				}
 					
 					//not linked
 				else if okActivity.containsString("<span class=\"eventcon\">")//find event content
 				{
-					let tempActivity = try! okActivity.cropExclusive("id=\"e_")
-					let activityID = try! tempActivity.cropEndExclusive("\">")
+                    if let tempActivity =  okActivity.cropExclusive("id=\"e_") {
+					let activityID =  tempActivity.cropEndExclusive("\">")
 					//TODO: organize activities by class and use id
-					activityClass = try! (tempActivity.cropExclusive("\">", end: "): ") + ")" ?? "Failed Activity")
-					activityTitle = try! (tempActivity.cropExclusive("): ", end: "</span>") ?? "Failed Title")
+					activityClass =  (tempActivity.cropExclusive("\">", end: "): ") + ")" ?? "Failed Activity")
+					activityTitle =  (tempActivity.cropExclusive("): ", end: "</span>") ?? "Failed Title")
 					
 					
 					if activityTitle.containsString("<br") {
-						activityTitle = try! activityTitle.cropEndExclusive("<br")
+						activityTitle =  activityTitle.cropEndExclusive("<br")
 					}
+                    }
+                    else {
+                        activityTitle = "Failed title: code eventcon"
+                    }
 					
 				}
 				else {
@@ -142,10 +149,10 @@ class CalendarHelper {
 			}
 			
 			//MARK: parsing Desc
-			var activityDescData = try! activityString.cropExclusive("</span>")
+			var activityDescData =  activityString.cropExclusive("</span>")!
 			while(activityDescData.containsString("<span")) {
-				activityDescData = try! activityDescData.cropExclusive("<span")
-				activityDescData = try! activityDescData.cropExclusive(">", end: "</span") as String
+				activityDescData =  activityDescData.cropExclusive("<span")!
+				activityDescData =  activityDescData.cropExclusive(">", end: "</span")!
 				
 				if activityDescData.containsString("<") && activityDescData.containsString(">"){//if carats found
 					//find carats and make range
@@ -165,13 +172,13 @@ class CalendarHelper {
 				activityDesc += (activityDescData) + "\n"
 			}
 			
-			tempDay.activities!.append(Activity(classString: activityClass, title: activityTitle, subtitle: activityDesc))
+			tempDay.activities!.append(Activity(classString: activityClass, title: activityTitle ?? "Title not found", subtitle: activityDesc))
 			
 			//while loop logic
 			//gets the next activity
-			currentActivity = try? (dayString!.cropExclusive(activityStartString, end: activityEndString))
-			dayString = try? dayString!.cropExclusive(activityStartString)
-			
+			currentActivity = (dayString!.cropExclusive(activityStartString, end: activityEndString))
+			dayString = dayString!.cropExclusive(activityStartString)
+            }
 			
 		}
 		

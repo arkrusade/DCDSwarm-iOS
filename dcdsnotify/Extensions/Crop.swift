@@ -39,54 +39,54 @@ extension String {
 
 extension NSString {
 	
-	func crop(start: String) throws -> String
+	func crop(start: String) -> String?
 	{
 		let startRange = (self as NSString).rangeOfString(start)
 		guard startRange.location < self.description.characters.count else
 		{
-			throw CropError.StartNotContained
+			return nil
 		}
 		
 		return (self as NSString).substringFromIndex(startRange.location)
 	}
-	func cropExclusive(start: String) throws -> String
+	func cropExclusive(start: String) -> String?
 	{
 		let startRange = (self as NSString).rangeOfString(start)
 		guard startRange.location < self.description.characters.count else
 		{
-			throw CropError.StartNotContained
+			return nil
 		}
 		
 		return (self as NSString).substringFromIndex(startRange.location + startRange.length)
 	}
 	
-	func cropEnd(suffix: String) throws -> String
+	func cropEnd(suffix: String) -> String?
 	{
 		let endRange = (self as NSString).rangeOfString(suffix)
 		guard endRange.location < self.description.characters.count else
 		{
-			throw CropError.EndNotContained
+			return nil
 		}
 		
 		return (self as NSString).substringToIndex(endRange.location + endRange.length)
 	}
-	func cropEndExclusive(suffix: String) throws -> String
+	func cropEndExclusive(suffix: String) -> String?
 	{
 		let endRange = (self as NSString).rangeOfString(suffix)
 		guard endRange.location < self.description.characters.count else
 		{
-			throw CropError.EndNotContained
+			return nil
 		}
 		
 		return (self as NSString).substringToIndex(endRange.location)
 	}
 	
-	func crop(start: String, end: String) throws -> String
+	func crop(start: String, end: String) -> String?
 	{
 		let startRange = (self as NSString).rangeOfString(start)
 		guard startRange.location < self.description.characters.count else
 		{
-			throw CropError.StartNotContained
+			return nil
 		}
 		
 		let startCut = (self as NSString).substringFromIndex(startRange.location)
@@ -94,17 +94,17 @@ extension NSString {
 		let endRange = (startCut as NSString).rangeOfString(end)
 		guard endRange.location < startCut.characters.count else
 		{
-			throw CropError.EndNotContained
+			return nil
 		}
 		
 		return (startCut as NSString).substringToIndex(endRange.location + endRange.length)
 	}
-	func cropExclusive(start: String, end: String) throws -> String
+	func cropExclusive(start: String, end: String) -> String?
 	{
 		let startRange = (self as NSString).rangeOfString(start)
 		guard startRange.location < self.description.characters.count else
 		{
-			throw CropError.StartNotContained
+			return nil
 		}
 		
 		let startCut = (self as NSString).substringFromIndex(startRange.location + startRange.length)
@@ -112,7 +112,7 @@ extension NSString {
 		let endRange = (startCut as NSString).rangeOfString(end)
 		guard endRange.location < startCut.characters.count else
 		{
-			throw CropError.EndNotContained
+			return nil
 		}
 		
 		return (startCut as NSString).substringToIndex(endRange.location)
