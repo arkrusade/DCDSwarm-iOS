@@ -12,7 +12,7 @@ class PortalHelper {
     //returns true if logged in, false if not, nil if unknown page
 	static func checkLoggedIn(htmlString: String) -> Bool? {
 		let tempLoginCheck = htmlString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
-        guard temploginCheck != nil else {
+        guard tempLoginCheck != nil else {
             return nil
         }
         let loginCheck = tempLoginCheck!

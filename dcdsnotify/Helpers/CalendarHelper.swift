@@ -75,7 +75,7 @@ class CalendarHelper {
 			
 			
             var activityTitle: String! = "Title not found"
-			let activityClass: String
+			var activityClass: String? = nil
 			var activityDesc = ""
 			
 			//MARK: parsing Title
@@ -129,7 +129,7 @@ class CalendarHelper {
                     if let tempActivity =  okActivity.cropExclusive("id=\"e_") {
 					let activityID =  tempActivity.cropEndExclusive("\">")
 					//TODO: organize activities by class and use id
-					activityClass =  (tempActivity.cropExclusive("\">", end: "): ") + ")" ?? "Failed Activity")
+					activityClass =  (tempActivity.cropExclusive("\">", end: "): ")! + ")" ?? "Failed Activity")
 					activityTitle =  (tempActivity.cropExclusive("): ", end: "</span>") ?? "Failed Title")
 					
 					
@@ -171,8 +171,8 @@ class CalendarHelper {
 				}
 				activityDesc += (activityDescData) + "\n"
 			}
-			
-			tempDay.activities!.append(Activity(classString: activityClass, title: activityTitle ?? "Title not found", subtitle: activityDesc))
+            
+			tempDay.activities!.append(Activity(classString: activityClass ?? "No activity found", title: activityTitle ?? "Title not found", subtitle: activityDesc))
 			
 			//while loop logic
 			//gets the next activity
