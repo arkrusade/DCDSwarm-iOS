@@ -103,9 +103,9 @@ class CalendarHelper {
 				//				activityTitle =  activityTitle.cropExclusive(": ")
 				//			}
 			else if (okActivity.hasPrefix("3500")) {
-				activityTitle =  activityString.cropExclusive("title=")?.cropExclusive(">", end: "</span") ?? "Failed title: code 3500"
-                activityClass =  activityTitle.cropEnd(":") ?? "Failed class: code 3500"
-				activityTitle =  activityTitle.cropExclusive(": ") ?? "Failed title: code 3500"
+				activityTitle =  activityString.cropExclusive("title=")?.cropExclusive(">", end: "</span") ?? "No title: code 3500"
+                activityClass =  activityTitle.cropEnd(":") ?? "No class: code 3500"
+				activityTitle =  activityTitle.cropExclusive(": ") ?? "No title: code 3500"
 			}
 			else {
 				//linked
@@ -113,14 +113,25 @@ class CalendarHelper {
 					activityTitle =  activityString.cropExclusive("title=\"Click here for event details\">", end: "</span>")//removes beginning crap in activity
 					
 					//separates class name from activity title
-					var tempClass =  (activityTitle.cropEnd("):") ?? "Failed Activity")
-					tempClass.removeAtIndex(tempClass.endIndex.predecessor())
-					activityClass = tempClass
-					activityTitle =  activityTitle.cropExclusive("): ", end: "</")
-					
-					if activityTitle.containsString("<br") {
-						activityTitle =  activityTitle.cropEndExclusive("<br")
-					}
+                    if let tempClass =  activityTitle.cropEnd("):") {
+                        activityClass = tempClass
+                        activityClass!.removeAtIndex(tempClass.endIndex.predecessor())
+                    }
+                    else {
+                        //Activity not found
+                    }
+                    
+                    if let tempTitle = activityTitle.cropExclusive("): ", end: "</") {
+                        activityTitle = tempTitle
+                    }
+                    if activityTitle.containsString("<br") {
+                        activityTitle =  activityTitle.cropEndExclusive("<br")
+                    }
+//                    activityTitle =  activityTitle.cropExclusive("): ", end: "</")
+//                    
+//                    if activityTitle.containsString("<br") {
+//                        activityTitle =  activityTitle.cropEndExclusive("<br")
+//                    }
 				}
 					
 					//not linked
@@ -172,7 +183,7 @@ class CalendarHelper {
 				activityDesc += (activityDescData) + "\n"
 			}
             
-			tempDay.activities!.append(Activity(classString: activityClass ?? "No activity found", title: activityTitle ?? "Title not found", subtitle: activityDesc))
+			tempDay.activities!.append(Activity(classString: activityClass ?? "No Title Found", title: activityTitle ?? "Title not found", subtitle: activityDesc))
 			
 			//while loop logic
 			//gets the next activity

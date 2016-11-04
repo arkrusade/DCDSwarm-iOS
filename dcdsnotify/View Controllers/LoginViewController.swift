@@ -100,12 +100,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("error=\(error == nil ? "\(error)" : "data is nil")")
                 if error?.code == -1009 {
                     print("no internet")//dealing with offline
-
-//                    else {
-                        ErrorHandling.defaultError(error!, sender: self)
-
-                        return
-//                    }
+                    ErrorHandling.defaultError(error!, sender: self)
+                    return
                 }
                 else {
                     ErrorHandling.defaultError(error!, sender: self)
