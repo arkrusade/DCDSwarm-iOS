@@ -79,10 +79,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
             return
         }
-        let url = Constants.userLoginURL
         activityIndicator.startAnimating()
 
-        let request = NSMutableURLRequest(URL: url)
+        let request = NSMutableURLRequest(URL: Constants.userLoginURL)
         request.HTTPMethod = "POST"
         let postString = "do=login&p=413&username=\(UsernameTextField.text!)&password=\(PasswordTextField.text!)&submit=login"
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
