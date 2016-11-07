@@ -88,13 +88,7 @@ extension HomeworkViewController {
                     CacheHelper.sharedInstance.addDay(self.activitiesDay)
                 }
             }
-            //            else {
-            //                if self.activitiesDay?.activities == nil {
-            //                    let errorActivity = Activity(classString: "Error", title: "No data", subtitle: "")
-            //                    self.activitiesDay?.activities = [errorActivity]
-            //
-            //                }
-            //            }
+            
         })
         portalTask!.resume()
         

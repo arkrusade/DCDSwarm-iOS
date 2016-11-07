@@ -7,7 +7,6 @@ target 'dcdsnotify' do
 
   # Pods for dcdsnotify
 
-    pod 'Instabug'
 
  target 'dcdsnotifyTests' do
     inherit! :search_paths
