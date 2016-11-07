@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Instabug
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         //TODO: notifs
 //        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
-        Instabug.startWithToken("aa54f4eb78ea74ef3084a47f55d8c8e2", invocationEvent: .Shake)
         return true
     }
 
