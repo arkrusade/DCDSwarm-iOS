@@ -49,7 +49,7 @@ class CalendarHelper {
 		
 		let dayStartString = "<span class=\"listcap"
 		let dayEndString = "</div>"//TODO: will not work on week or greater periods
-        var tempDayString: String? = htmlString.cropExclusive(dayStartString, end: dayEndString)?.cropExclusive(">")
+        let tempDayString: String? = htmlString.cropExclusive(dayStartString, end: dayEndString)?.cropExclusive(">")
         guard tempDayString != nil else {
             return Day.emptyDay(date)
         }
