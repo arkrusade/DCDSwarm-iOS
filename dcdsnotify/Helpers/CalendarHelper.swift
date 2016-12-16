@@ -37,7 +37,7 @@ class CalendarHelper {
 		
 		
 		<ul class="eventobj calendar3160" id="event_521366_591468">
-		^
+		^ (after calendar)
 		this number
 		applies to end of this link:
 		https://www.dcds.edu/page.cfm?p=
@@ -70,7 +70,6 @@ class CalendarHelper {
 		//TODO: use activity and class ID
 		dayString = dayString!.cropExclusive(activityStartString)//removes currActivity by finding next one
 		
-		
 		while let okActivity = currentActivity {
 			
 			
@@ -79,7 +78,6 @@ class CalendarHelper {
 			var activityDesc = ""
 			
 			//MARK: parsing Title
-			
             if let activityString =  okActivity.crop("etitle") {
 			if okActivity.hasPrefix("3659") {
 				activityTitle =  activityString.cropExclusive("\">", end: "/span")
@@ -192,7 +190,6 @@ class CalendarHelper {
             }
 			
 		}
-		
 		return tempDay
 	}
 }

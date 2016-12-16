@@ -31,7 +31,7 @@ class ExcelHelper {
     func configureBlockSchedule() {
         loaded = true
         var fullSchedule: [DaySchedule] = []
-        if let path = NSBundle.mainBundle().pathForResource("convertcsv", ofType: "json")
+        if let path = NSBundle.mainBundle().pathForResource("convertcsvGoal2", ofType: "json")
         {
             if let jsonData = NSData(contentsOfFile: path)
             {
