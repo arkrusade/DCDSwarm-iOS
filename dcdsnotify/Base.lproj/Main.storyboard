@@ -1,57 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bvW-Sm-2dG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="djG-bU-WW7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Welcome View Controller-->
-        <scene sceneID="zFV-NB-k0b">
-            <objects>
-                <viewController storyboardIdentifier="Welcome" id="bvW-Sm-2dG" customClass="WelcomeViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ULe-J4-Rnk"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZTU-cR-uTk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2eN-Jc-pad">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Obj-Vc-JgQ">
-                                <rect key="frame" x="51" y="317" width="274" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="274" id="5Ac-mO-Hbp"/>
-                                </constraints>
-                                <state key="normal" title="Welcome"/>
-                                <connections>
-                                    <action selector="onWelcomeButtonTap:" destination="bvW-Sm-2dG" eventType="touchUpInside" id="i4q-Ua-nUQ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.99150443077087402" green="0.85754311084747314" blue="0.15896539390087128" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Obj-Vc-JgQ" firstAttribute="centerY" secondItem="2eN-Jc-pad" secondAttribute="centerY" id="lzt-tU-Z6z"/>
-                            <constraint firstItem="Obj-Vc-JgQ" firstAttribute="centerX" secondItem="2eN-Jc-pad" secondAttribute="centerX" id="nc2-JD-9C3"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <segue destination="djG-bU-WW7" kind="show" identifier="SkipWelcome" id="fB2-y9-QKy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v3w-Ip-ho3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-115" y="311"/>
-        </scene>
-        <!--Login View Controller-->
+        <!--Login-->
         <scene sceneID="2qT-gc-mK3">
             <objects>
-                <viewController id="djG-bU-WW7" customClass="LoginViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Login" id="djG-bU-WW7" customClass="LoginViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PYK-6j-Y6Z"/>
                         <viewControllerLayoutGuide type="bottom" id="zk9-SS-KcX"/>
@@ -255,9 +218,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="LXD-pf-huN"/>
                                 <exclude reference="YWg-uy-nQt"/>
                                 <exclude reference="mEE-x5-zOv"/>
+                                <exclude reference="LXD-pf-huN"/>
                             </mask>
                         </variation>
                     </view>
