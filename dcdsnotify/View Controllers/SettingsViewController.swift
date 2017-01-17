@@ -70,7 +70,7 @@ class SettingsViewController: UIViewController {
 
                     let currentDateOfHVC = hVC.activitiesDay.date
                     scheduleVC.date = currentDateOfHVC
-                    scheduleVC.daySchedule = ExcelHelper.sharedInstance.getSchedule(currentDateOfHVC)
+                    scheduleVC.daySchedule = ExcelHelper.sharedInstance.getSchedule(currentDateOfHVC, sender: self)
                 }
             }
         }

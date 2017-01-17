@@ -98,7 +98,7 @@ class HomeworkViewController: UIViewController {
     func goToSchedule(sender: AnyObject?) {
         let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("schedule") as! ScheduleViewController
         scheduleVC.date = self.activitiesDay.date
-        scheduleVC.daySchedule = ExcelHelper.sharedInstance.getSchedule(activitiesDay.date)
+        scheduleVC.daySchedule = ExcelHelper.sharedInstance.getSchedule(activitiesDay.date, sender: self)
         self.navigationController?.pushViewController(scheduleVC, animated: true)
     }
 
