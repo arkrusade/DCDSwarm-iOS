@@ -18,7 +18,8 @@ class ScheduleViewController: UIViewController {
             daySchedule = DaySchedule()
             daySchedule?.date = date
             let emptyBlock: Block = ("Could not", "find schedule")
-            daySchedule?.blocks = [emptyBlock]
+            let checkBlock: Block = ("Have you ", "updated recently?")
+            daySchedule?.blocks = [emptyBlock, checkBlock]
         }
         self.titleBar.title = "Schedule"
         self.titleBar.backBarButtonItem?.title = "Assignments"
