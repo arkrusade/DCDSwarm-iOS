@@ -102,7 +102,7 @@ class ExcelHelper {
             }
 
         }
-        if let path = NSBundle.mainBundle().pathForResource("goal3", ofType: "json")
+        if let path = NSBundle.mainBundle().pathForResource("goal3 copy", ofType: "json")
         {
             if let jsonData = NSData(contentsOfFile: path)
             {

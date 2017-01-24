@@ -34,10 +34,10 @@ class SettingsViewController: UIViewController {
         let clearCacheClosure: ClosureVoid = { ClosureVoid in
             CacheHelper.clearUserCache(self)
         }
+        
         let scheduleClosure: ClosureVoid = { ClosureVoid in
             self.showSchedule()
         }
-
         let userCategory: SettingsCategory
         userCategory.category = "User Settings"
 
@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController {
 
         let scheduleAction: SettingsAction = ("Block Schedule", scheduleClosure)
         scheduleCategory.list = [scheduleAction]
-
+        
         settingsList = [userCategory, scheduleCategory]
         //,("Notifications", ["Set Notification Time"])]
         //TODO: view in week, month

@@ -76,6 +76,7 @@ extension HomeworkViewController {
                                 return
                             }
                         }
+                        //everythings ok, so start again
                         NSOperationQueue.mainQueue().addOperationWithBlock({
                             self.loadActivities()
                         })
@@ -84,7 +85,7 @@ extension HomeworkViewController {
                 }
                 else {
                     self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
-                    self.lastLoaded = NSDate() //TODO: make this didSet of currentDay?
+                    self.lastLoaded = NSDate() //TODO: make this didSet of currentDate? and also use this (15 minutes, then refresh automatically)
                     CacheHelper.sharedInstance.addDay(self.activitiesDay)
                 }
             }
