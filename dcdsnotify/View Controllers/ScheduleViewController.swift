@@ -12,21 +12,33 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var titleBar: UINavigationItem!
     
     var date: NSDate!
-    var daySchedule: DaySchedule? = DaySchedule()
+    private var daySchedule: DaySchedule? = DaySchedule()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //means no schedule exists for this day, usually weekends
+        daySchedule = ExcelHelper.sharedInstance.getSchedule(date, sender: self)
         if daySchedule == nil {
             daySchedule = DaySchedule()
             daySchedule?.date = date
             let emptyBlock: Block = ("Could not", "find schedule")
             let checkBlock: Block = ("Have you ", "updated recently?")
-            daySchedule?.blocks = [emptyBlock, checkBlock]
+            daySchedule?.blocks = [emptyBlock]//, checkBlock]
         }
+        
+        let datePickerButton = UIBarButtonItem(image: Constants.Images.calendar, style: .Plain, target: self, action: #selector(segueToDatePicker(_: )))
+        self.navigationItem.rightBarButtonItem = datePickerButton
+
         self.titleBar.title = "Schedule"
-        self.titleBar.backBarButtonItem?.title = "Assignments"
         tableView.reloadData()
+    }
+    func segueToDatePicker(sender: AnyObject?)
+    {
+        let dateVC = self.storyboard?.instantiateViewControllerWithIdentifier("datePicker") as! DatePickerViewController
+        dateVC.date = self.date
+        dateVC.sendingVC = self
+        self.navigationController?.pushViewController(dateVC, animated: true)
+        
     }
 }
 

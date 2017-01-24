@@ -25,10 +25,6 @@ class DatePickerViewController: UIViewController {
     
     @IBAction func confirmButtonTapped(sender: AnyObject) {
         returnToVC(datePicker.date)
-//        let HWVC = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-2] as? HomeworkViewController
-//        HWVC?.changeDate(datePicker.date)
-//        self.navigationController?.popViewControllerAnimated(true)
-        
     }
     func returnToVC(date: NSDate) {
         if let HWVC = sendingVC as? HomeworkViewController {
