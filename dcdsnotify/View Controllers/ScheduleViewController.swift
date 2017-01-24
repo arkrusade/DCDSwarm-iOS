@@ -8,11 +8,14 @@
 
 import UIKit
 class ScheduleViewController: UIViewController {
-    var date: NSDate!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleBar: UINavigationItem!
+    
+    var date: NSDate!
     var daySchedule: DaySchedule? = DaySchedule()
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         //means no schedule exists for this day, usually weekends
         if daySchedule == nil {
             daySchedule = DaySchedule()

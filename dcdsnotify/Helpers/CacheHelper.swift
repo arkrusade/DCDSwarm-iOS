@@ -11,7 +11,7 @@ import UIKit
 class CacheHelper {
     static let sharedInstance = CacheHelper()
     let MyKeychainWrapper = KeychainWrapper()
-
+    //TODO: remove date from hwschedule
 //    static func storeSchedule(schedule: [DaySchedule]) {
 //
 //    }
@@ -23,7 +23,7 @@ class CacheHelper {
 //            let dayDict: [Block] = daySchedule.blocks
 //
 //
-//            scheduleDict[day.asSlashedDate()] = dayDict
+//            scheduleDict[day.asSlashedDate()] = dayDict as? AnyObject
 //        }
 //        NSUserDefaults.standardUserDefaults().synchronize()
 //
@@ -31,12 +31,12 @@ class CacheHelper {
 //    static func retrieveSchedule(forDay: NSDate) -> DaySchedule?
 //    {
 //        let scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? [:]
-//        if let dayString = scheduleDict[forDay.asSlashedDate()] {
+//        if let dayString = scheduleDict[forDay.asSlashedDate()] as? [[String]] {
 //            var activities: [Activity] = []
 //            for values in dayString {
 //                activities.append(Activity(fromValues: values))
 //            }
-//            return Day(activities: activities, date: date)
+//            return Day(activities: activities, date: forDay)
 //        }
 //
 //        else {
@@ -65,9 +65,9 @@ class CacheHelper {
         NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasLoginKey")
     }
-    static func retrieveLogin() -> Credentials?
+    func retrieveLogin() -> Credentials?
     {
-        if let username = NSUserDefaults.standardUserDefaults().stringForKey("username"), let pass = sharedInstance.MyKeychainWrapper.myObjectForKey(kSecValueData) as? String
+        if let username = NSUserDefaults.standardUserDefaults().stringForKey("username"), let pass = MyKeychainWrapper.myObjectForKey(kSecValueData) as? String
         {
             return (username, pass)
         }
@@ -76,16 +76,16 @@ class CacheHelper {
             return nil
         }
     }
-    static func storeLogin(login: Credentials) {
+    func storeLogin(login: Credentials) {
         storeLogin(login.username, password: login.password)
     }
-    static func storeLogin(username: String, password: String) {
+    func storeLogin(username: String, password: String) {
         if !NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey") {//TODO: beware, will not overwrite
             NSUserDefaults.standardUserDefaults().setValue(username, forKey: "username")
         }
 
-        sharedInstance.MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
-        sharedInstance.MyKeychainWrapper.writeToKeychain()
+        MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
+        MyKeychainWrapper.writeToKeychain()
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
         NSUserDefaults.standardUserDefaults().synchronize()
     }

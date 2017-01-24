@@ -92,6 +92,7 @@ class HomeworkViewController: UIViewController {
         
         let pickerVC = self.storyboard?.instantiateViewControllerWithIdentifier("datePicker") as! DatePickerViewController
         pickerVC.date = currentDate
+        pickerVC.sendingVC = self
         self.navigationController?.pushViewController(pickerVC, animated: true)
         
     }

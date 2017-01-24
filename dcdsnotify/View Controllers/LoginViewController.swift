@@ -13,13 +13,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var UsernameTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
-    var login: Credentials? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
         PasswordTextField.returnKeyType = .Go
-        testLogin()
+        //testLogin()
 
     }
     func testLogin() {
@@ -44,10 +44,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
 
     override func viewDidAppear(animated: Bool) {
-        if let login = login {
+        if let login = CacheHelper.sharedInstance.retrieveLogin() {
             UsernameTextField.text = login.username
             PasswordTextField.text = login.password
-            onLoginButtonTap(self)
+            hwLogin()
         }
 
     }
@@ -60,7 +60,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func didReceiveMemoryWarning() {
-        login = nil
         self.UsernameTextField.text = ""
         self.PasswordTextField.text = ""
     }
@@ -73,11 +72,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
 
         }
-
-        login = (self.UsernameTextField.text!, self.PasswordTextField.text!)
+        hwLogin()
+    }
+    func hwLogin()
+    {
+        let login: Credentials = (self.UsernameTextField.text!, self.PasswordTextField.text!)
         //login if cache exists
-        if let cacheLogin = CacheHelper.retrieveLogin(), let enteredLogin = login where cacheLogin == enteredLogin {
-            //if has data, 'login' and show data
+        if let cacheLogin = CacheHelper.sharedInstance.retrieveLogin() where cacheLogin == login {
+            //if cache data matches entered, 'login' and show data
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
             }
@@ -129,7 +131,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             NSOperationQueue.mainQueue().addOperationWithBlock {
-                CacheHelper.storeLogin(self.UsernameTextField.text!, password: self.PasswordTextField.text!)
+                CacheHelper.sharedInstance.storeLogin(login)
                 self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
             }
         }
@@ -138,7 +140,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.UsernameTextField.text = ""
         self.PasswordTextField.text = ""
-        login = nil
 
         if segue.identifier == Constants.Segues.LoginToHomeworkView
         {

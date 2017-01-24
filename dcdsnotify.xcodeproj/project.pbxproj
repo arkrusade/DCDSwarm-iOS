@@ -27,7 +27,6 @@
 		AD053AD41D8248E700CBAB8C /* PortalHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD053AD31D8248E700CBAB8C /* PortalHelper.swift */; };
 		AD053AD61D82503800CBAB8C /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD053AD51D82503800CBAB8C /* UIImage.swift */; };
 		AD053AD81D825C6400CBAB8C /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD053AD71D825C6400CBAB8C /* SettingsCell.swift */; };
-		AD6B91D81D6F876F005B77A9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91D71D6F876F005B77A9 /* WelcomeViewController.swift */; };
 		AD6B91DA1D6F8E62005B77A9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91D91D6F8E62005B77A9 /* LoginViewController.swift */; };
 		AD6B91DC1D6F8F49005B77A9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91DB1D6F8F49005B77A9 /* Constants.swift */; };
 		AD6B91E91D6FAAE8005B77A9 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B91E81D6FAAE8005B77A9 /* ActivityTableViewCell.swift */; };
@@ -83,7 +82,6 @@
 		AD053AD31D8248E700CBAB8C /* PortalHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortalHelper.swift; sourceTree = "<group>"; };
 		AD053AD51D82503800CBAB8C /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		AD053AD71D825C6400CBAB8C /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
-		AD6B91D71D6F876F005B77A9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AD6B91D91D6F8E62005B77A9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AD6B91DB1D6F8F49005B77A9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AD6B91E81D6FAAE8005B77A9 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 				AD6B91EF1D6FAC7F005B77A9 /* HomeworkViewController.swift */,
 				365F3F4A1DA8DB340085B5A6 /* HVCInternetExtension.swift */,
 				AD6B92031D700CA8005B77A9 /* HVCTableViewExtension.swift */,
-				AD6B91D71D6F876F005B77A9 /* WelcomeViewController.swift */,
 				AD6B91D91D6F8E62005B77A9 /* LoginViewController.swift */,
 				3621AB441DA8063E00CF67CA /* ScheduleViewController.swift */,
 				AD053AD11D81F67E00CBAB8C /* SettingsViewController.swift */,
@@ -501,7 +498,6 @@
 				AD6B91F01D6FAC7F005B77A9 /* HomeworkViewController.swift in Sources */,
 				AD053ACF1D7A428100CBAB8C /* KeychainWrapper.m in Sources */,
 				36E1E29B1D98CBD500674F91 /* CropError.swift in Sources */,
-				AD6B91D81D6F876F005B77A9 /* WelcomeViewController.swift in Sources */,
 				AD6B91F51D6FAC87005B77A9 /* ErrorHandling.swift in Sources */,
 				AD6B91DA1D6F8E62005B77A9 /* LoginViewController.swift in Sources */,
 				362B4EB81E2E6CC300F09FC6 /* DatePickerViewController.swift in Sources */,

@@ -11,7 +11,7 @@ import UIKit
 
 public let DAYS_KEY = "daysKey"
 public let SCHEDULE_KEY = "scheduleKey"
-
+typealias Credentials = (username: String, password: String)
 class Constants {
 	static let userLoginURL = NSURL(string: "https://www.dcds.edu/userlogin.cfm")!
 	static let invalidLoginURL = NSURL(string: "https://www.dcds.edu/userlogin.cfm?do=login&p=413")!

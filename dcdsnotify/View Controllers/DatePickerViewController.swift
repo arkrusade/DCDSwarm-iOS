@@ -8,7 +8,8 @@
 
 import UIKit
 class DatePickerViewController: UIViewController {
-    var date: NSDate!
+    var date: NSDate! = NSDate()
+    var sendingVC: UIViewController!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
@@ -23,10 +24,21 @@ class DatePickerViewController: UIViewController {
     }
     
     @IBAction func confirmButtonTapped(sender: AnyObject) {
-        let HWVC = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-2] as? HomeworkViewController
-        HWVC?.changeDate(datePicker.date)
-        self.navigationController?.popViewControllerAnimated(true)
+        returnToVC(datePicker.date)
+//        let HWVC = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-2] as? HomeworkViewController
+//        HWVC?.changeDate(datePicker.date)
+//        self.navigationController?.popViewControllerAnimated(true)
         
+    }
+    func returnToVC(date: NSDate) {
+        if let HWVC = sendingVC as? HomeworkViewController {
+            HWVC.changeDate(date)
+        }
+        else if let ScheduleVC = sendingVC as? ScheduleViewController {
+            ScheduleVC.date = date
+            ScheduleVC.viewDidLoad()
+        }
+        self.navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func todayButtonTapped(sender: AnyObject) {
         let today = NSDate()

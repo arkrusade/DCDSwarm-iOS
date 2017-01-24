@@ -44,7 +44,7 @@ extension HomeworkViewController {
 
                     let loggingInActivity = Activity(classString: "", title: "Webpage timed out", subtitle: "Logging in again...")
                     self.activitiesDay?.activities = [loggingInActivity]
-                    let checkLogin = CacheHelper.retrieveLogin()
+                    let checkLogin = CacheHelper.sharedInstance.retrieveLogin()
 
                     //logged in without a cached login
                     guard checkLogin != nil else {
