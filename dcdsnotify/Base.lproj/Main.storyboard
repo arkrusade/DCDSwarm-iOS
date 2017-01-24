@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="djG-bU-WW7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="djG-bU-WW7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -425,7 +425,14 @@
                                 <rect key="frame" x="149" y="548" width="77" height="30"/>
                                 <state key="normal" title="Go To Date"/>
                                 <connections>
-                                    <action selector="confirmButtonTapped:" destination="J2f-FH-LTl" eventType="touchUpInside" id="PgZ-ch-8lS"/>
+                                    <action selector="confirmButtonTapped:" destination="J2f-FH-LTl" eventType="touchUpInside" id="rgV-8z-UZM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uS1-y3-jpK">
+                                <rect key="frame" x="167" y="196" width="42" height="30"/>
+                                <state key="normal" title="Today"/>
+                                <connections>
+                                    <action selector="todayButtonTapped:" destination="J2f-FH-LTl" eventType="touchUpInside" id="Mwf-Ni-lO8"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -436,9 +443,11 @@
                             <constraint firstItem="eRu-dQ-iDU" firstAttribute="centerX" secondItem="9Ui-MY-Rkc" secondAttribute="centerX" id="Cam-YM-exH"/>
                             <constraint firstItem="G4l-O3-JaG" firstAttribute="centerX" secondItem="9Ui-MY-Rkc" secondAttribute="centerX" id="Cfz-hh-9KS"/>
                             <constraint firstItem="99F-69-axA" firstAttribute="leading" secondItem="9Ui-MY-Rkc" secondAttribute="leadingMargin" id="GRk-jV-s2K"/>
+                            <constraint firstItem="uS1-y3-jpK" firstAttribute="top" secondItem="eRu-dQ-iDU" secondAttribute="bottom" constant="41" id="PeJ-hY-vgI"/>
                             <constraint firstItem="99F-69-axA" firstAttribute="top" secondItem="eRu-dQ-iDU" secondAttribute="bottom" constant="119" id="UVF-qi-3UX"/>
                             <constraint firstItem="G4l-O3-JaG" firstAttribute="top" secondItem="99F-69-axA" secondAttribute="bottom" constant="58" id="VAA-Tx-8w0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="99F-69-axA" secondAttribute="trailing" constant="-32" id="asN-ns-miM"/>
+                            <constraint firstItem="uS1-y3-jpK" firstAttribute="centerX" secondItem="eRu-dQ-iDU" secondAttribute="centerX" id="vgu-xI-uMK"/>
                             <constraint firstItem="99F-69-axA" firstAttribute="centerY" secondItem="9Ui-MY-Rkc" secondAttribute="centerY" constant="48.5" id="z6d-Tg-hMJ"/>
                         </constraints>
                     </view>
@@ -450,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="05I-KJ-XT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2145" y="989"/>
+            <point key="canvasLocation" x="2144.8000000000002" y="988.15592203898063"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IR4-hP-GqP">

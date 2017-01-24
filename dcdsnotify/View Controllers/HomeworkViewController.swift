@@ -73,7 +73,7 @@ class HomeworkViewController: UIViewController {
 
     func changeDate(date: NSDate?) {
         if date != nil{
-            activitiesDay = Day(date: currentDate)
+            activitiesDay = Day(date: date)
             loadActivities()
         }
         

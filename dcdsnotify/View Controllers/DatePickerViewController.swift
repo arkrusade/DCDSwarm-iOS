@@ -17,17 +17,23 @@ class DatePickerViewController: UIViewController {
         datePicker.datePickerMode = UIDatePickerMode.Date
         navigationController?.title = "Change Date"
         
-        datePicker.date = date.tomorrow()!
+        datePicker.date = date
         datePickerChanged(datePicker)
-        
         datePicker.addTarget(self, action: #selector(datePickerChanged), forControlEvents: UIControlEvents.ValueChanged)
-        confirmButtonTapped(self)
     }
     
     @IBAction func confirmButtonTapped(sender: AnyObject) {
-        let HWVC = self.navigationController?.presentingViewController
+        let HWVC = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count-2] as? HomeworkViewController
         HWVC?.changeDate(datePicker.date)
+        self.navigationController?.popViewControllerAnimated(true)
+        
     }
+    @IBAction func todayButtonTapped(sender: AnyObject) {
+        let today = NSDate()
+        self.datePicker.date = today
+        datePickerChanged(datePicker)
+    }
+    
     func datePickerChanged(datePicker: UIDatePicker) {
         let dateFormatter = NSDate.dateFormatterSlashedAndDay()
         dateLabel.text = dateFormatter.stringFromDate(datePicker.date)
