@@ -11,13 +11,21 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleBar: UINavigationItem!
     
+    @IBOutlet weak var yesterdayButton: UIButton!
+    @IBOutlet weak var tomorrowButton: UIButton!
     var date: NSDate!
     private var daySchedule: DaySchedule? = DaySchedule()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //means no schedule exists for this day, usually weekends
-        daySchedule = ExcelHelper.sharedInstance.getSchedule(date, sender: self)
+        updateBlocks(nil)
+        configureArrows()
+        
+        configureNavBar()
+    }
+    func updateBlocks(forDate: NSDate?) {
+        daySchedule = ExcelHelper.sharedInstance.getSchedule(forDate ?? date, sender: self)
         if daySchedule == nil {
             daySchedule = DaySchedule()
             daySchedule?.date = date
@@ -25,12 +33,35 @@ class ScheduleViewController: UIViewController {
             let checkBlock: Block = ("Have you ", "updated recently?")
             daySchedule?.blocks = [emptyBlock]//, checkBlock]
         }
-        
+        tableView.reloadData()
+
+
+    }
+    func configureNavBar() {
         let datePickerButton = UIBarButtonItem(image: Constants.Images.calendar, style: .Plain, target: self, action: #selector(segueToDatePicker(_: )))
         self.navigationItem.rightBarButtonItem = datePickerButton
-
+        
         self.titleBar.title = "Schedule"
-        tableView.reloadData()
+    }
+    func configureArrows() {
+        self.view.bringSubviewToFront(yesterdayButton)
+        self.view.bringSubviewToFront(tomorrowButton)
+        
+        let left = Constants.Images.leftCarat.alpha(0.5)
+        yesterdayButton.setBackgroundImage(left, forState: .Normal)
+        let right = Constants.Images.rightCarat.alpha(0.5)
+        tomorrowButton.setBackgroundImage(right, forState: .Normal)
+        
+        yesterdayButton.addTarget(self, action: #selector(yesterdaySchedule(_:)), forControlEvents: .TouchUpInside)
+        tomorrowButton.addTarget(self, action: #selector(tomorrowSchedule(_:)), forControlEvents: .TouchUpInside)
+    }
+    func yesterdaySchedule(sender: AnyObject?) {
+        date = date?.yesterday()
+        updateBlocks(nil)
+    }
+    func tomorrowSchedule(sender: AnyObject?) {
+        date = date?.tomorrow()
+        updateBlocks(nil)
     }
     func segueToDatePicker(sender: AnyObject?)
     {

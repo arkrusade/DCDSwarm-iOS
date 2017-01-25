@@ -11,7 +11,7 @@ class AppState {
 	static var sharedInstance = AppState()
 	var loggedIn = false
 	
-	
+    //TODO: change date for app to appwide, sharedinstance
 //	func login(sender: AnyObject?)
 //	{
 //		

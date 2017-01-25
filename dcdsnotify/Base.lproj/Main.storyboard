@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -90,18 +89,12 @@
                             <constraint firstItem="kmt-t2-5g6" firstAttribute="leading" secondItem="aYP-9X-drl" secondAttribute="trailing" constant="18.5" id="WYg-v3-aeN"/>
                             <constraint firstItem="MGc-1H-jcK" firstAttribute="centerX" secondItem="byr-Zz-FoF" secondAttribute="centerX" id="ZhO-Vh-c3w"/>
                             <constraint firstItem="kmt-t2-5g6" firstAttribute="leading" secondItem="byr-Zz-FoF" secondAttribute="leading" id="bNV-d0-e4A"/>
-                            <constraint firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xdy-G8-yTW" secondAttribute="leadingMargin" constant="15" id="cnv-QO-SN7"/>
                             <constraint firstItem="Ngu-nJ-3Rf" firstAttribute="centerY" secondItem="LCO-3o-pQN" secondAttribute="centerY" id="eh7-KJ-trD"/>
                             <constraint firstItem="kmt-t2-5g6" firstAttribute="top" secondItem="LCO-3o-pQN" secondAttribute="bottom" constant="26" id="gZx-ni-yY6"/>
                             <constraint firstItem="Ngu-nJ-3Rf" firstAttribute="trailing" secondItem="aYP-9X-drl" secondAttribute="trailing" id="hbQ-Mn-zjX"/>
                             <constraint firstItem="LCO-3o-pQN" firstAttribute="top" secondItem="MGc-1H-jcK" secondAttribute="bottom" constant="66.5" id="jkz-WA-xKN"/>
                             <constraint firstItem="byr-Zz-FoF" firstAttribute="centerX" secondItem="Xdy-G8-yTW" secondAttribute="centerX" id="q6S-fO-fuj"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="cnv-QO-SN7"/>
-                            </mask>
-                        </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="4Be-JT-b3R" appends="YES" id="Eft-GU-uvZ"/>
                         </connections>
@@ -159,7 +152,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="240" tableViewCell="ejL-qJ-xhA" id="zlr-tx-XoT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD0-pr-n1v">
@@ -259,7 +252,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="lI3-EZ-xp7" id="ddB-j9-GvT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghc-Tf-hYN">
@@ -320,6 +313,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNZ-AL-0GW">
+                                <rect key="frame" x="296" y="301" width="48" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="dFc-x4-jvK"/>
+                                    <constraint firstAttribute="height" constant="64" id="kSj-yR-wyg"/>
+                                </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EK5-R3-mts">
+                                <rect key="frame" x="31" y="301" width="48" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="FFV-Md-qq5"/>
+                                    <constraint firstAttribute="height" constant="64" id="Swt-Pk-2wM"/>
+                                </constraints>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QSH-zT-TTq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -328,7 +335,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="dZX-yA-iaV" id="uH1-OI-kfR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGG-Ik-3Tg">
@@ -383,19 +390,25 @@
                         <constraints>
                             <constraint firstItem="QSH-zT-TTq" firstAttribute="leading" secondItem="igN-oh-Hvw" secondAttribute="leading" id="3YY-An-tbJ"/>
                             <constraint firstAttribute="trailing" secondItem="QSH-zT-TTq" secondAttribute="trailing" id="69y-ub-Zss"/>
+                            <constraint firstItem="KNZ-AL-0GW" firstAttribute="centerY" secondItem="igN-oh-Hvw" secondAttribute="centerY" id="Je0-9j-Vtw"/>
                             <constraint firstItem="xxW-zD-iam" firstAttribute="top" secondItem="QSH-zT-TTq" secondAttribute="bottom" id="KWJ-kc-e1j"/>
-                            <constraint firstItem="QSH-zT-TTq" firstAttribute="top" secondItem="igN-oh-Hvw" secondAttribute="top" id="Tlu-7a-DhV"/>
+                            <constraint firstItem="EK5-R3-mts" firstAttribute="leading" secondItem="igN-oh-Hvw" secondAttribute="leadingMargin" constant="15" id="h9Y-tf-AGI"/>
+                            <constraint firstItem="EK5-R3-mts" firstAttribute="centerY" secondItem="igN-oh-Hvw" secondAttribute="centerY" id="rXU-6P-Sim"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KNZ-AL-0GW" secondAttribute="trailing" constant="15" id="vI3-7z-CUH"/>
+                            <constraint firstItem="QSH-zT-TTq" firstAttribute="top" secondItem="igN-oh-Hvw" secondAttribute="topMargin" id="yav-1u-1Pr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AFn-fV-M8A"/>
                     <connections>
                         <outlet property="tableView" destination="QSH-zT-TTq" id="wIf-ol-atw"/>
                         <outlet property="titleBar" destination="AFn-fV-M8A" id="rYp-kA-Y55"/>
+                        <outlet property="tomorrowButton" destination="KNZ-AL-0GW" id="Iep-sM-l1o"/>
+                        <outlet property="yesterdayButton" destination="EK5-R3-mts" id="uD5-8o-kdh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4zw-70-Kxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3506" y="311"/>
+            <point key="canvasLocation" x="3504.8000000000002" y="310.79460269865069"/>
         </scene>
         <!--Date Picker View Controller-->
         <scene sceneID="SPX-Pd-Iz8">
