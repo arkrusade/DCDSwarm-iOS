@@ -314,14 +314,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNZ-AL-0GW">
-                                <rect key="frame" x="296" y="301" width="48" height="64"/>
+                                <rect key="frame" x="304" y="301" width="48" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="dFc-x4-jvK"/>
                                     <constraint firstAttribute="height" constant="64" id="kSj-yR-wyg"/>
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EK5-R3-mts">
-                                <rect key="frame" x="31" y="301" width="48" height="64"/>
+                                <rect key="frame" x="23" y="301" width="48" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="FFV-Md-qq5"/>
                                     <constraint firstAttribute="height" constant="64" id="Swt-Pk-2wM"/>
@@ -392,9 +392,9 @@
                             <constraint firstAttribute="trailing" secondItem="QSH-zT-TTq" secondAttribute="trailing" id="69y-ub-Zss"/>
                             <constraint firstItem="KNZ-AL-0GW" firstAttribute="centerY" secondItem="igN-oh-Hvw" secondAttribute="centerY" id="Je0-9j-Vtw"/>
                             <constraint firstItem="xxW-zD-iam" firstAttribute="top" secondItem="QSH-zT-TTq" secondAttribute="bottom" id="KWJ-kc-e1j"/>
-                            <constraint firstItem="EK5-R3-mts" firstAttribute="leading" secondItem="igN-oh-Hvw" secondAttribute="leadingMargin" constant="15" id="h9Y-tf-AGI"/>
+                            <constraint firstItem="EK5-R3-mts" firstAttribute="leading" secondItem="igN-oh-Hvw" secondAttribute="leadingMargin" constant="7" id="h9Y-tf-AGI"/>
                             <constraint firstItem="EK5-R3-mts" firstAttribute="centerY" secondItem="igN-oh-Hvw" secondAttribute="centerY" id="rXU-6P-Sim"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="KNZ-AL-0GW" secondAttribute="trailing" constant="15" id="vI3-7z-CUH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KNZ-AL-0GW" secondAttribute="trailing" constant="7" id="vI3-7z-CUH"/>
                             <constraint firstItem="QSH-zT-TTq" firstAttribute="top" secondItem="igN-oh-Hvw" secondAttribute="topMargin" id="yav-1u-1Pr"/>
                         </constraints>
                     </view>
