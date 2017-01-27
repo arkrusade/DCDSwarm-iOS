@@ -38,12 +38,16 @@ class SettingsViewController: UIViewController {
         let scheduleClosure: ClosureVoid = { ClosureVoid in
             self.showSchedule()
         }
+        let reportClosure: ClosureVoid = { ClosureVoid in
+            self.showReportVC()
+        }
+        let reportAction: SettingsAction = ("Send Report", reportClosure)
         let userCategory: SettingsCategory
         userCategory.category = "User Settings"
 
         let clearCacheSetting: SettingsAction = ("Clear Cache", clearCacheClosure)
         let logoutAction: SettingsAction = ("Logout", logoutClosure)
-        userCategory.list = [clearCacheSetting, logoutAction]
+        userCategory.list = [clearCacheSetting, logoutAction, reportAction]
 
 
         let scheduleCategory: SettingsCategory
@@ -58,6 +62,15 @@ class SettingsViewController: UIViewController {
         //TODO: add note taking
         //TODO: add search, blcok numbers, class order
 
+    }
+    func showReportVC() {
+        if let reportVC = self.storyboard?.instantiateViewControllerWithIdentifier("report") as? ReportViewController//TODO: constant
+        {
+            self.navigationController?.pushViewController(reportVC, animated: true)
+        }
+        else {
+            ErrorHandling.defaultError("Failed to send report", desc: "Coulndt switch to report view", sender: self)
+        }
     }
     func showSchedule() {
         self.performSegueWithIdentifier(Constants.Segues.SettingsToSchedule, sender: self)

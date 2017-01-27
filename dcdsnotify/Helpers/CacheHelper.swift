@@ -11,41 +11,10 @@ import UIKit
 class CacheHelper {
     static let sharedInstance = CacheHelper()
     let MyKeychainWrapper = KeychainWrapper()
-    //TODO: remove date from hwschedule
-//    static func storeSchedule(schedule: [DaySchedule]) {
-//
-//    }
-//
-//    static func storeDaySchedule(daySchedule: DaySchedule) {
-//
-//        var scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? Dictionary()
-//        if let day = daySchedule.date {
-//            let dayDict: [Block] = daySchedule.blocks
-//
-//
-//            scheduleDict[day.asSlashedDate()] = dayDict as? AnyObject
-//        }
-//        NSUserDefaults.standardUserDefaults().synchronize()
-//
-//    }
-//    static func retrieveSchedule(forDay: NSDate) -> DaySchedule?
-//    {
-//        let scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? [:]
-//        if let dayString = scheduleDict[forDay.asSlashedDate()] as? [[String]] {
-//            var activities: [Activity] = []
-//            for values in dayString {
-//                activities.append(Activity(fromValues: values))
-//            }
-//            return Day(activities: activities, date: forDay)
-//        }
-//
-//        else {
-//            return nil
-//        }
-//    }
-    static func clearAll() {
+       static func clearAll() {
         clearDays()
         clearLogin()
+        clearLogs()
         clearNotifs()
     }
     static func clearUserCache(sender: UIViewController) {
@@ -53,12 +22,59 @@ class CacheHelper {
         clearNotifs()
         ErrorHandling.displayAlert("Cache Cleared!", desc: "", sender: sender, completion: nil)
     }
-    static func clearDays() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(DAYS_KEY)
-    }
+    
     static func clearNotifs() {
         UIApplication.sharedApplication().cancelAllLocalNotifications()
     }
+    
+}
+//MARK: crash log (html storage)
+extension CacheHelper {
+    static func clearLogs() {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(LOGS_KEY)
+    }
+    func hasLogs() -> Bool {
+        return NSUserDefaults.standardUserDefaults().dictionaryForKey(LOGS_KEY) != nil
+    }
+    func addLog(day: Day?) {
+        
+        if let day = day {
+            // persist a representation of this todo item in NSUserDefaults
+            var todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(DAYS_KEY) ?? Dictionary() // if todoItems hasn't been set in user defaults, initialize todoDictionary to an empty dictionary using nil-coalescing operator (??)
+            todoDictionary[day.date.asSlashedDate()] = day.activitiesArray // store NSData representation of todo item in dictionary with UUID as key
+            NSUserDefaults.standardUserDefaults().setObject(todoDictionary, forKey: DAYS_KEY) // save/overwrite todo item list
+            
+            // create a corresponding local notification
+            let notification = UILocalNotification()
+            notification.alertBody = "Homework for \(day.date.asSlashedDate()):\n\(day.activitiesDescription)" // text that will be displayed in the notification
+            notification.alertAction = "view" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+            notification.fireDate = Day(date: NSDate()).date // todo item due date (when notification will be fired)
+            //TODO: set notif time with input time
+            notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+            notification.userInfo = ["slashedDate": day.date.asSlashedDate()] // assign a unique identifier to the notification so that we can retrieve it later
+            
+            //TODO: notifs
+            //			UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
+    }
+    func retrieveDLog(date: NSDate) -> Day? {
+        let todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(DAYS_KEY) as? [String:[[String]]] ?? [:]
+        //		let keys = Array(todoDictionary.keys)
+        if let dayString = todoDictionary[date.asSlashedDate()] {
+            var activities: [Activity] = []
+            for values in dayString {
+                activities.append(Activity(fromValues: values))
+            }
+            return Day(activities: activities, date: date)
+        }
+        else {
+            return nil
+        }
+    }
+
+}
+//MARK: Login storage
+extension CacheHelper {
     static func clearLogin() {
         sharedInstance.MyKeychainWrapper.mySetObject("password", forKey: kSecValueData)
         sharedInstance.MyKeychainWrapper.writeToKeychain()
@@ -89,17 +105,23 @@ class CacheHelper {
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
         NSUserDefaults.standardUserDefaults().synchronize()
     }
+}
+//MARK: days storage
+extension CacheHelper {
+    static func clearDays() {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(DAYS_KEY)
+    }
     func hasDays() -> Bool {
         return NSUserDefaults.standardUserDefaults().dictionaryForKey(DAYS_KEY) != nil
     }
     func addDay(day: Day?) {
-
+        
         if let day = day {
             // persist a representation of this todo item in NSUserDefaults
             var todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(DAYS_KEY) ?? Dictionary() // if todoItems hasn't been set in user defaults, initialize todoDictionary to an empty dictionary using nil-coalescing operator (??)
             todoDictionary[day.date.asSlashedDate()] = day.activitiesArray // store NSData representation of todo item in dictionary with UUID as key
             NSUserDefaults.standardUserDefaults().setObject(todoDictionary, forKey: DAYS_KEY) // save/overwrite todo item list
-
+            
             // create a corresponding local notification
             let notification = UILocalNotification()
             notification.alertBody = "Homework for \(day.date.asSlashedDate()):\n\(day.activitiesDescription)" // text that will be displayed in the notification
@@ -108,7 +130,7 @@ class CacheHelper {
             //TODO: set notif time with input time
             notification.soundName = UILocalNotificationDefaultSoundName // play default sound
             notification.userInfo = ["slashedDate": day.date.asSlashedDate()] // assign a unique identifier to the notification so that we can retrieve it later
-
+            
             //TODO: notifs
             //			UIApplication.sharedApplication().scheduleLocalNotification(notification)
         }
@@ -127,4 +149,37 @@ class CacheHelper {
             return nil
         }
     }
+    //TODO: remove date from hwschedule
+    //    static func storeSchedule(schedule: [DaySchedule]) {
+    //
+    //    }
+    //
+    //    static func storeDaySchedule(daySchedule: DaySchedule) {
+    //
+    //        var scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? Dictionary()
+    //        if let day = daySchedule.date {
+    //            let dayDict: [Block] = daySchedule.blocks
+    //
+    //
+    //            scheduleDict[day.asSlashedDate()] = dayDict as? AnyObject
+    //        }
+    //        NSUserDefaults.standardUserDefaults().synchronize()
+    //
+    //    }
+    //    static func retrieveSchedule(forDay: NSDate) -> DaySchedule?
+    //    {
+    //        let scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? [:]
+    //        if let dayString = scheduleDict[forDay.asSlashedDate()] as? [[String]] {
+    //            var activities: [Activity] = []
+    //            for values in dayString {
+    //                activities.append(Activity(fromValues: values))
+    //            }
+    //            return Day(activities: activities, date: forDay)
+    //        }
+    //
+    //        else {
+    //            return nil
+    //        }
+    //    }
+
 }

@@ -301,6 +301,51 @@
             </objects>
             <point key="canvasLocation" x="2817" y="311"/>
         </scene>
+        <!--Report View Controller-->
+        <scene sceneID="xzu-vT-g5t">
+            <objects>
+                <viewController storyboardIdentifier="report" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1YU-MN-YaJ" customClass="ReportViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o6Q-Ag-wcO"/>
+                        <viewControllerLayoutGuide type="bottom" id="P9Q-cr-Sbv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TfV-8Z-piZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlT-Ml-2br">
+                                <rect key="frame" x="164" y="511" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send Report"/>
+                                <connections>
+                                    <action selector="sendReportButtonTapped:" destination="1YU-MN-YaJ" eventType="touchUpInside" id="uHs-Yc-kw9"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add classes, when it crashed, what you tried to do, etc." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fzu-FX-X3V">
+                                <rect key="frame" x="139" y="473" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSy-gb-AGL">
+                                <rect key="frame" x="168" y="124" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="messageTextField" destination="fzu-FX-X3V" id="nvi-fw-3DV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2m7-mB-SwJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3475" y="-64"/>
+        </scene>
         <!--Schedule View Controller-->
         <scene sceneID="6Kb-Fa-FNy">
             <objects>
