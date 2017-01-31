@@ -9,7 +9,7 @@
 import Foundation
 
 class CalendarHelper {
-	static func processCalendarString(htmlString: NSString) -> Day
+	static func processCalendarString(_ htmlString: NSString) -> Day
 		//TODO: add param for diff calendar lengths
 	{
 		//MARK: set date
@@ -18,9 +18,9 @@ class CalendarHelper {
 		
 		let dayStart = "thisDate: {ts '"
 		let dayEnd = "'} start:"
-		let dateFormatter = NSDateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-		let date = dateFormatter.dateFromString( htmlString.cropExclusive(dayStart, end: dayEnd) ?? "") ?? NSDate()
+		let date = dateFormatter.date( from: htmlString.cropExclusive(dayStart, end: dayEnd) ?? "") ?? Date()
 
 		//MARK: check for empty day
 		guard (htmlString.crop(emptyStart, end: emptyEnd)) == nil else{
@@ -85,7 +85,7 @@ class CalendarHelper {
 				var tempClassString = activityTitle
 				
 				activityTitle =  activityTitle.cropEndExclusive("(")
-				if activityTitle.containsString("<br") {
+				if activityTitle.contains("<br") {
 					tempClassString =  tempClassString.cropExclusive("<br")!.cropExclusive("(")!
 					activityTitle =  activityTitle.cropEndExclusive("<")
 					
@@ -107,13 +107,13 @@ class CalendarHelper {
 			}
 			else {
 				//linked
-				if okActivity.containsString("title=\"Click here for event details\">") {
+				if okActivity.contains("title=\"Click here for event details\">") {
 					activityTitle =  activityString.cropExclusive("title=\"Click here for event details\">", end: "</span>")//removes beginning crap in activity
 					
 					//separates class name from activity title
                     if let tempClass =  activityTitle.cropEnd("):") {
                         activityClass = tempClass
-                        activityClass!.removeAtIndex(tempClass.endIndex.predecessor())
+                        activityClass!.remove(at: tempClass.characters.index(before: tempClass.endIndex))
                     }
                     else {
                         //Activity not found
@@ -122,7 +122,7 @@ class CalendarHelper {
                     if let tempTitle = activityTitle.cropExclusive("): ", end: "</") {
                         activityTitle = tempTitle
                     }
-                    if activityTitle.containsString("<br") {
+                    if activityTitle.contains("<br") {
                         activityTitle =  activityTitle.cropEndExclusive("<br")
                     }
 //                    activityTitle =  activityTitle.cropExclusive("): ", end: "</")
@@ -133,7 +133,7 @@ class CalendarHelper {
 				}
 					
 					//not linked
-				else if okActivity.containsString("<span class=\"eventcon\">")//find event content
+				else if okActivity.contains("<span class=\"eventcon\">")//find event content
 				{
                     if let tempActivity =  okActivity.cropExclusive("id=\"e_") {
 					let activityID =  tempActivity.cropEndExclusive("\">")
@@ -142,7 +142,7 @@ class CalendarHelper {
 					activityTitle =  (tempActivity.cropExclusive("): ", end: "</span>") ?? "Failed Title")
 					
 					
-					if activityTitle.containsString("<br") {
+					if activityTitle.contains("<br") {
 						activityTitle =  activityTitle.cropEndExclusive("<br")
 					}
                     }
@@ -159,22 +159,22 @@ class CalendarHelper {
 			
 			//MARK: parsing Desc
 			var activityDescData =  activityString.cropExclusive("</span>")!
-			while(activityDescData.containsString("<span")) {
+			while(activityDescData.contains("<span")) {
 				activityDescData =  activityDescData.cropExclusive("<span")!
 				activityDescData =  activityDescData.cropExclusive(">", end: "</span")!
 				
-				if activityDescData.containsString("<") && activityDescData.containsString(">"){//if carats found
+				if activityDescData.contains("<") && activityDescData.contains(">"){//if carats found
 					//find carats and make range
-					let startIndex = activityDescData.rangeOfString("<")!.startIndex
-					let endIndex = activityDescData.rangeOfString(">")!.endIndex
+					let startIndex = activityDescData.range(of: "<")!.lowerBound
+					let endIndex = activityDescData.range(of: ">")!.upperBound
 					let asdf = startIndex..<endIndex
 					//assert break in carats
-					guard activityDescData.substringWithRange(asdf).containsString("br") || activityDescData.substringWithRange(asdf).containsString("BR") else {
+					guard activityDescData.substring(with: asdf).contains("br") || activityDescData.substring(with: asdf).contains("BR") else {
 						print("carats found, but no break")
 						break
 					}
 					//bye carats
-					activityDescData.removeRange(asdf)
+					activityDescData.removeSubrange(asdf)
 					//replace with newline
 					//					activityDescData.insertContentsOf("\n".characters, at: startIndex)
 				}

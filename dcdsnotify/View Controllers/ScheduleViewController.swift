@@ -13,8 +13,8 @@ class ScheduleViewController: UIViewController {
     
     @IBOutlet weak var yesterdayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
-    var date: NSDate!
-    private var daySchedule: DaySchedule? = DaySchedule()
+    var date: Date!
+    fileprivate var daySchedule: DaySchedule? = DaySchedule()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class ScheduleViewController: UIViewController {
         
         configureNavBar()
     }
-    func updateBlocks(forDate: NSDate?) {
+    func updateBlocks(_ forDate: Date?) {
         daySchedule = ExcelHelper.sharedInstance.getSchedule(forDate ?? date, sender: self)
         if daySchedule == nil {
             daySchedule = DaySchedule()
@@ -38,34 +38,34 @@ class ScheduleViewController: UIViewController {
 
     }
     func configureNavBar() {
-        let datePickerButton = UIBarButtonItem(image: Constants.Images.calendar, style: .Plain, target: self, action: #selector(segueToDatePicker(_: )))
+        let datePickerButton = UIBarButtonItem(image: Constants.Images.calendar, style: .plain, target: self, action: #selector(segueToDatePicker(_: )))
         self.navigationItem.rightBarButtonItem = datePickerButton
         
         self.titleBar.title = "Schedule"
     }
     func configureArrows() {
-        self.view.bringSubviewToFront(yesterdayButton)
-        self.view.bringSubviewToFront(tomorrowButton)
+        self.view.bringSubview(toFront: yesterdayButton)
+        self.view.bringSubview(toFront: tomorrowButton)
         
         let left = Constants.Images.leftCarat.alpha(0.5)
-        yesterdayButton.setBackgroundImage(left, forState: .Normal)
+        yesterdayButton.setBackgroundImage(left, for: UIControlState())
         let right = Constants.Images.rightCarat.alpha(0.5)
-        tomorrowButton.setBackgroundImage(right, forState: .Normal)
+        tomorrowButton.setBackgroundImage(right, for: UIControlState())
         
-        yesterdayButton.addTarget(self, action: #selector(yesterdaySchedule(_:)), forControlEvents: .TouchUpInside)
-        tomorrowButton.addTarget(self, action: #selector(tomorrowSchedule(_:)), forControlEvents: .TouchUpInside)
+        yesterdayButton.addTarget(self, action: #selector(yesterdaySchedule(_:)), for: .touchUpInside)
+        tomorrowButton.addTarget(self, action: #selector(tomorrowSchedule(_:)), for: .touchUpInside)
     }
-    func yesterdaySchedule(sender: AnyObject?) {
+    func yesterdaySchedule(_ sender: AnyObject?) {
         date = date?.yesterday()
         updateBlocks(nil)
     }
-    func tomorrowSchedule(sender: AnyObject?) {
+    func tomorrowSchedule(_ sender: AnyObject?) {
         date = date?.tomorrow()
         updateBlocks(nil)
     }
-    func segueToDatePicker(sender: AnyObject?)
+    func segueToDatePicker(_ sender: AnyObject?)
     {
-        let dateVC = self.storyboard?.instantiateViewControllerWithIdentifier("datePicker") as! DatePickerViewController
+        let dateVC = self.storyboard?.instantiateViewController(withIdentifier: "datePicker") as! DatePickerViewController
         dateVC.date = self.date
         dateVC.sendingVC = self
         self.navigationController?.pushViewController(dateVC, animated: true)
@@ -74,14 +74,14 @@ class ScheduleViewController: UIViewController {
 }
 
 extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
         let titleView = UITextView(frame: headerView.frame)
-        titleView.textAlignment = .Center
+        titleView.textAlignment = .center
 
 
         if section == 0 {
@@ -89,25 +89,25 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
             titleView.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
             let gradient: CAGradientLayer = CAGradientLayer.init(layer: titleView)
             gradient.frame = headerView.bounds
-            gradient.colors = [(UIColor(red: 0.89, green: 0.90, blue: 0.92, alpha: 1.00).CGColor as AnyObject), (UIColor(red: 0.82, green: 0.82, blue: 0.85, alpha: 1.00).CGColor as AnyObject)]
-            titleView.layer.insertSublayer(gradient, atIndex: 0)
+            gradient.colors = [(UIColor(red: 0.89, green: 0.90, blue: 0.92, alpha: 1.00).cgColor as AnyObject), (UIColor(red: 0.82, green: 0.82, blue: 0.85, alpha: 1.00).cgColor as AnyObject)]
+            titleView.layer.insertSublayer(gradient, at: 0)
 
         }
         headerView.addSubview(titleView)
         return headerView
 
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return (section == 1 ? 0 : 40)
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (section == 1 ? (daySchedule?.blocks.count ?? 0) : 1)
     }
 
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("BlockCell") as! BlockCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BlockCell") as! BlockCell
         cell.backgroundColor = UIColor(colorLiteralRed: 230/256, green: 230/256, blue: 230/256, alpha: 1)
 
         guard indexPath.section == 1 else {

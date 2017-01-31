@@ -12,24 +12,24 @@ extension String {
 		enumerateLines{ result.append($0.line) }
 		return result
 	}
-	func indexOf(target: String) -> Int
+	func indexOf(_ target: String) -> Int
 	{
-		let range = self.rangeOfString(target)
+		let range = self.range(of: target)
 		if let range = range {
-			return self.startIndex.distanceTo(range.startIndex)
+			return self.characters.distance(from: self.startIndex, to: range.lowerBound)
 		} else {
 			return -1
 		}
 	}
 	
-	func indexOf(target: String, startIndex: Int) -> Int
+	func indexOf(_ target: String, startIndex: Int) -> Int
 	{
-		let startRange = self.startIndex.advancedBy(startIndex)
+		let startRange = self.characters.index(self.startIndex, offsetBy: startIndex)
 		
-		let range = self.rangeOfString(target, options: NSStringCompareOptions.LiteralSearch, range: startRange ..< endIndex)
+		let range = self.range(of: target, options: NSString.CompareOptions.literal, range: startRange ..< endIndex)
 		
 		if let range = range {
-			return self.startIndex.distanceTo(range.startIndex)
+			return self.characters.distance(from: self.startIndex, to: range.lowerBound)
 		} else {
 			return -1
 		}
@@ -39,82 +39,82 @@ extension String {
 
 extension NSString {
 	
-	func crop(start: String) -> String?
+	func crop(_ start: String) -> String?
 	{
-		let startRange = (self as NSString).rangeOfString(start)
+		let startRange = (self as NSString).range(of: start)
 		guard startRange.location < self.description.characters.count else
 		{
 			return nil
 		}
 		
-		return (self as NSString).substringFromIndex(startRange.location)
+		return (self as NSString).substring(from: startRange.location)
 	}
-	func cropExclusive(start: String) -> String?
+	func cropExclusive(_ start: String) -> String?
 	{
-		let startRange = (self as NSString).rangeOfString(start)
+		let startRange = (self as NSString).range(of: start)
 		guard startRange.location < self.description.characters.count else
 		{
 			return nil
 		}
 		
-		return (self as NSString).substringFromIndex(startRange.location + startRange.length)
+		return (self as NSString).substring(from: startRange.location + startRange.length)
 	}
 	
-	func cropEnd(suffix: String) -> String?
+	func cropEnd(_ suffix: String) -> String?
 	{
-		let endRange = (self as NSString).rangeOfString(suffix)
+		let endRange = (self as NSString).range(of: suffix)
 		guard endRange.location < self.description.characters.count else
 		{
 			return nil
 		}
 		
-		return (self as NSString).substringToIndex(endRange.location + endRange.length)
+		return (self as NSString).substring(to: endRange.location + endRange.length)
 	}
-	func cropEndExclusive(suffix: String) -> String?
+	func cropEndExclusive(_ suffix: String) -> String?
 	{
-		let endRange = (self as NSString).rangeOfString(suffix)
+		let endRange = (self as NSString).range(of: suffix)
 		guard endRange.location < self.description.characters.count else
 		{
 			return nil
 		}
 		
-		return (self as NSString).substringToIndex(endRange.location)
+		return (self as NSString).substring(to: endRange.location)
 	}
 	
-	func crop(start: String, end: String) -> String?
+	func crop(_ start: String, end: String) -> String?
 	{
-		let startRange = (self as NSString).rangeOfString(start)
+		let startRange = (self as NSString).range(of: start)
 		guard startRange.location < self.description.characters.count else
 		{
 			return nil
 		}
 		
-		let startCut = (self as NSString).substringFromIndex(startRange.location)
+		let startCut = (self as NSString).substring(from: startRange.location)
 		
-		let endRange = (startCut as NSString).rangeOfString(end)
+		let endRange = (startCut as NSString).range(of: end)
 		guard endRange.location < startCut.characters.count else
 		{
 			return nil
 		}
 		
-		return (startCut as NSString).substringToIndex(endRange.location + endRange.length)
+		return (startCut as NSString).substring(to: endRange.location + endRange.length)
 	}
-	func cropExclusive(start: String, end: String) -> String?
+	func cropExclusive(_ start: String, end: String) -> String?
 	{
-		let startRange = (self as NSString).rangeOfString(start)
+		let startRange = (self as NSString).range(of: start)
 		guard startRange.location < self.description.characters.count else
 		{
 			return nil
 		}
 		
-		let startCut = (self as NSString).substringFromIndex(startRange.location + startRange.length)
+		let startCut = (self as NSString).substring(from: startRange.location + startRange.length)
 		
-		let endRange = (startCut as NSString).rangeOfString(end)
+		let endRange = (startCut as NSString).range(of: end)
 		guard endRange.location < startCut.characters.count else
 		{
 			return nil
 		}
 		
-		return (startCut as NSString).substringToIndex(endRange.location)
+		return (startCut as NSString).substring(to: endRange.location)
 	}
 }

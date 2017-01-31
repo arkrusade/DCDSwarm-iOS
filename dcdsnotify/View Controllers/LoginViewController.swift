@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
-        PasswordTextField.returnKeyType = .Go
+        PasswordTextField.returnKeyType = .go
         //testLogin()
 
     }
@@ -27,13 +27,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         PasswordTextField.text = "1u2i3o4p"
         onLoginButtonTap(self)
     }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if UsernameTextField.isFirstResponder()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if UsernameTextField.isFirstResponder
         {
             PasswordTextField.becomeFirstResponder()
             return true
         }
-        else if PasswordTextField.isFirstResponder()
+        else if PasswordTextField.isFirstResponder
         {
             PasswordTextField.resignFirstResponder()
             onLoginButtonTap(self)
@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if let login = CacheHelper.sharedInstance.retrieveLogin() {
             UsernameTextField.text = login.username
             PasswordTextField.text = login.password
@@ -52,7 +52,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     }
 
-    @IBAction func viewTapped(sender: AnyObject) {
+    @IBAction func viewTapped(_ sender: AnyObject) {
 
         self.UsernameTextField.resignFirstResponder()
         self.PasswordTextField.resignFirstResponder()
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.PasswordTextField.text = ""
     }
 
-    @IBAction func onLoginButtonTap(sender: AnyObject) {
+    @IBAction func onLoginButtonTap(_ sender: AnyObject) {
 
         guard UsernameTextField.text != "" || PasswordTextField.text != "" else {
             print("empty text")
@@ -78,23 +78,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     {
         let login: Credentials = (self.UsernameTextField.text!, self.PasswordTextField.text!)
         //login if cache exists
-        if let cacheLogin = CacheHelper.sharedInstance.retrieveLogin() where cacheLogin == login {
+        if let cacheLogin = CacheHelper.sharedInstance.retrieveLogin(), cacheLogin == login {
             //if cache data matches entered, 'login' and show data
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
+            OperationQueue.main.addOperation {
+                self.performSegue(withIdentifier: Constants.Segues.LoginToHomeworkView, sender: self)
             }
             return
         }
         activityIndicator.startAnimating()
 
-        let request = NSMutableURLRequest(URL: Constants.userLoginURL)
-        request.HTTPMethod = "POST"
+        let request = NSMutableURLRequest(url: Constants.userLoginURL as URL)
+        request.httpMethod = "POST"
         let postString = "do=login&p=413&username=\(UsernameTextField.text!)&password=\(PasswordTextField.text!)&submit=login"
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        request.httpBody = postString.data(using: String.Encoding.utf8)
 
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
 
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 self.activityIndicator.stopAnimating()
             }
             guard error?.code != -999 else {
@@ -114,7 +114,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
 
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 { // check for http errors
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 { // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
                 return
@@ -122,7 +122,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
             //MARK: Login Check
             
-            let urlContentString = NSString(data: data!, encoding: NSUTF8StringEncoding) as NSString!
+            let urlContentString = NSString(data: data!, encoding: String.Encoding.utf8) as NSString!
             let loginCheck = urlContentString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
             guard loginCheck == "STUDENT PORTAL" else {
                 //TODO: check for parents too
@@ -130,28 +130,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 ErrorHandling.defaultError("Invalid Username/Password", desc: "Please enter a valid username and password combination", sender: self)
                 return
             }
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 CacheHelper.sharedInstance.storeLogin(login)
-                self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
+                self.performSegue(withIdentifier: Constants.Segues.LoginToHomeworkView, sender: self)
             }
-        }
+        }) 
         task.resume()
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.UsernameTextField.text = ""
         self.PasswordTextField.text = ""
 
         if segue.identifier == Constants.Segues.LoginToHomeworkView
         {
             print("seguing to HomeworkViewController")
-            let nav = segue.destinationViewController as? UINavigationController
+            let nav = segue.destination as? UINavigationController
             let vc = nav?.topViewController as? HomeworkViewController
             guard vc != nil else {
                 ErrorHandling.defaultError("Bug!", desc: "Improper segue - \(segue.identifier)", sender: self)
                 return
             }
 
-            vc!.activitiesDay = Day(date: NSDate())
+            vc!.activitiesDay = Day(date: Date())
 
         }
         

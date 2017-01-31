@@ -9,24 +9,24 @@
 import UIKit
 extension HomeworkViewController {
     func loadActivities() {
-        if !activityIndicator.isAnimating() {
+        if !activityIndicator.isAnimating {
             activityIndicator.startAnimating()
         }
         //while loading, if in cache, use that; else, clear the day to show activity loader
-        if let day = CacheHelper.sharedInstance.retrieveDay(activitiesDay?.date ?? NSDate()) {
+        if let day = CacheHelper.sharedInstance.retrieveDay(activitiesDay?.date ?? Date()) {
             self.activitiesDay = day
         }
         //until task is finished, inserts this before everything else
         let loadingActivity = Activity(classString: "", title: "Loading", subtitle: "")
-        self.activitiesDay?.activities?.insert(loadingActivity, atIndex: 0)
+        self.activitiesDay?.activities?.insert(loadingActivity, at: 0)
         tableView.reloadData()
 
         //TODO: also send request after some refresh button
 
-        let homeworkURL = (activitiesDay?.date ?? NSDate()).toDCDSURL()
+        let homeworkURL = (activitiesDay?.date ?? Date()).toDCDSURL()
         portalTask?.cancel()
-        portalTask = NSURLSession.sharedSession().dataTaskWithURL(homeworkURL!, completionHandler: { (data, response, error) -> Void in
-            NSOperationQueue.mainQueue().addOperationWithBlock() {
+        portalTask = URLSession.shared.dataTask(with: homeworkURL!, completionHandler: { (data, response, error) -> Void in
+            OperationQueue.main.addOperation() {
                 self.activityIndicator.stopAnimating()
             }
             if let urlContent = PortalHelper.checkResponse(data, response: response, error: error, sender: self)
@@ -55,13 +55,13 @@ extension HomeworkViewController {
 
                     //else continue logging in; make url request
                     let login = checkLogin!
-                    let request = NSMutableURLRequest(URL: Constants.userLoginURL)
-                    request.HTTPMethod = "POST"
+                    let request = NSMutableURLRequest(url: Constants.userLoginURL)
+                    request.httpMethod = "POST"
                     let postString = "do=login&p=413&username=\(login.username)&password=\(login.password)&submit=login"
-                    request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+                    request.httpBody = postString.data(using: String.Encoding.utf8)
 
                     //start task
-                    let checkLoginTask = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+                    let checkLoginTask = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
 
                         //check no errors
                         if let checkLoginString = PortalHelper.checkResponse(data, response: response, error: error, sender: self)
@@ -77,15 +77,15 @@ extension HomeworkViewController {
                             }
                         }
                         //everythings ok, so start again
-                        NSOperationQueue.mainQueue().addOperationWithBlock({
+                        OperationQueue.main.addOperation({
                             self.loadActivities()
                         })
-                    }
+                    }) 
                     checkLoginTask.resume()
                 }
                 else {
                     self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
-                    self.lastLoaded = NSDate() //TODO: make this didSet of currentDate? and also use this (15 minutes, then refresh automatically)
+                    self.lastLoaded = Date() //TODO: make this didSet of currentDate? and also use this (15 minutes, then refresh automatically)
                     CacheHelper.sharedInstance.addDay(self.activitiesDay)
                 }
             }

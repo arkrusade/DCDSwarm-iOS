@@ -13,12 +13,12 @@ public let DAYS_KEY = "daysKey"
 public let SCHEDULE_KEY = "scheduleKey"
 typealias Credentials = (username: String, password: String)
 class Constants {
-	static let userLoginURL = NSURL(string: "https://www.dcds.edu/userlogin.cfm")!
-	static let invalidLoginURL = NSURL(string: "https://www.dcds.edu/userlogin.cfm?do=login&p=413")!
-	static let homeURL = NSURL(string: "https://www.dcds.edu")!
-	static let homeworkWeek = NSURL(string: "http://www.dcds.edu/page.cfm?p=8256&period=week")!
-	static let homeworkDay = NSURL(string: "https://www.dcds.edu/page.cfm?p=8256&period=day")!
-	static let homeworkYear = NSURL(string: "http://www.dcds.edu/page.cfm?p=8256&period=year")!
+	static let userLoginURL = URL(string: "https://www.dcds.edu/userlogin.cfm")!
+	static let invalidLoginURL = URL(string: "https://www.dcds.edu/userlogin.cfm?do=login&p=413")!
+	static let homeURL = URL(string: "https://www.dcds.edu")!
+	static let homeworkWeek = URL(string: "http://www.dcds.edu/page.cfm?p=8256&period=week")!
+	static let homeworkDay = URL(string: "https://www.dcds.edu/page.cfm?p=8256&period=day")!
+	static let homeworkYear = URL(string: "http://www.dcds.edu/page.cfm?p=8256&period=year")!
 	
 	struct Segues {
 		static let LoginToHomeworkView = "LoginToHomeworkView"

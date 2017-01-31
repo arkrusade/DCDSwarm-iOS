@@ -8,8 +8,8 @@
 
 import UIKit
 
-enum ExcelParsingError: ErrorType	 {
-    case FailedParse(goalNum: Int)
+enum ExcelParsingError: Error	 {
+    case failedParse(goalNum: Int)
 }
 
 class ExcelHelper {
@@ -17,13 +17,13 @@ class ExcelHelper {
     var schedule: [DaySchedule]?
     var loaded = false
 
-    func getSchedule(forDay: NSDate, sender: UIViewController) -> DaySchedule?{
+    func getSchedule(_ forDay: Date, sender: UIViewController) -> DaySchedule?{
         if !loaded || schedule == nil {
             do  {
                 
                 try configureBlockSchedule()
             }
-            catch ExcelParsingError.FailedParse(let goal) {
+            catch ExcelParsingError.failedParse(let goal) {
                 ErrorHandling.defaultError("Failed to parse schedule", desc: "Error with goal \(goal)", sender: sender)
             }
             catch let e as NSError{
@@ -45,12 +45,12 @@ class ExcelHelper {
     func configureBlockSchedule() throws {
         loaded = true
         var fullSchedule: [DaySchedule] = []
-        if let path = NSBundle.mainBundle().pathForResource("convertcsvGoal2", ofType: "json")
+        if let path = Bundle.main.path(forResource: "convertcsvGoal2", ofType: "json")
         {
-            if let jsonData = NSData(contentsOfFile: path)
+            if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path))
             {
                 do {
-                    if let jsonResult: NSDictionary = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                    if let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as? NSDictionary
                     {
                         if let fields: Dictionary = jsonResult as? Dictionary<String, AnyObject>
                         {
@@ -74,7 +74,7 @@ class ExcelHelper {
                                     if let times = fields[timesKey] as? [String] {
                                         let excelDateString: String = blocks[0]
                                         if let excelNum = Int(excelDateString) {
-                                            daySchedule.date = NSDate.fromExcelDate(excelNum)
+                                            daySchedule.date = Date.fromExcelDate(excelNum)
                                         }
                                         
                                         for j in 1..<blocks.count {
@@ -97,17 +97,17 @@ class ExcelHelper {
                     }
                 }
                 catch {
-                    throw ExcelParsingError.FailedParse(goalNum: 3)
+                    throw ExcelParsingError.failedParse(goalNum: 3)
                 }
             }
 
         }
-        if let path = NSBundle.mainBundle().pathForResource("goal3 copy", ofType: "json")
+        if let path = Bundle.main.path(forResource: "goal3 copy", ofType: "json")
         {
-            if let jsonData = NSData(contentsOfFile: path)
+            if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path))
             {
                 do {
-                    if let jsonResult: NSDictionary = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                    if let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as? NSDictionary
                     {
                         if let fields: Dictionary = jsonResult as? Dictionary<String, AnyObject>
                         {
@@ -131,7 +131,7 @@ class ExcelHelper {
                                     if let times = fields[timesKey] as? [String] {
                                         let excelDateString: String = blocks[0]
                                         if let excelNum = Int(excelDateString) {
-                                            daySchedule.date = NSDate.fromExcelDate(excelNum)
+                                            daySchedule.date = Date.fromExcelDate(excelNum)
                                         }
                                         
                                         for j in 1..<blocks.count {
@@ -154,7 +154,7 @@ class ExcelHelper {
                     }
                 }
                 catch {
-                    throw ExcelParsingError.FailedParse(goalNum: 2)
+                    throw ExcelParsingError.failedParse(goalNum: 2)
                 }
             }
         }
