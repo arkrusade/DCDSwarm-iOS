@@ -19,14 +19,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
         PasswordTextField.returnKeyType = .Go
-        //testLogin()
+    }
 
-    }
-    func testLogin() {
-        UsernameTextField.text = "lee1801"
-        PasswordTextField.text = "1u2i3o4p"
-        onLoginButtonTap(self)
-    }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if UsernameTextField.isFirstResponder()
         {
