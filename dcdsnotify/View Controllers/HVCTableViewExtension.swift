@@ -26,7 +26,6 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
 		if activitiesDay != nil && activitiesDay!.activities != nil
 		{
 			cell.activity = activitiesDay?.activities?[indexPath.section]
-			
 		}
 		else {
 			cell.activity = Activity(classString: "", title: "", subtitle: "No Data")

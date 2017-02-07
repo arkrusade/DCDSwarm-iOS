@@ -34,8 +34,6 @@ class ScheduleViewController: UIViewController {
             daySchedule?.blocks = [emptyBlock]//, checkBlock]
         }
         tableView.reloadData()
-
-
     }
     func configureNavBar() {
         let datePickerButton = UIBarButtonItem(image: Constants.Images.calendar, style: .Plain, target: self, action: #selector(segueToDatePicker(_: )))
@@ -69,7 +67,6 @@ class ScheduleViewController: UIViewController {
         dateVC.date = self.date
         dateVC.sendingVC = self
         self.navigationController?.pushViewController(dateVC, animated: true)
-        
     }
 }
 
@@ -77,13 +74,11 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
-
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
         let titleView = UITextView(frame: headerView.frame)
         titleView.textAlignment = .Center
-
-
+        
         if section == 0 {
             titleView.text = "\(date.dayOfTheWeek() ?? "Day") - \(date.asSlashedDate())"
             titleView.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
