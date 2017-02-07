@@ -19,13 +19,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
         PasswordTextField.returnKeyType = .Go
-        //testLogin()
 
-    }
-    func testLogin() {
-        UsernameTextField.text = "lee1801"
-        PasswordTextField.text = "1u2i3o4p"
-        onLoginButtonTap(self)
     }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if UsernameTextField.isFirstResponder()
@@ -81,6 +75,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let cacheLogin = CacheHelper.sharedInstance.retrieveLogin() where cacheLogin == login {
             //if cache data matches entered, 'login' and show data
             NSOperationQueue.mainQueue().addOperationWithBlock {
+                AppState.sharedInstance.login(login)
+
                 self.performSegueWithIdentifier(Constants.Segues.LoginToHomeworkView, sender: self)
             }
             return
@@ -152,6 +148,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
 
             vc!.activitiesDay = Day(date: NSDate())
+            
 
         }
         

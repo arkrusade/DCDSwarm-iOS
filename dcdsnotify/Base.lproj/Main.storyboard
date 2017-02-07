@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="djG-bU-WW7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="djG-bU-WW7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -301,10 +301,10 @@
             </objects>
             <point key="canvasLocation" x="2817" y="311"/>
         </scene>
-        <!--Report View Controller-->
+        <!--Send Report-->
         <scene sceneID="xzu-vT-g5t">
             <objects>
-                <viewController storyboardIdentifier="report" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1YU-MN-YaJ" customClass="ReportViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="report" title="Send Report" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1YU-MN-YaJ" customClass="ReportViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="o6Q-Ag-wcO"/>
                         <viewControllerLayoutGuide type="bottom" id="P9Q-cr-Sbv"/>
@@ -313,38 +313,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlT-Ml-2br">
-                                <rect key="frame" x="164" y="511" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlT-Ml-2br">
+                                <rect key="frame" x="144" y="511" width="86" height="30"/>
                                 <state key="normal" title="Send Report"/>
                                 <connections>
                                     <action selector="sendReportButtonTapped:" destination="1YU-MN-YaJ" eventType="touchUpInside" id="uHs-Yc-kw9"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add classes, when it crashed, what you tried to do, etc." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fzu-FX-X3V">
-                                <rect key="frame" x="139" y="473" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add info about what you did, when it crashed, etc." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fzu-FX-X3V">
+                                <rect key="frame" x="15" y="178" width="345" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="6JO-dU-LNc"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSy-gb-AGL">
-                                <rect key="frame" x="168" y="124" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include Logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdQ-Dv-M6R">
+                                <rect key="frame" x="15" y="78" width="296" height="31"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z46-pZ-Z7j">
+                                <rect key="frame" x="311" y="78" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="fzu-FX-X3V" firstAttribute="top" secondItem="o6Q-Ag-wcO" secondAttribute="bottom" constant="158" id="1Zb-nI-iVU"/>
+                            <constraint firstItem="Z46-pZ-Z7j" firstAttribute="leading" secondItem="gdQ-Dv-M6R" secondAttribute="trailing" id="2VV-Ja-TWU"/>
+                            <constraint firstItem="gdQ-Dv-M6R" firstAttribute="top" secondItem="o6Q-Ag-wcO" secondAttribute="bottom" constant="58" id="LDM-eq-S5Q"/>
+                            <constraint firstAttribute="trailing" secondItem="fzu-FX-X3V" secondAttribute="trailing" constant="15" id="MLC-4A-iUc"/>
+                            <constraint firstItem="Z46-pZ-Z7j" firstAttribute="centerY" secondItem="gdQ-Dv-M6R" secondAttribute="centerY" id="Mjx-WU-mve"/>
+                            <constraint firstItem="jlT-Ml-2br" firstAttribute="centerX" secondItem="TfV-8Z-piZ" secondAttribute="centerX" id="WBW-tI-ceO"/>
+                            <constraint firstItem="P9Q-cr-Sbv" firstAttribute="top" secondItem="jlT-Ml-2br" secondAttribute="bottom" constant="126" id="d5I-lt-qto"/>
+                            <constraint firstItem="Z46-pZ-Z7j" firstAttribute="trailing" secondItem="fzu-FX-X3V" secondAttribute="trailing" id="eD7-EU-nD4"/>
+                            <constraint firstItem="fzu-FX-X3V" firstAttribute="leading" secondItem="TfV-8Z-piZ" secondAttribute="leading" constant="15" id="eek-UV-C7a"/>
+                            <constraint firstItem="fzu-FX-X3V" firstAttribute="centerX" secondItem="TfV-8Z-piZ" secondAttribute="centerX" id="fHU-wj-awI"/>
+                            <constraint firstItem="fzu-FX-X3V" firstAttribute="top" secondItem="gdQ-Dv-M6R" secondAttribute="bottom" constant="69" id="n5C-Ig-br6"/>
+                            <constraint firstItem="gdQ-Dv-M6R" firstAttribute="leading" secondItem="fzu-FX-X3V" secondAttribute="leading" id="p4g-fV-giN"/>
+                            <constraint firstItem="jlT-Ml-2br" firstAttribute="top" secondItem="fzu-FX-X3V" secondAttribute="bottom" constant="83" id="t9D-oC-WOR"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Oth-fi-Rmn" appends="YES" id="TLz-Iq-aTB"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="logSwitch" destination="Z46-pZ-Z7j" id="yXf-Lj-UVe"/>
                         <outlet property="messageTextField" destination="fzu-FX-X3V" id="nvi-fw-3DV"/>
+                        <outlet property="reportButton" destination="jlT-Ml-2br" id="EcI-aj-Pd3"/>
+                        <outlet property="tapGestureReconizer" destination="Oth-fi-Rmn" id="F7I-tn-uKK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2m7-mB-SwJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Oth-fi-Rmn">
+                    <connections>
+                        <action selector="onViewTapped:" destination="1YU-MN-YaJ" id="p3m-wV-q3T"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3475" y="-64"/>
+            <point key="canvasLocation" x="2817" y="-859"/>
         </scene>
         <!--Schedule View Controller-->
         <scene sceneID="6Kb-Fa-FNy">
@@ -480,7 +510,7 @@
                                 </date>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4l-O3-JaG">
-                                <rect key="frame" x="149" y="548" width="77" height="30"/>
+                                <rect key="frame" x="16" y="505" width="343" height="162"/>
                                 <state key="normal" title="Go To Date"/>
                                 <connections>
                                     <action selector="confirmButtonTapped:" destination="J2f-FH-LTl" eventType="touchUpInside" id="rgV-8z-UZM"/>
@@ -496,14 +526,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KHh-o3-fFS" firstAttribute="top" secondItem="G4l-O3-JaG" secondAttribute="bottom" constant="89" id="9LN-KJ-wXn"/>
                             <constraint firstItem="99F-69-axA" firstAttribute="centerX" secondItem="9Ui-MY-Rkc" secondAttribute="centerX" constant="16" id="BMl-hP-kQv"/>
                             <constraint firstItem="eRu-dQ-iDU" firstAttribute="centerX" secondItem="9Ui-MY-Rkc" secondAttribute="centerX" id="Cam-YM-exH"/>
                             <constraint firstItem="G4l-O3-JaG" firstAttribute="centerX" secondItem="9Ui-MY-Rkc" secondAttribute="centerX" id="Cfz-hh-9KS"/>
+                            <constraint firstItem="G4l-O3-JaG" firstAttribute="leading" secondItem="9Ui-MY-Rkc" secondAttribute="leadingMargin" id="FRO-py-Lx6"/>
                             <constraint firstItem="99F-69-axA" firstAttribute="leading" secondItem="9Ui-MY-Rkc" secondAttribute="leadingMargin" id="GRk-jV-s2K"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="G4l-O3-JaG" secondAttribute="trailing" id="Gso-LI-M8Q"/>
                             <constraint firstItem="uS1-y3-jpK" firstAttribute="top" secondItem="eRu-dQ-iDU" secondAttribute="bottom" constant="41" id="PeJ-hY-vgI"/>
                             <constraint firstItem="99F-69-axA" firstAttribute="top" secondItem="eRu-dQ-iDU" secondAttribute="bottom" constant="119" id="UVF-qi-3UX"/>
-                            <constraint firstItem="G4l-O3-JaG" firstAttribute="top" secondItem="99F-69-axA" secondAttribute="bottom" constant="58" id="VAA-Tx-8w0"/>
+                            <constraint firstItem="G4l-O3-JaG" firstAttribute="top" secondItem="99F-69-axA" secondAttribute="bottom" constant="15" id="VAA-Tx-8w0"/>
+                            <constraint firstItem="KHh-o3-fFS" firstAttribute="top" secondItem="G4l-O3-JaG" secondAttribute="bottom" id="Z7f-3K-7rw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="99F-69-axA" secondAttribute="trailing" constant="-32" id="asN-ns-miM"/>
                             <constraint firstItem="uS1-y3-jpK" firstAttribute="centerX" secondItem="eRu-dQ-iDU" secondAttribute="centerX" id="vgu-xI-uMK"/>
                             <constraint firstItem="99F-69-axA" firstAttribute="centerY" secondItem="9Ui-MY-Rkc" secondAttribute="centerY" constant="48.5" id="z6d-Tg-hMJ"/>

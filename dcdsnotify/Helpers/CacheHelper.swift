@@ -36,40 +36,54 @@ extension CacheHelper {
     func hasLogs() -> Bool {
         return NSUserDefaults.standardUserDefaults().dictionaryForKey(LOGS_KEY) != nil
     }
-    func addLog(day: Day?) {
-        
-        if let day = day {
-            // persist a representation of this todo item in NSUserDefaults
-            var todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(DAYS_KEY) ?? Dictionary() // if todoItems hasn't been set in user defaults, initialize todoDictionary to an empty dictionary using nil-coalescing operator (??)
-            todoDictionary[day.date.asSlashedDate()] = day.activitiesArray // store NSData representation of todo item in dictionary with UUID as key
-            NSUserDefaults.standardUserDefaults().setObject(todoDictionary, forKey: DAYS_KEY) // save/overwrite todo item list
+    func retrieveLogDates() -> [NSDate]? {
+        if hasLogs()
+        {
+            var dates: [NSDate] = []
+            let dateDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(LOGS_KEY)
             
-            // create a corresponding local notification
-            let notification = UILocalNotification()
-            notification.alertBody = "Homework for \(day.date.asSlashedDate()):\n\(day.activitiesDescription)" // text that will be displayed in the notification
-            notification.alertAction = "view" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-            notification.fireDate = Day(date: NSDate()).date // todo item due date (when notification will be fired)
-            //TODO: set notif time with input time
-            notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-            notification.userInfo = ["slashedDate": day.date.asSlashedDate()] // assign a unique identifier to the notification so that we can retrieve it later
+                for key in dateDict!.keys 
+                {
+                    if let dateK = NSDate.dateFormatterSlashed().dateFromString(key) {
+                        dates.append(dateK)
+                    }
+                }
+                return dates
             
-            //TODO: notifs
-            //			UIApplication.sharedApplication().scheduleLocalNotification(notification)
+            
         }
+        return nil
     }
-    func retrieveDLog(date: NSDate) -> Day? {
-        let todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(DAYS_KEY) as? [String:[[String]]] ?? [:]
-        //		let keys = Array(todoDictionary.keys)
-        if let dayString = todoDictionary[date.asSlashedDate()] {
-            var activities: [Activity] = []
-            for values in dayString {
-                activities.append(Activity(fromValues: values))
+    func addLog(log: HTMLLog?) {
+        
+        if let log = log {
+            var todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(LOGS_KEY) ?? Dictionary()
+            todoDictionary[log.date.asSlashedDate()] = log.htmlData
+            NSUserDefaults.standardUserDefaults().setObject(todoDictionary, forKey: LOGS_KEY) // save/overwrite todo item list
             }
-            return Day(activities: activities, date: date)
-        }
+    }
+    func retrieveLog(date: NSDate) -> HTMLLog? {
+        let todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(DAYS_KEY) as? [String:String] ?? [:]
+        if let log: String = todoDictionary[date.asSlashedDate()] {
+                return HTMLLog(date: date, log: log)
+        	}
         else {
             return nil
         }
+    }
+    func retrieveAllLogs() -> [HTMLLog]? {
+        if let dates = retrieveLogDates()
+        {
+            var logs: [HTMLLog] = []
+            for date in dates {
+                if let log = retrieveLog(date)
+                {
+                    logs.append(log)
+                }
+            }
+            return logs
+        }
+        return nil
     }
 
 }
@@ -122,14 +136,14 @@ extension CacheHelper {
             todoDictionary[day.date.asSlashedDate()] = day.activitiesArray // store NSData representation of todo item in dictionary with UUID as key
             NSUserDefaults.standardUserDefaults().setObject(todoDictionary, forKey: DAYS_KEY) // save/overwrite todo item list
             
-            // create a corresponding local notification
-            let notification = UILocalNotification()
-            notification.alertBody = "Homework for \(day.date.asSlashedDate()):\n\(day.activitiesDescription)" // text that will be displayed in the notification
-            notification.alertAction = "view" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-            notification.fireDate = Day(date: NSDate()).date // todo item due date (when notification will be fired)
-            //TODO: set notif time with input time
-            notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-            notification.userInfo = ["slashedDate": day.date.asSlashedDate()] // assign a unique identifier to the notification so that we can retrieve it later
+//            // create a corresponding local notification
+//            let notification = UILocalNotification()
+//            notification.alertBody = "Homework for \(day.date.asSlashedDate()):\n\(day.activitiesDescription)" // text that will be displayed in the notification
+//            notification.alertAction = "view" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+//            notification.fireDate = Day(date: NSDate()).date // todo item due date (when notification will be fired)
+//            //TODO: set notif time with input time
+//            notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+//            notification.userInfo = ["slashedDate": day.date.asSlashedDate()] // assign a unique identifier to the notification so that we can retrieve it later
             
             //TODO: notifs
             //			UIApplication.sharedApplication().scheduleLocalNotification(notification)

@@ -9,10 +9,36 @@
 import MessageUI
 import UIKit
 class ReportViewController: UIViewController {
+    @IBOutlet weak var reportButton: UIButton!
     @IBOutlet weak var messageTextField: UITextField!
     
+    @IBOutlet var tapGestureReconizer: UITapGestureRecognizer!
     @IBAction func sendReportButtonTapped(sender: AnyObject) {
         sendMail("test", message: "desc")
+    }
+    
+    @IBOutlet weak var logSwitch: UISwitch!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        reportButton.bringSubviewToFront(reportButton)
+    }
+    @IBAction func onViewTapped(sender: AnyObject) {
+        messageTextField.resignFirstResponder()
+    }
+    
+    func sendReport(withLogs: Bool) {
+        let subjectString = "[Self sent] Username: \(AppState.sharedInstance.credentials?.username)"
+        var message = (messageTextField.text ?? "") + "\n"
+        if withLogs {
+            if let logs = CacheHelper.sharedInstance.retrieveAllLogs()
+            {
+                for log in logs {
+                    message += "\(log.date) \t-\t\(log.htmlData)\n"
+                }
+            }
+        }
+        sendMail(subjectString, message: message)
+        
     }
 }
 extension ReportViewController: MFMailComposeViewControllerDelegate {
@@ -23,7 +49,6 @@ extension ReportViewController: MFMailComposeViewControllerDelegate {
         mailVC.setToRecipients(["dcdsnotify@gmail.com"])
         mailVC.setSubject(subject)
         mailVC.setMessageBody(message, isHTML: false)
-        
         return mailVC
     }
     func sendMail(subject: String, message: String) {

@@ -9,13 +9,28 @@
 import UIKit
 class AppState {
 	static var sharedInstance = AppState()
-	var loggedIn = false
-	
+    private var loggedIn = false {
+        didSet {
+            
+
+            NSUserDefaults.standardUserDefaults().setBool(self.loggedIn, forKey: LOGIN_STATUS_KEY)
+
+        }
+    }
+    var credentials: Credentials? = nil
+    
     //TODO: change date for app to appwide, sharedinstance
-//	func login(sender: AnyObject?)
-//	{
-//		
-//	}
+    func login(login:Credentials)
+	{
+        if NSUserDefaults.standardUserDefaults().boolForKey(LOGIN_STATUS_KEY)
+        {
+            //TODO: crash detected
+        }
+		credentials = login
+        loggedIn = true
+
+        
+	}
 	func logout(sender: UIViewController) {
 		NSOperationQueue.mainQueue().addOperationWithBlock({
 			CacheHelper.clearAll()
@@ -26,5 +41,7 @@ class AppState {
 		let window = UIApplication.sharedApplication().windows[0]
 		sender.dismissViewControllerAnimated(false, completion: nil)
 		window.rootViewController = loginVC
+        
+        loggedIn = false
 	}
 }

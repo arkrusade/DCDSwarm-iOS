@@ -41,13 +41,15 @@ class SettingsViewController: UIViewController {
         let reportClosure: ClosureVoid = { ClosureVoid in
             self.showReportVC()
         }
-        let reportAction: SettingsAction = ("Send Report", reportClosure)
+        
         let userCategory: SettingsCategory
         userCategory.category = "User Settings"
 
-        let clearCacheSetting: SettingsAction = ("Clear Cache", clearCacheClosure)
+        let clearCacheAction: SettingsAction = ("Clear Cache", clearCacheClosure)
         let logoutAction: SettingsAction = ("Logout", logoutClosure)
-        userCategory.list = [clearCacheSetting, logoutAction, reportAction]
+        let reportAction: SettingsAction = ("Send Report", reportClosure)
+
+        userCategory.list = [clearCacheAction, logoutAction, reportAction]
 
 
         let scheduleCategory: SettingsCategory
