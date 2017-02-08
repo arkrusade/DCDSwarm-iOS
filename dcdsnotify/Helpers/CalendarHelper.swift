@@ -86,12 +86,12 @@ class CalendarHelper {
 				
 				activityTitle =  activityTitle.cropEndExclusive("(")
 				if activityTitle.contains("<br") {
-					tempClassString =  tempClassString.cropExclusive("<br")!.cropExclusive("(")!
+					tempClassString =  tempClassString?.cropExclusive("<br")!.cropExclusive("(")!
 					activityTitle =  activityTitle.cropEndExclusive("<")
 					
 				}
 				
-				activityClass =  tempClassString.cropExclusive("(", end: ")<") ?? "Failed to find class"
+				activityClass =  tempClassString?.cropExclusive("(", end: ")<") ?? "Failed to find class"
 				
 			}
 				
@@ -138,7 +138,7 @@ class CalendarHelper {
                     if let tempActivity =  okActivity.cropExclusive("id=\"e_") {
 					let activityID =  tempActivity.cropEndExclusive("\">")
 					//TODO: organize activities by class and use id
-					activityClass =  (tempActivity.cropExclusive("\">", end: "): ")! + ")" ?? "Failed Activity")
+					activityClass =  (tempActivity.cropExclusive("\">", end: "): ")! + ")" )
 					activityTitle =  (tempActivity.cropExclusive("): ", end: "</span>") ?? "Failed Title")
 					
 					

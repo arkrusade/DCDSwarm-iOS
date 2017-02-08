@@ -9,7 +9,7 @@ import Foundation
 extension String {
 	var lines:[String] {
 		var result:[String] = []
-		enumerateLines{ result.append($0.line) }
+        enumerateLines{ line, _ in result.append(line) }
 		return result
 	}
 	func indexOf(_ target: String) -> Int

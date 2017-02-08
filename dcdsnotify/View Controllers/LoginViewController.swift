@@ -87,13 +87,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         activityIndicator.startAnimating()
 
-        let request = NSMutableURLRequest(url: Constants.userLoginURL as URL)
+        var request = URLRequest(url: Constants.userLoginURL as URL)
         request.httpMethod = "POST"
         let postString = "do=login&p=413&username=\(UsernameTextField.text!)&password=\(PasswordTextField.text!)&submit=login"
         request.httpBody = postString.data(using: String.Encoding.utf8)
 
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error3: Error?) in
+            
+            let error = error3 as? NSError
+            
             OperationQueue.main.addOperation {
                 self.activityIndicator.stopAnimating()
             }
@@ -121,8 +123,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
 
             //MARK: Login Check
-            
-            let urlContentString = NSString(data: data!, encoding: String.Encoding.utf8) as NSString!
+            //data has been checked for nil
+            let urlContentString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) ?? "" as NSString
             let loginCheck = urlContentString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
             guard loginCheck == "STUDENT PORTAL" else {
                 //TODO: check for parents too

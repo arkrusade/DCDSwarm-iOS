@@ -29,7 +29,7 @@ extension HomeworkViewController {
             OperationQueue.main.addOperation() {
                 self.activityIndicator.stopAnimating()
             }
-            if let urlContent = PortalHelper.checkResponse(data, response: response, error: error, sender: self)
+            if let urlContent = PortalHelper.checkResponse(data, response: response, error: error as NSError?, sender: self)
             {
                 let isAPage = PortalHelper.checkLoggedIn(urlContent)
                 guard isAPage != nil else{
@@ -55,14 +55,14 @@ extension HomeworkViewController {
 
                     //else continue logging in; make url request
                     let login = checkLogin!
-                    let request = NSMutableURLRequest(url: Constants.userLoginURL)
+                    var request = URLRequest(url: Constants.userLoginURL)
                     request.httpMethod = "POST"
                     let postString = "do=login&p=413&username=\(login.username)&password=\(login.password)&submit=login"
                     request.httpBody = postString.data(using: String.Encoding.utf8)
 
                     //start task
-                    let checkLoginTask = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-
+                    let checkLoginTask = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error3: Error?) in
+                        let error = error3 as? NSError
                         //check no errors
                         if let checkLoginString = PortalHelper.checkResponse(data, response: response, error: error, sender: self)
                         {
@@ -84,7 +84,7 @@ extension HomeworkViewController {
                     checkLoginTask.resume()
                 }
                 else {
-                    self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
+                    self.activitiesDay = CalendarHelper.processCalendarString(urlContent as NSString)
                     self.lastLoaded = Date() //TODO: make this didSet of currentDate? and also use this (15 minutes, then refresh automatically)
                     CacheHelper.sharedInstance.addDay(self.activitiesDay)
                 }
