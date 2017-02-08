@@ -6,7 +6,7 @@
 //  Copyright © 2016 orctech. All rights reserved.
 //
 
-enum CropError: ErrorType {
-    case StartNotContained
-    case EndNotContained
+enum CropError: Error {
+    case startNotContained
+    case endNotContained
 }

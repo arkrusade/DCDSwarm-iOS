@@ -10,7 +10,7 @@ import UIKit
 class PortalHelper {
 
     //returns true if logged in, false if not, nil if unknown page
-	static func checkLoggedIn(htmlString: String) -> Bool? {
+	static func checkLoggedIn(_ htmlString: String) -> Bool? {
 		let tempLoginCheck = htmlString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
         guard tempLoginCheck != nil else {
             return nil
@@ -28,7 +28,7 @@ class PortalHelper {
         }
 		return nil
 	}
-    static func checkResponse(data: NSData?, response: NSURLResponse?, error: NSError?, sender: UIViewController) -> String?
+    static func checkResponse(_ data: Data?, response: URLResponse?, error: NSError?, sender: UIViewController) -> String?
     {
         guard error?.code != -999 else {
             //cancelled task
@@ -47,7 +47,7 @@ class PortalHelper {
             return nil
         }
 
-        if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+        if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
             print("statusCode should be 200, but is \(httpStatus.statusCode)")
             if httpStatus.statusCode == 404{
                 print("response = \(response)")
@@ -61,7 +61,7 @@ class PortalHelper {
             }
         }
         
-        return NSString(data: data!, encoding: NSUTF8StringEncoding) as String!
+        return NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as String!
 
     }
 }

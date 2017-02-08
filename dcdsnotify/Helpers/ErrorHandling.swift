@@ -21,21 +21,21 @@ struct ErrorHandling {
 	This default error handler presents an Alert View on the sending View Controller
 	*/
     //TODO: add report error ability
-    static func delayedFeatureAlert(sender: UIViewController)
+    static func delayedFeatureAlert(_ sender: UIViewController)
     {
         ErrorHandling.defaultError(DelayedFeatureTitle, desc: DelayedFeatureMessage, sender: sender)
     }
-    static func defaultError(error: NSError, sender: UIViewController) {
+    static func defaultError(_ error: NSError, sender: UIViewController) {
         ErrorHandling.defaultError(ErrorTitle, desc: error.localizedDescription, sender: sender)
     }
-    static func defaultError(error: NSError, sender: UIViewController, completion: ClosureVoid?) {
+    static func defaultError(_ error: NSError, sender: UIViewController, completion: ClosureVoid?) {
         ErrorHandling.displayAlert(ErrorTitle, desc: error.localizedDescription, sender: sender, completion: completion)
     }
-    static func defaultError(title: String, desc: String, sender: UIViewController) {
+    static func defaultError(_ title: String, desc: String, sender: UIViewController) {
         displayAlert(title, desc: desc, sender: sender, completion: nil)
     }
-    static func displayAlert(title: String, desc: String, sender: UIViewController, completion: ClosureVoid?) {
-        let alert = UIAlertController(title: title, message: desc, preferredStyle: UIAlertControllerStyle.Alert)
+    static func displayAlert(_ title: String, desc: String, sender: UIViewController, completion: ClosureVoid?) {
+        let alert = UIAlertController(title: title, message: desc, preferredStyle: UIAlertControllerStyle.alert)
         var handler: ((UIAlertAction) -> Void)?
         if let completion = completion {
             handler = {(UIAlertAction) -> Void in
@@ -47,10 +47,10 @@ struct ErrorHandling {
             handler = nil
         }
         
-        alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.Default, handler: handler))
+        alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.default, handler: handler))
 
-        NSOperationQueue.mainQueue().addOperationWithBlock {
-            sender.presentViewController(alert, animated: true, completion: nil)
+        OperationQueue.main.addOperation {
+            sender.present(alert, animated: true, completion: nil)
         }
     }
 }

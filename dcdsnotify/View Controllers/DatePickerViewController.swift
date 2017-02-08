@@ -8,25 +8,25 @@
 
 import UIKit
 class DatePickerViewController: UIViewController {
-    var date: NSDate! = NSDate()
+    var date: Date! = Date()
     var sendingVC: UIViewController!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
     override func viewDidLoad() {
         confirmButton.titleLabel?.text = "Go To Date"
-        datePicker.datePickerMode = UIDatePickerMode.Date
+        datePicker.datePickerMode = UIDatePickerMode.date
         navigationController?.title = "Change Date"
         
         datePicker.date = date
         datePickerChanged(datePicker)
-        datePicker.addTarget(self, action: #selector(datePickerChanged), forControlEvents: UIControlEvents.ValueChanged)
+        datePicker.addTarget(self, action: #selector(datePickerChanged), for: UIControlEvents.valueChanged)
     }
     
-    @IBAction func confirmButtonTapped(sender: AnyObject) {
+    @IBAction func confirmButtonTapped(_ sender: AnyObject) {
         returnToVC(datePicker.date)
     }
-    func returnToVC(date: NSDate) {
+    func returnToVC(_ date: Date) {
         if let HWVC = sendingVC as? HomeworkViewController {
             HWVC.changeDate(date)
         }
@@ -34,16 +34,16 @@ class DatePickerViewController: UIViewController {
             ScheduleVC.date = date
             ScheduleVC.viewDidLoad()
         }
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
-    @IBAction func todayButtonTapped(sender: AnyObject) {
-        let today = NSDate()
+    @IBAction func todayButtonTapped(_ sender: AnyObject) {
+        let today = Date()
         self.datePicker.date = today
         datePickerChanged(datePicker)
     }
     
-    func datePickerChanged(datePicker: UIDatePicker) {
-        let dateFormatter = NSDate.dateFormatterSlashedAndDay()
-        dateLabel.text = dateFormatter.stringFromDate(datePicker.date)
+    func datePickerChanged(_ datePicker: UIDatePicker) {
+        let dateFormatter = Date.dateFormatterSlashedAndDay()
+        dateLabel.text = dateFormatter.string(from: datePicker.date)
     }
 }
