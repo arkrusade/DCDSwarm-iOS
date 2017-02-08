@@ -18,15 +18,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()
+
         PasswordTextField.returnKeyType = .go
-        //testLogin()
 
     }
-    func testLogin() {
-        UsernameTextField.text = "lee1801"
-        PasswordTextField.text = "1u2i3o4p"
-        onLoginButtonTap(self)
-    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if UsernameTextField.isFirstResponder
         {
@@ -80,6 +76,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //login if cache exists
         if let cacheLogin = CacheHelper.sharedInstance.retrieveLogin(), cacheLogin == login {
             //if cache data matches entered, 'login' and show data
+
             OperationQueue.main.addOperation {
                 self.performSegue(withIdentifier: Constants.Segues.LoginToHomeworkView, sender: self)
             }
@@ -152,6 +149,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 ErrorHandling.defaultError("Bug!", desc: "Improper segue - \(segue.identifier)", sender: self)
                 return
             }
+
 
             vc!.activitiesDay = Day(date: Date())
 

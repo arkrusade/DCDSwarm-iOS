@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 public let DAYS_KEY = "daysKey"
+public let LOGS_KEY = "logsKey"
+public let LOGIN_STATUS_KEY = "statusKey"
 public let SCHEDULE_KEY = "scheduleKey"
 typealias Credentials = (username: String, password: String)
 class Constants {

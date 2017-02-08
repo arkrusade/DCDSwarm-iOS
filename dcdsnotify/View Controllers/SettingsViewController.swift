@@ -38,12 +38,18 @@ class SettingsViewController: UIViewController {
         let scheduleClosure: ClosureVoid = { ClosureVoid in
             self.showSchedule()
         }
+        let reportClosure: ClosureVoid = { ClosureVoid in
+            self.showReportVC()
+        }
+        
         let userCategory: SettingsCategory
         userCategory.category = "User Settings"
 
-        let clearCacheSetting: SettingsAction = ("Clear Cache", clearCacheClosure)
+        let clearCacheAction: SettingsAction = ("Clear Cache", clearCacheClosure)
         let logoutAction: SettingsAction = ("Logout", logoutClosure)
-        userCategory.list = [clearCacheSetting, logoutAction]
+        let reportAction: SettingsAction = ("Send Report", reportClosure)
+
+        userCategory.list = [clearCacheAction, logoutAction, reportAction]
 
 
         let scheduleCategory: SettingsCategory
@@ -51,13 +57,21 @@ class SettingsViewController: UIViewController {
 
         let scheduleAction: SettingsAction = ("Block Schedule", scheduleClosure)
         scheduleCategory.list = [scheduleAction]
-        
         settingsList = [userCategory, scheduleCategory]
         //,("Notifications", ["Set Notification Time"])]
         //TODO: view in week, month
         //TODO: add note taking
         //TODO: add search, blcok numbers, class order
 
+    }
+    func showReportVC() {
+        if let reportVC = self.storyboard?.instantiateViewControllerWithIdentifier("report") as? ReportViewController//TODO: constant
+        {
+            self.navigationController?.pushViewController(reportVC, animated: true)
+        }
+        else {
+            ErrorHandling.defaultError("Failed to send report", desc: "Coulndt switch to report view", sender: self)
+        }
     }
     func showSchedule() {
         self.performSegue(withIdentifier: Constants.Segues.SettingsToSchedule, sender: self)
@@ -70,12 +84,12 @@ class SettingsViewController: UIViewController {
 
                     let currentDateOfHVC = hVC.activitiesDay.date
                     scheduleVC.date = currentDateOfHVC
-                    
                 }
             }
         }
     }
 }
+
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 	// MARK: TableView Data Source
 	func numberOfSections(in tableView: UITableView) -> Int {
