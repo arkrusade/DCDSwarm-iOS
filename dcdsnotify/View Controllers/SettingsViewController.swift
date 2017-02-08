@@ -57,7 +57,6 @@ class SettingsViewController: UIViewController {
 
         let scheduleAction: SettingsAction = ("Block Schedule", scheduleClosure)
         scheduleCategory.list = [scheduleAction]
-        
         settingsList = [userCategory, scheduleCategory]
         //,("Notifications", ["Set Notification Time"])]
         //TODO: view in week, month
@@ -85,12 +84,12 @@ class SettingsViewController: UIViewController {
 
                     let currentDateOfHVC = hVC.activitiesDay.date
                     scheduleVC.date = currentDateOfHVC
-                    
                 }
             }
         }
     }
 }
+
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 	// MARK: TableView Data Source
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {

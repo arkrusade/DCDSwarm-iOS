@@ -17,8 +17,6 @@
 		3650C20F1DA696D900882801 /* ExcelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3650C20E1DA696D900882801 /* ExcelHelper.swift */; };
 		365DA0291E3A358E00B964EF /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365DA0281E3A358E00B964EF /* ReportViewController.swift */; };
 		365F3F4B1DA8DB340085B5A6 /* HVCInternetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F3F4A1DA8DB340085B5A6 /* HVCInternetExtension.swift */; };
-		367B33FC1E438F1B002A10F8 /* HTMLLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367B33FB1E438F1B002A10F8 /* HTMLLog.swift */; };
-		369BD2131DD10F1F008F360D /* convertcsvGoal2.json in Resources */ = {isa = PBXBuildFile; fileRef = 369BD2121DD10F1F008F360D /* convertcsvGoal2.json */; };
 		36E1E2931D98C3A000674F91 /* dcdsnotifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */; };
 		36E1E29B1D98CBD500674F91 /* CropError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E29A1D98CBD500674F91 /* CropError.swift */; };
 		393DCBECF4EF68C4F3B69091 /* libPods-dcdsnotifyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9FBD820199321A3919CBA2 /* libPods-dcdsnotifyTests.a */; };
@@ -64,13 +62,10 @@
 		3621AB461DA80DD900CF67CA /* scheduleDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleDay.swift; sourceTree = "<group>"; };
 		362B4EB51E2E640B00F09FC6 /* goal3 copy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "goal3 copy.json"; sourceTree = "<group>"; };
 		362B4EB71E2E6CC300F09FC6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
-		3650C20A1DA6898100882801 /* convertcsv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = convertcsv.json; sourceTree = "<group>"; };
 		3650C20C1DA68A9900882801 /* DictionarySorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySorting.swift; sourceTree = "<group>"; };
 		3650C20E1DA696D900882801 /* ExcelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcelHelper.swift; sourceTree = "<group>"; };
 		365DA0281E3A358E00B964EF /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		365F3F4A1DA8DB340085B5A6 /* HVCInternetExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HVCInternetExtension.swift; sourceTree = "<group>"; };
-		367B33FB1E438F1B002A10F8 /* HTMLLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLLog.swift; sourceTree = "<group>"; };
-		369BD2121DD10F1F008F360D /* convertcsvGoal2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = convertcsvGoal2.json; sourceTree = "<group>"; };
 		36E1E2901D98C3A000674F91 /* dcdsnotifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dcdsnotifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dcdsnotifyTests.swift; sourceTree = "<group>"; };
 		36E1E2941D98C3A000674F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,8 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				362B4EB51E2E640B00F09FC6 /* goal3 copy.json */,
-				3650C20A1DA6898100882801 /* convertcsv.json */,
-				369BD2121DD10F1F008F360D /* convertcsvGoal2.json */,
 				AD053ACD1D7A428100CBAB8C /* dcdsnotify-Bridging-Header.h */,
 				36F936F21D91A1C6007BCF21 /* dcdsnotify.entitlements */,
 				ADA986F61D6A642300C26E6B /* AppDelegate.swift */,
@@ -378,8 +371,6 @@
 				ADA986FE1D6A642300C26E6B /* Assets.xcassets in Resources */,
 				ADA986FC1D6A642300C26E6B /* Main.storyboard in Resources */,
 				362B4EB61E2E640B00F09FC6 /* goal3 copy.json in Resources */,
-				3650C20B1DA6898100882801 /* convertcsv.json in Resources */,
-				369BD2131DD10F1F008F360D /* convertcsvGoal2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
