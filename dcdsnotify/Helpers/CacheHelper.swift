@@ -23,9 +23,7 @@ class CacheHelper {
         ErrorHandling.displayAlert("Cache Cleared!", desc: "", sender: sender, completion: nil)
     }
 
-    static func clearDays() {
-        UserDefaults.standard.removeObject(forKey: DAYS_KEY)
-    }
+
     static func clearNotifs() {
         UIApplication.shared.cancelAllLocalNotifications()
     }
@@ -34,20 +32,20 @@ class CacheHelper {
 //MARK: crash log (html storage)
 extension CacheHelper {
     static func clearLogs() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(LOGS_KEY)
+        UserDefaults.standard.removeObject(forKey: LOGS_KEY)
     }
     func hasLogs() -> Bool {
-        return NSUserDefaults.standardUserDefaults().dictionaryForKey(LOGS_KEY) != nil
+        return UserDefaults.standard.dictionary(forKey: LOGS_KEY) != nil
     }
-    func retrieveLogDates() -> [NSDate]? {
+    func retrieveLogDates() -> [Date]? {
         if hasLogs()
         {
-            var dates: [NSDate] = []
-            let dateDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(LOGS_KEY)
+            var dates: [Date] = []
+            let dateDict = UserDefaults.standard.dictionary(forKey: LOGS_KEY)
             
                 for key in dateDict!.keys 
                 {
-                    if let dateK = NSDate.dateFormatterSlashed().dateFromString(key) {
+                    if let dateK = Date.dateFormatterSlashed().date(from: key) {
                         dates.append(dateK)
                     }
                 }
@@ -60,13 +58,13 @@ extension CacheHelper {
     func addLog(log: HTMLLog?) {
         
         if let log = log {
-            var todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(LOGS_KEY) ?? Dictionary()
+            var todoDictionary = UserDefaults.standard.dictionary(forKey: LOGS_KEY) ?? Dictionary()
             todoDictionary[log.date.asSlashedDate()] = log.htmlData
-            NSUserDefaults.standardUserDefaults().setObject(todoDictionary, forKey: LOGS_KEY) // save/overwrite todo item list
+            UserDefaults.standard.set(todoDictionary, forKey: LOGS_KEY) // save/overwrite todo item list
             }
     }
-    func retrieveLog(date: NSDate) -> HTMLLog? {
-        let todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(DAYS_KEY) as? [String:String] ?? [:]
+    func retrieveLog(date: Date) -> HTMLLog? {
+        let todoDictionary = UserDefaults.standard.dictionary(forKey: DAYS_KEY) as? [String:String] ?? [:]
         if let log: String = todoDictionary[date.asSlashedDate()] {
                 return HTMLLog(date: date, log: log)
         	}
@@ -79,7 +77,7 @@ extension CacheHelper {
         {
             var logs: [HTMLLog] = []
             for date in dates {
-                if let log = retrieveLog(date)
+                if let log = retrieveLog(date: date)
                 {
                     logs.append(log)
                 }
@@ -126,7 +124,7 @@ extension CacheHelper {
 //MARK: days storage
 extension CacheHelper {
     static func clearDays() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(DAYS_KEY)
+        UserDefaults.standard.removeObject(forKey: DAYS_KEY)
     }
     func hasDays() -> Bool {
         return UserDefaults.standard.dictionary(forKey: DAYS_KEY) != nil
@@ -173,19 +171,19 @@ extension CacheHelper {
     //
     //    static func storeDaySchedule(daySchedule: DaySchedule) {
     //
-    //        var scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? Dictionary()
+    //        var scheduleDict = UserDefaults.standard.dictionaryForKey(SCHEDULE_KEY) ?? Dictionary()
     //        if let day = daySchedule.date {
     //            let dayDict: [Block] = daySchedule.blocks
     //
     //
     //            scheduleDict[day.asSlashedDate()] = dayDict as? AnyObject
     //        }
-    //        NSUserDefaults.standardUserDefaults().synchronize()
+    //        UserDefaults.standard.synchronize()
     //
     //    }
     //    static func retrieveSchedule(forDay: NSDate) -> DaySchedule?
     //    {
-    //        let scheduleDict = NSUserDefaults.standardUserDefaults().dictionaryForKey(SCHEDULE_KEY) ?? [:]
+    //        let scheduleDict = UserDefaults.standard.dictionaryForKey(SCHEDULE_KEY) ?? [:]
     //        if let dayString = scheduleDict[forDay.asSlashedDate()] as? [[String]] {
     //            var activities: [Activity] = []
     //            for values in dayString {

@@ -13,7 +13,7 @@ class AppState {
         didSet {
             
 
-            UserDefaults.standard.setBool(self.loggedIn, forKey: LOGIN_STATUS_KEY)
+            UserDefaults.standard.set(self.loggedIn, forKey: LOGIN_STATUS_KEY)
 
         }
     }
@@ -22,7 +22,7 @@ class AppState {
     //TODO: change date for app to appwide, sharedinstance
     func login(login:Credentials)
 	{
-        if UserDefaults.standard.boolForKey(LOGIN_STATUS_KEY)
+        if UserDefaults.standard.bool(forKey: LOGIN_STATUS_KEY)
         {
             //TODO: crash detected
         }

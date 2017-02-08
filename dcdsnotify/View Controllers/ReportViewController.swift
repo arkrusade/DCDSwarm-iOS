@@ -14,13 +14,13 @@ class ReportViewController: UIViewController {
     
     @IBOutlet var tapGestureReconizer: UITapGestureRecognizer!
     @IBAction func sendReportButtonTapped(sender: AnyObject) {
-        sendMail("test", message: "desc")
+        sendMail(subject: "test", message: "desc")
     }
     
     @IBOutlet weak var logSwitch: UISwitch!
     override func viewDidLoad() {
         super.viewDidLoad()
-        reportButton.bringSubviewToFront(reportButton)
+        reportButton.bringSubview(toFront: reportButton)
     }
     @IBAction func onViewTapped(sender: AnyObject) {
         messageTextField.resignFirstResponder()
@@ -37,7 +37,7 @@ class ReportViewController: UIViewController {
                 }
             }
         }
-        sendMail(subjectString, message: message)
+        sendMail(subject: subjectString, message: message)
         
     }
 }
@@ -52,10 +52,10 @@ extension ReportViewController: MFMailComposeViewControllerDelegate {
         return mailVC
     }
     func sendMail(subject: String, message: String) {
-        let mailVC = getMailController(subject, message: message)
+        let mailVC = getMailController(subject: subject, message: message)
         if MFMailComposeViewController.canSendMail()
         {
-            self.presentViewController(mailVC, animated: true, completion: nil)
+            self.present(mailVC, animated: true, completion: nil)
         }
         else {
             showSendMailErrorAlert()
@@ -64,7 +64,7 @@ extension ReportViewController: MFMailComposeViewControllerDelegate {
     func showSendMailErrorAlert() {
         ErrorHandling.defaultError("Could not send email", desc: "Please check e-mail configuration", sender: self)
     }
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(false, completion: nil)
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: false, completion: nil)
     }
 }

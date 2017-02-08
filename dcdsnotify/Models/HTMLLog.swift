@@ -7,9 +7,9 @@
 //
 
 class HTMLLog {
-    var date: NSDate = NSDate()
+    var date: Date = Date()
     var htmlData: String = ""
-    init(date: NSDate, log: String) {
+    init(date: Date, log: String) {
         self.date = date
         self.htmlData = log
     }

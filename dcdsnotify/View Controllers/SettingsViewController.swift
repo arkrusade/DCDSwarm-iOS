@@ -65,12 +65,12 @@ class SettingsViewController: UIViewController {
 
     }
     func showReportVC() {
-        if let reportVC = self.storyboard?.instantiateViewControllerWithIdentifier("report") as? ReportViewController//TODO: constant
+        if let reportVC = self.storyboard?.instantiateViewController(withIdentifier: "report") as? ReportViewController//TODO: constant
         {
             self.navigationController?.pushViewController(reportVC, animated: true)
         }
         else {
-            ErrorHandling.defaultError("Failed to send report", desc: "Coulndt switch to report view", sender: self)
+            ErrorHandling.defaultError("Failed to send report", desc: "Could not show to report view", sender: self)
         }
     }
     func showSchedule() {
