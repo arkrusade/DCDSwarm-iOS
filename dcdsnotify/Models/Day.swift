@@ -9,7 +9,7 @@
 import Foundation
 class Day: CustomStringConvertible {
 	var activities: [Activity]? = nil
-	let date: NSDate!
+	let date: Date!
 	
 //	var slashedDate: String {
 //		get {
@@ -17,29 +17,29 @@ class Day: CustomStringConvertible {
 //		}
 //	}
 	
-	init(date: NSDate?)
+	init(date: Date?)
 	{
 		if let date = date {
-			let calendar = NSCalendar.currentCalendar()
-			calendar.locale = NSLocale.currentLocale()
-			let components = calendar.components([.Month, .Day, .Year], fromDate: date)
-			let currComponents = calendar.components([.Hour, .Minute, .Second], fromDate: NSDate())
+			var calendar = Calendar.current
+			calendar.locale = Locale.current
+			let components = (calendar as NSCalendar).components([.month, .day, .year], from: date)
+			let currComponents = (calendar as NSCalendar).components([.hour, .minute, .second], from: Date())
 //			components.setValue(23, forComponent: .Hour)
 //			components.setValue(35, forComponent: .Minute)
 //			components.setValue(0, forComponent: .Second)
 			//TODO: update with preferred notif time
-			components.setValue(currComponents.hour, forComponent: .Hour)
-			components.setValue(currComponents.minute + 1, forComponent: .Minute)
-			components.setValue(currComponents.second, forComponent: .Second)
+			(components as NSDateComponents).setValue(currComponents.hour!, forComponent: .hour)
+			(components as NSDateComponents).setValue(currComponents.minute! + 1, forComponent: .minute)
+			(components as NSDateComponents).setValue(currComponents.second!, forComponent: .second)
 
-			self.date = calendar.dateFromComponents(components)
+			self.date = calendar.date(from: components)
 		}
 		else
 		{
 			self.date = date!
 		}
 	}
-	convenience init(activities: [Activity]?, date: NSDate?)
+	convenience init(activities: [Activity]?, date: Date?)
 	{
 		self.init(date: date)
 		if let activities = activities {
@@ -69,11 +69,11 @@ class Day: CustomStringConvertible {
 	
 	var description: String {
 		get {
-			return "date: \(date.descriptionWithLocale(NSLocale.currentLocale()))\nactivities: \(activities?.description ?? "")"
+			return "date: \(date.description(with: Locale.current))\nactivities: \(activities?.description ?? "")"
 		}
 	}
 	
-	static func emptyDay(date: NSDate) -> Day
+	static func emptyDay(_ date: Date) -> Day
 	{
 		return Day(activities: [Activity(classString: "", title: "There are no events to display", subtitle: "")], date: date)
 	}

@@ -14,7 +14,7 @@ class SettingsCell: UITableViewCell {
 	@IBOutlet weak var settingButton: UIButton!
 	
 	
-    @IBAction func onButtonTap(sender: AnyObject) {
+    @IBAction func onButtonTap(_ sender: AnyObject) {
         action()
     }
 

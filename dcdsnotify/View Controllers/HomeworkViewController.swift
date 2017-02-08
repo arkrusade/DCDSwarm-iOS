@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 struct DaySchedule {
-    var date: NSDate?
+    var date: Date?
     var blocks: [Block]
     init() {
         blocks = []
@@ -25,19 +25,19 @@ class HomeworkViewController: UIViewController {
     @IBOutlet weak var tomorrowButton: UIButton!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
 
-    var portalTask: NSURLSessionDataTask?
-    var lastLoaded: NSDate?
+    var portalTask: URLSessionDataTask?
+    var lastLoaded: Date?
     //TODO: separate activities from date
-    var currentDate: NSDate {
+    var currentDate: Date {
         get {
-            return activitiesDay.date
+            return activitiesDay.date as Date
         }
     }
     var activitiesDay: Day! {
         didSet {
-            titleBar.title = NSDate.dateFormatterSlashedAndDay().stringFromDate(activitiesDay.date)
-            if self.isViewLoaded() && activitiesDay.activities != nil {
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+            titleBar.title = Date.dateFormatterSlashedAndDay().string(from: activitiesDay.date)
+            if self.isViewLoaded && activitiesDay.activities != nil {
+                OperationQueue.main.addOperation {
                     self.tableView.reloadData()
                 }
             }
@@ -54,55 +54,55 @@ class HomeworkViewController: UIViewController {
 
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(HomeworkViewController.respondToSwipeGesture(_:)))
-        swipeRight.direction = .Right
+        swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
 
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(HomeworkViewController.respondToSwipeGesture(_:)))
-        swipeLeft.direction = .Left
+        swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
     }
 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        self.activitiesDay = Day(date: NSDate())
+        self.activitiesDay = Day(date: Date())
 
         //TODO: is this right?? p sure im supposed to separate NSDate from activities array, so that changing date from elsewhere is ez
         // Dispose of any resources that can be recreated.
     }
 
-    func changeDate(date: NSDate?) {
+    func changeDate(_ date: Date?) {
         if date != nil{
             activitiesDay = Day(date: date)
             loadActivities()
         }
         
     }
-    func nextPeriod(sender: AnyObject?) {
+    func nextPeriod(_ sender: AnyObject?) {
         let tomorrow = activitiesDay?.date.tomorrow()
-        changeDate(tomorrow)
+        changeDate(tomorrow as Date?)
     }
 
-    func prevPeriod(sender: AnyObject?) {
+    func prevPeriod(_ sender: AnyObject?) {
         let yesterday = activitiesDay?.date.yesterday()
-        changeDate(yesterday)
+        changeDate(yesterday as Date?)
     }
 
-    func segueToDatePicker(sender: AnyObject?) {//TODO: make ids constants
+    func segueToDatePicker(_ sender: AnyObject?) {//TODO: make ids constants
         
-        let pickerVC = self.storyboard?.instantiateViewControllerWithIdentifier("datePicker") as! DatePickerViewController
+        let pickerVC = self.storyboard?.instantiateViewController(withIdentifier: "datePicker") as! DatePickerViewController
         pickerVC.date = currentDate
         pickerVC.sendingVC = self
         self.navigationController?.pushViewController(pickerVC, animated: true)
         
     }
 
-    func segueToSettings(sender: AnyObject?){
-        self.performSegueWithIdentifier(Constants.Segues.HomeworkToSettings, sender: self)
+    func segueToSettings(_ sender: AnyObject?){
+        self.performSegue(withIdentifier: Constants.Segues.HomeworkToSettings, sender: self)
     }
 
-    func segueToSchedule(sender: AnyObject?) {
-        let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("schedule") as! ScheduleViewController
+    func segueToSchedule(_ sender: AnyObject?) {
+        let scheduleVC = self.storyboard?.instantiateViewController(withIdentifier: "schedule") as! ScheduleViewController
         scheduleVC.date = self.activitiesDay.date
         self.navigationController?.pushViewController(scheduleVC, animated: true)
     }
@@ -110,34 +110,34 @@ class HomeworkViewController: UIViewController {
 
 
     func configureArrowButtons() {
-        self.view.bringSubviewToFront(yesterdayButton)
-        self.view.bringSubviewToFront(tomorrowButton)
+        self.view.bringSubview(toFront: yesterdayButton)
+        self.view.bringSubview(toFront: tomorrowButton)
 
         let left = Constants.Images.leftCarat.alpha(0.5)
-        yesterdayButton.setBackgroundImage(left, forState: .Normal)
+        yesterdayButton.setBackgroundImage(left, for: UIControlState())
         let right = Constants.Images.rightCarat.alpha(0.5)
-        tomorrowButton.setBackgroundImage(right, forState: .Normal)
+        tomorrowButton.setBackgroundImage(right, for: UIControlState())
 
-        yesterdayButton.addTarget(self, action: #selector(prevPeriod(_:)), forControlEvents: .TouchUpInside)
-        tomorrowButton.addTarget(self, action: #selector(nextPeriod(_:)), forControlEvents: .TouchUpInside)
+        yesterdayButton.addTarget(self, action: #selector(prevPeriod(_:)), for: .touchUpInside)
+        tomorrowButton.addTarget(self, action: #selector(nextPeriod(_:)), for: .touchUpInside)
     }
     func configureNavigationBar() {
-        let settingsButton = UIBarButtonItem(image: Constants.Images.settings, style: .Plain, target: self, action: #selector(segueToSettings(_: )))
+        let settingsButton = UIBarButtonItem(image: Constants.Images.settings, style: .plain, target: self, action: #selector(segueToSettings(_: )))
         self.navigationItem.rightBarButtonItem = settingsButton
 
-        let datePickerButton = UIBarButtonItem(image: Constants.Images.calendar, style: .Plain, target: self, action: #selector(segueToDatePicker(_: )))
+        let datePickerButton = UIBarButtonItem(image: Constants.Images.calendar, style: .plain, target: self, action: #selector(segueToDatePicker(_: )))
 
 
         self.navigationItem.rightBarButtonItems = [settingsButton, datePickerButton]
         
-        let scheduleButton = UIBarButtonItem(title: "Blocks", style: .Plain, target: self, action: #selector(segueToSchedule(_: )))
+        let scheduleButton = UIBarButtonItem(title: "Blocks", style: .plain, target: self, action: #selector(segueToSchedule(_: )))
 
         self.navigationItem.leftBarButtonItem = scheduleButton
 
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.stopAnimating()
 
-        topConstraint.constant = -(self.navigationController?.navigationBar.frame.height)! - UIApplication.sharedApplication().statusBarFrame.size.height
+        topConstraint.constant = -(self.navigationController?.navigationBar.frame.height)! - UIApplication.shared.statusBarFrame.size.height
     }
 
     
@@ -151,18 +151,18 @@ class HomeworkViewController: UIViewController {
      make notes or write text on block schedule
      */
 
-    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+    func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
 
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
 
 
             switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.Right:
+            case UISwipeGestureRecognizerDirection.right:
                 print("Swiped right")
                 prevPeriod(self)
-            case UISwipeGestureRecognizerDirection.Down:
+            case UISwipeGestureRecognizerDirection.down:
                 print("Swiped down")
-            case UISwipeGestureRecognizerDirection.Left:
+            case UISwipeGestureRecognizerDirection.left:
                 print("Swiped left")
                 nextPeriod(self)
                 //				let toViewController = yesterday
@@ -183,7 +183,7 @@ class HomeworkViewController: UIViewController {
                 //				})
                 
                 
-            case UISwipeGestureRecognizerDirection.Up:
+            case UISwipeGestureRecognizerDirection.up:
                 print("Swiped up")
             default:
                 break

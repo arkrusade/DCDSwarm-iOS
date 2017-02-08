@@ -26,20 +26,20 @@ class AppState {
         {
             //TODO: crash detected
         }
-		credentials = login
-        loggedIn = true
+	  credentials = login
+    loggedIn = true
 
-        
-	}
-	func logout(sender: UIViewController) {
-		NSOperationQueue.mainQueue().addOperationWithBlock({
+  }
+
+	func logout(_ sender: UIViewController) {
+		OperationQueue.main.addOperation({
 			CacheHelper.clearAll()
 		})
         //TODO: constants
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginVC = storyboard.instantiateInitialViewController() as! LoginViewController
-		let window = UIApplication.sharedApplication().windows[0]
-		sender.dismissViewControllerAnimated(false, completion: nil)
+		let window = UIApplication.shared.windows[0]
+		sender.dismiss(animated: false, completion: nil)
 		window.rootViewController = loginVC
         
         loggedIn = false
