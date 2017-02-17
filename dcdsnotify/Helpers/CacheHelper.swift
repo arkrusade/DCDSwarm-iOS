@@ -64,7 +64,7 @@ extension CacheHelper {
             }
     }
     func retrieveLog(date: Date) -> HTMLLog? {
-        let todoDictionary = UserDefaults.standard.dictionary(forKey: DAYS_KEY) as? [String:String] ?? [:]
+        let todoDictionary = UserDefaults.standard.dictionary(forKey: LOGS_KEY) as? [String:String] ?? [:]
         if let log: String = todoDictionary[date.asSlashedDate()] {
                 return HTMLLog(date: date, log: log)
         	}

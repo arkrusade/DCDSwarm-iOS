@@ -84,7 +84,7 @@ extension HomeworkViewController {
                     checkLoginTask.resume()
                 }
                 else {
-                    self.activitiesDay = CalendarHelper.processCalendarString(urlContent as NSString)
+                    self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
                     self.lastLoaded = Date() //TODO: make this didSet of currentDate? and also use this (15 minutes, then refresh automatically)
                     CacheHelper.sharedInstance.addDay(self.activitiesDay)
                 }

@@ -9,7 +9,7 @@
 import Foundation
 
 class CalendarHelper {
-	static func processCalendarString(_ htmlString: NSString) -> Day
+	static func processCalendarString(_ htmlString: String) -> Day
 		//TODO: add param for diff calendar lengths
 	{
 		//MARK: set date
@@ -28,7 +28,8 @@ class CalendarHelper {
 			let emptyDay = Day.emptyDay(date)
 			return emptyDay
 		}
-		
+        let log: HTMLLog = HTMLLog(date: date, log: htmlString)
+        CacheHelper.sharedInstance.addLog(log: log)
 		/*
 		NOTE: caldata divides months
 		nothing divides weeks

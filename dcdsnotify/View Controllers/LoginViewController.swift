@@ -70,6 +70,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         hwLogin()
     }
+    func loggedIn(username: String, password: String) {
+        let creds = (username, password)
+        AppState.sharedInstance.credentials = creds
+        CacheHelper.sharedInstance.storeLogin(creds)
+        self.performSegue(withIdentifier: Constants.Segues.LoginToHomeworkView, sender: self)
+        
+    }
     func hwLogin()
     {
         let login: Credentials = (self.UsernameTextField.text!, self.PasswordTextField.text!)
@@ -78,7 +85,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //if cache data matches entered, 'login' and show data
 
             OperationQueue.main.addOperation {
-                self.performSegue(withIdentifier: Constants.Segues.LoginToHomeworkView, sender: self)
+                self.loggedIn(username: login.username, password: login.password)
             }
             return
         }
@@ -130,8 +137,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             OperationQueue.main.addOperation {
-                CacheHelper.sharedInstance.storeLogin(login)
-                self.performSegue(withIdentifier: Constants.Segues.LoginToHomeworkView, sender: self)
+                self.loggedIn(username: login.username, password: login.password)
             }
         }) 
         task.resume()

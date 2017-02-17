@@ -314,63 +314,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlT-Ml-2br">
-                                <rect key="frame" x="144" y="511" width="86" height="30"/>
+                                <rect key="frame" x="62" y="466" width="250" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="2rh-yG-1em"/>
+                                    <constraint firstAttribute="width" constant="250" id="ocs-ed-7bj"/>
+                                </constraints>
                                 <state key="normal" title="Send Report"/>
                                 <connections>
-                                    <action selector="sendReportButtonTapped:" destination="1YU-MN-YaJ" eventType="touchUpInside" id="uHs-Yc-kw9"/>
+                                    <action selector="sendReportButtonTapped:" destination="1YU-MN-YaJ" eventType="touchUpInside" id="dza-cJ-zbD"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add info about what you did, when it crashed, etc." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fzu-FX-X3V">
                                 <rect key="frame" x="15" y="178" width="345" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="6JO-dU-LNc"/>
-                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include Logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdQ-Dv-M6R">
-                                <rect key="frame" x="15" y="78" width="296" height="31"/>
+                                <rect key="frame" x="15" y="78" width="296" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z46-pZ-Z7j">
-                                <rect key="frame" x="311" y="78" width="51" height="31"/>
+                                <rect key="frame" x="311" y="73" width="51" height="31"/>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="fzu-FX-X3V" firstAttribute="top" secondItem="o6Q-Ag-wcO" secondAttribute="bottom" constant="158" id="1Zb-nI-iVU"/>
-                            <constraint firstItem="Z46-pZ-Z7j" firstAttribute="leading" secondItem="gdQ-Dv-M6R" secondAttribute="trailing" id="2VV-Ja-TWU"/>
-                            <constraint firstItem="gdQ-Dv-M6R" firstAttribute="top" secondItem="o6Q-Ag-wcO" secondAttribute="bottom" constant="58" id="LDM-eq-S5Q"/>
-                            <constraint firstAttribute="trailing" secondItem="fzu-FX-X3V" secondAttribute="trailing" constant="15" id="MLC-4A-iUc"/>
-                            <constraint firstItem="Z46-pZ-Z7j" firstAttribute="centerY" secondItem="gdQ-Dv-M6R" secondAttribute="centerY" id="Mjx-WU-mve"/>
-                            <constraint firstItem="jlT-Ml-2br" firstAttribute="centerX" secondItem="TfV-8Z-piZ" secondAttribute="centerX" id="WBW-tI-ceO"/>
-                            <constraint firstItem="P9Q-cr-Sbv" firstAttribute="top" secondItem="jlT-Ml-2br" secondAttribute="bottom" constant="126" id="d5I-lt-qto"/>
-                            <constraint firstItem="Z46-pZ-Z7j" firstAttribute="trailing" secondItem="fzu-FX-X3V" secondAttribute="trailing" id="eD7-EU-nD4"/>
-                            <constraint firstItem="fzu-FX-X3V" firstAttribute="leading" secondItem="TfV-8Z-piZ" secondAttribute="leading" constant="15" id="eek-UV-C7a"/>
-                            <constraint firstItem="fzu-FX-X3V" firstAttribute="centerX" secondItem="TfV-8Z-piZ" secondAttribute="centerX" id="fHU-wj-awI"/>
-                            <constraint firstItem="fzu-FX-X3V" firstAttribute="top" secondItem="gdQ-Dv-M6R" secondAttribute="bottom" constant="69" id="n5C-Ig-br6"/>
-                            <constraint firstItem="gdQ-Dv-M6R" firstAttribute="leading" secondItem="fzu-FX-X3V" secondAttribute="leading" id="p4g-fV-giN"/>
-                            <constraint firstItem="jlT-Ml-2br" firstAttribute="top" secondItem="fzu-FX-X3V" secondAttribute="bottom" constant="83" id="t9D-oC-WOR"/>
+                            <constraint firstItem="jlT-Ml-2br" firstAttribute="centerX" secondItem="TfV-8Z-piZ" secondAttribute="centerX" id="45e-Ai-IWZ"/>
+                            <constraint firstItem="Z46-pZ-Z7j" firstAttribute="leading" secondItem="gdQ-Dv-M6R" secondAttribute="trailing" id="EIm-YX-sNl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Z46-pZ-Z7j" secondAttribute="trailing" constant="-1" id="GBE-Il-cq4"/>
+                            <constraint firstItem="jlT-Ml-2br" firstAttribute="top" secondItem="fzu-FX-X3V" secondAttribute="bottom" constant="38" id="HTI-yC-yRk"/>
+                            <constraint firstItem="P9Q-cr-Sbv" firstAttribute="top" secondItem="jlT-Ml-2br" secondAttribute="bottom" constant="126" id="QEM-Pb-blW"/>
+                            <constraint firstItem="fzu-FX-X3V" firstAttribute="leading" secondItem="TfV-8Z-piZ" secondAttribute="leadingMargin" constant="-1" id="Qp6-6F-o9d"/>
+                            <constraint firstItem="gdQ-Dv-M6R" firstAttribute="top" secondItem="o6Q-Ag-wcO" secondAttribute="bottom" constant="58" id="m8o-kb-drz"/>
+                            <constraint firstItem="gdQ-Dv-M6R" firstAttribute="centerY" secondItem="Z46-pZ-Z7j" secondAttribute="centerY" id="rp1-A8-RWl"/>
+                            <constraint firstItem="gdQ-Dv-M6R" firstAttribute="leading" secondItem="TfV-8Z-piZ" secondAttribute="leadingMargin" constant="-1" id="wQE-Vh-nrI"/>
+                            <constraint firstItem="fzu-FX-X3V" firstAttribute="top" secondItem="gdQ-Dv-M6R" secondAttribute="bottom" constant="79.5" id="wrG-2r-ffu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fzu-FX-X3V" secondAttribute="trailing" constant="-1" id="zVu-CF-Zen"/>
                         </constraints>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="Oth-fi-Rmn" appends="YES" id="TLz-Iq-aTB"/>
+                            <outletCollection property="gestureRecognizers" destination="fdC-ga-Dii" appends="YES" id="O4y-BV-YJ6"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="logSwitch" destination="Z46-pZ-Z7j" id="yXf-Lj-UVe"/>
                         <outlet property="messageTextField" destination="fzu-FX-X3V" id="nvi-fw-3DV"/>
-                        <outlet property="reportButton" destination="jlT-Ml-2br" id="EcI-aj-Pd3"/>
-                        <outlet property="tapGestureReconizer" destination="Oth-fi-Rmn" id="F7I-tn-uKK"/>
+                        <outlet property="reportButton" destination="jlT-Ml-2br" id="jkJ-0P-t0h"/>
+                        <outlet property="tapGestureReconizer" destination="fdC-ga-Dii" id="Cbn-4f-Qhp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2m7-mB-SwJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Oth-fi-Rmn">
+                <tapGestureRecognizer id="fdC-ga-Dii">
                     <connections>
-                        <action selector="onViewTapped:" destination="1YU-MN-YaJ" id="p3m-wV-q3T"/>
+                        <action selector="onViewTapped:" destination="1YU-MN-YaJ" id="rnV-IV-T4h"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

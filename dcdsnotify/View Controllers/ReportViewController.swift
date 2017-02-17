@@ -11,33 +11,38 @@ import UIKit
 class ReportViewController: UIViewController {
     @IBOutlet weak var reportButton: UIButton!
     @IBOutlet weak var messageTextField: UITextField!
-    
+    @IBOutlet weak var logSwitch: UISwitch!
     @IBOutlet var tapGestureReconizer: UITapGestureRecognizer!
-    @IBAction func sendReportButtonTapped(sender: AnyObject) {
-        sendMail(subject: "test", message: "desc")
+    
+    @IBAction func sendReportButtonTapped(_ sender: Any) {
+        sendReport(withLogs: logSwitch.isOn)
     }
     
-    @IBOutlet weak var logSwitch: UISwitch!
     override func viewDidLoad() {
         super.viewDidLoad()
         reportButton.bringSubview(toFront: reportButton)
     }
-    @IBAction func onViewTapped(sender: AnyObject) {
+
+    @IBAction func onViewTapped(_ sender: Any) {
         messageTextField.resignFirstResponder()
     }
     
     func sendReport(withLogs: Bool) {
-        let subjectString = "[Self sent] Username: \(AppState.sharedInstance.credentials?.username)"
-        var message = (messageTextField.text ?? "") + "\n"
+        let subjectString = "[User sent report] Username: \(AppState.sharedInstance.credentials?.username ?? "not found")"
+        let message = (messageTextField.text ?? "")
+        //TODO: change to attatchment
+        var dataString = ""
         if withLogs {
             if let logs = CacheHelper.sharedInstance.retrieveAllLogs()
             {
                 for log in logs {
-                    message += "\(log.date) \t-\t\(log.htmlData)\n"
+                    dataString += "\(log.date) \t-\t\(log.htmlData)\n"
                 }
             }
         }
-        sendMail(subject: subjectString, message: message)
+        let data = dataString.data(using: .utf8)!
+
+        sendMail(subject: subjectString, message: message, data: data)
         
     }
 }
@@ -51,11 +56,16 @@ extension ReportViewController: MFMailComposeViewControllerDelegate {
         mailVC.setMessageBody(message, isHTML: false)
         return mailVC
     }
-    func sendMail(subject: String, message: String) {
-        let mailVC = getMailController(subject: subject, message: message)
+    func sendMail(subject: String?, message: String?, data: Data?) {
+        let mailVC = getMailController(subject: subject ?? "", message: message ?? "")
+        if let data = data {
+            mailVC.addAttachmentData(data, mimeType: ".txt", fileName: "logs")
+        }
+        
+        
         if MFMailComposeViewController.canSendMail()
         {
-            self.present(mailVC, animated: true, completion: nil)
+            present(mailVC, animated: true, completion: nil)
         }
         else {
             showSendMailErrorAlert()
@@ -64,7 +74,21 @@ extension ReportViewController: MFMailComposeViewControllerDelegate {
     func showSendMailErrorAlert() {
         ErrorHandling.defaultError("Could not send email", desc: "Please check e-mail configuration", sender: self)
     }
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: false, completion: nil)
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if(error == nil)
+        {
+            if(result == .cancelled) {
+                controller.dismiss(animated: true, completion: nil)
+                
+            }
+            else if (result == .sent) {
+                controller.dismiss(animated: true, completion: nil)
+                _ = self.navigationController?.popViewController(animated: true)
+            }
+        }
+        else {
+            controller.dismiss(animated: true, completion: nil)
+        }
     }
 }

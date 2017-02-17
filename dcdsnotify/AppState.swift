@@ -9,6 +9,7 @@
 import UIKit
 class AppState {
 	static var sharedInstance = AppState()
+    
     private var loggedIn = false {
         didSet {
             
@@ -20,13 +21,14 @@ class AppState {
     var credentials: Credentials? = nil
     
     //TODO: change date for app to appwide, sharedinstance
+    //TODO: make network loss error only appear every 5 minutes
     func login(login:Credentials)
 	{
         if UserDefaults.standard.bool(forKey: LOGIN_STATUS_KEY)
         {
             //TODO: crash detected
         }
-	  credentials = login
+    credentials = login
     loggedIn = true
 
   }
