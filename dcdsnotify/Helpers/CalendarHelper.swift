@@ -30,6 +30,7 @@ class CalendarHelper {
 		}
         let log: HTMLLog = HTMLLog(date: date, log: htmlString)
         CacheHelper.sharedInstance.addLog(log: log)
+        let asdf = ""
 		/*
 		NOTE: caldata divides months
 		nothing divides weeks
@@ -76,7 +77,7 @@ class CalendarHelper {
 			
             var activityTitle: String! = "Title not found"
 			var activityClass: String? = nil
-			var activityDesc = ""
+            var activityDesc: String? = nil
 			
 			//MARK: parsing Title
             if let activityString =  okActivity.crop("etitle") {
@@ -118,6 +119,9 @@ class CalendarHelper {
                     }
                     else {
                         //Activity not found
+                        activityTitle =  activityString.cropExclusive("title=")?.cropExclusive(">", end: "</span") ?? "No title: code 3500"
+                        activityClass =  activityTitle.cropEnd(":") ?? "No class: code 3500"
+                        activityTitle =  activityTitle.cropExclusive(": ") ?? "No title: code 3500"
                     }
                     
                     if let tempTitle = activityTitle.cropExclusive("): ", end: "</") {
@@ -159,30 +163,32 @@ class CalendarHelper {
 			}
 			
 			//MARK: parsing Desc
-			var activityDescData =  activityString.cropExclusive("</span>")!
-			while(activityDescData.contains("<span")) {
-				activityDescData =  activityDescData.cropExclusive("<span")!
-				activityDescData =  activityDescData.cropExclusive(">", end: "</span")!
-				
-				if activityDescData.contains("<") && activityDescData.contains(">"){//if carats found
-					//find carats and make range
-					let startIndex = activityDescData.range(of: "<")!.lowerBound
-					let endIndex = activityDescData.range(of: ">")!.upperBound
-					let asdf = startIndex..<endIndex
-					//assert break in carats
-					guard activityDescData.substring(with: asdf).contains("br") || activityDescData.substring(with: asdf).contains("BR") else {
-						print("carats found, but no break")
-						break
-					}
-					//bye carats
-					activityDescData.removeSubrange(asdf)
-					//replace with newline
-					//					activityDescData.insertContentsOf("\n".characters, at: startIndex)
-				}
-				activityDesc += (activityDescData) + "\n"
-			}
+                if var activityDescData =  activityString.cropExclusive("</span>") {
+                    activityDesc = ""
+                    while(activityDescData.contains("<span")) {
+                        activityDescData =  activityDescData.cropExclusive("<span")!
+                        activityDescData =  activityDescData.cropExclusive(">", end: "</span")!
+                        
+                        if activityDescData.contains("<") && activityDescData.contains(">"){//if carats found
+                            //find carats and make range
+                            let startIndex = activityDescData.range(of: "<")!.lowerBound
+                            let endIndex = activityDescData.range(of: ">")!.upperBound
+                            let asdf = startIndex..<endIndex
+                            //assert break in carats
+                            guard activityDescData.substring(with: asdf).contains("br") || activityDescData.substring(with: asdf).contains("BR") else {
+                                print("carats found, but no break")
+                                break
+                            }
+                            //bye carats
+                            activityDescData.removeSubrange(asdf)
+                            //replace with newline
+                            //					activityDescData.insertContentsOf("\n".characters, at: startIndex)
+                        }
+                        activityDesc? += (activityDescData) + "\n"
+                    }
+                }
             
-			tempDay.activities!.append(Activity(classString: activityClass ?? "No Title Found", title: activityTitle ?? "Title not found", subtitle: activityDesc))
+			tempDay.activities!.append(Activity(classString: activityClass ?? "No Title Found", title: activityTitle ?? "Title not found", subtitle: activityDesc ?? "Description not found"))
 			
 			//while loop logic
 			//gets the next activity

@@ -49,10 +49,12 @@ struct ErrorHandling {
         
         alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.default, handler: handler))
 
+        
         OperationQueue.main.addOperation {
-            sender.present(alert, animated: true, completion: nil)
+            sender.present(alert, animated: true, completion: {
+
+            })
         }
     }
+    
 }
-
-	
