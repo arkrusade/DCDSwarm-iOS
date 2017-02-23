@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func configureRefresh() {
+        self.tableView.addSubview(refreshControl)
+    }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        loadActivities()
+        
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return activitiesDay?.activities?.count ?? 1
 	}
@@ -28,7 +40,7 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
 			cell.activity = activitiesDay?.activities?[indexPath.section]
 		}
 		else {
-			cell.activity = Activity(classString: "", title: "", subtitle: "No Data")
+            cell.activity = Activity(classString: "", title: "", subtitle: "No Data")//TODO: change to "Refreshing automatically in \(count))
 		}
 		return cell
 	}

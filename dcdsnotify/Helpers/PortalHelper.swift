@@ -7,8 +7,10 @@
 //
 
 import UIKit
-class PortalHelper {
 
+class PortalHelper {
+    static var lastChecked: Date? = nil
+    
     //returns true if logged in, false if not, nil if unknown page
 	static func checkLoggedIn(_ htmlString: String) -> Bool? {
 		let tempLoginCheck = htmlString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
@@ -37,14 +39,34 @@ class PortalHelper {
         guard error == nil && data != nil else {// check for fundamental networking error
             if error?.code == -1009 {
                 print("no internet")//dealing with offline
-
-                ErrorHandling.defaultError(error!, sender: sender)
-
+                if let last = lastChecked  {
+                    if #available(iOS 10.0, *) {
+                        let i = TimeInterval.init(300)
+                        let five = DateInterval(start: last, duration: i)
+                        if !five.contains(Date())
+                        {
+                            ErrorHandling.defaultError(error!, sender: sender)
+                            lastChecked = Date()
+                        }
+                    
+                    }
+                    else {
+                        ErrorHandling.defaultError(error!, sender: sender)
+                        lastChecked = Date()
+                    }
+                    
+                }
+                else {
+                    ErrorHandling.defaultError(error!, sender: sender)
+                    lastChecked = Date()
+                }
                 return nil
             }
-            print("\(error)")
-            ErrorHandling.defaultError("Network Error", desc: (error?.localizedDescription)!, sender: sender)
-            return nil
+            else {
+                print("\(error)")
+                ErrorHandling.defaultError("Network Error", desc: (error?.localizedDescription)!, sender: sender)
+                return nil
+            }
         }
 
         if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors

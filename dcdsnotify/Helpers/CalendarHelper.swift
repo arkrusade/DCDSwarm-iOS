@@ -30,7 +30,6 @@ class CalendarHelper {
 		}
         let log: HTMLLog = HTMLLog(date: date, log: htmlString)
         CacheHelper.sharedInstance.addLog(log: log)
-        let asdf = ""
 		/*
 		NOTE: caldata divides months
 		nothing divides weeks

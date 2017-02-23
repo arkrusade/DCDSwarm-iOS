@@ -24,7 +24,15 @@ class HomeworkViewController: UIViewController {
     @IBOutlet weak var yesterdayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
-
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
+    
     var portalTask: URLSessionDataTask?
     var lastLoaded: Date?
     //TODO: separate activities from date
@@ -43,6 +51,9 @@ class HomeworkViewController: UIViewController {
             }
         }
     }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -52,6 +63,7 @@ class HomeworkViewController: UIViewController {
         loadActivities()
         self.tableView.reloadData()
 
+        configureRefresh()
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(HomeworkViewController.respondToSwipeGesture(_:)))
         swipeRight.direction = .right

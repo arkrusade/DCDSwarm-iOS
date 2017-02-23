@@ -16,7 +16,7 @@ class DatePickerViewController: UIViewController {
     override func viewDidLoad() {
         confirmButton.titleLabel?.text = "Go To Date"
         datePicker.datePickerMode = UIDatePickerMode.date
-        navigationController?.title = "Change Date"
+        self.title = "Change Date"
         
         datePicker.date = date
         datePickerChanged(datePicker)
@@ -34,12 +34,12 @@ class DatePickerViewController: UIViewController {
             ScheduleVC.date = date
             ScheduleVC.viewDidLoad()
         }
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     @IBAction func todayButtonTapped(_ sender: AnyObject) {
         let today = Date()
         self.datePicker.date = today
-        datePickerChanged(datePicker)
+        returnToVC(today)
     }
     
     func datePickerChanged(_ datePicker: UIDatePicker) {
