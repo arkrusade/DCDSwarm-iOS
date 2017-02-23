@@ -189,29 +189,22 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="CLH-hh-vxc"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QZd-oa-aDZ">
-                                <rect key="frame" x="178" y="72" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="pDo-lR-T22" firstAttribute="trailing" secondItem="BBo-DE-us1" secondAttribute="trailing" constant="15" id="4zL-bm-qOb"/>
                             <constraint firstItem="kx8-Hh-cvI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="LXD-pf-huN"/>
-                            <constraint firstItem="QZd-oa-aDZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="MMg-kQ-kSP"/>
                             <constraint firstItem="kx8-Hh-cvI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="MXS-DO-jgd"/>
                             <constraint firstItem="BBo-DE-us1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PCJ-Te-k5D"/>
-                            <constraint firstItem="pDo-lR-T22" firstAttribute="top" secondItem="QZd-oa-aDZ" secondAttribute="bottom" constant="-88" id="YWg-uy-nQt"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pDo-lR-T22" secondAttribute="bottom" id="aNQ-VO-TjI"/>
                             <constraint firstItem="pDo-lR-T22" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gdz-tN-vTR"/>
                             <constraint firstItem="pDo-lR-T22" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-60" id="mEE-x5-zOv"/>
                             <constraint firstAttribute="trailing" secondItem="pDo-lR-T22" secondAttribute="trailing" id="nIT-Ow-2No"/>
                             <constraint firstItem="pDo-lR-T22" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="q4p-Zs-aRL"/>
                             <constraint firstItem="kx8-Hh-cvI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="w4c-Ol-OdQ"/>
-                            <constraint firstItem="QZd-oa-aDZ" firstAttribute="centerX" secondItem="pDo-lR-T22" secondAttribute="centerX" id="wwN-nh-RRu"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="YWg-uy-nQt"/>
                                 <exclude reference="mEE-x5-zOv"/>
                                 <exclude reference="LXD-pf-huN"/>
                             </mask>
@@ -219,7 +212,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Today's Date" id="9yk-lu-d0O"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="QZd-oa-aDZ" id="OFE-l6-Vbf"/>
                         <outlet property="tableView" destination="pDo-lR-T22" id="PgS-nK-iEC"/>
                         <outlet property="titleBar" destination="9yk-lu-d0O" id="gkf-u3-7e2"/>
                         <outlet property="tomorrowButton" destination="BBo-DE-us1" id="dBp-aU-mzR"/>

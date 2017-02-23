@@ -14,12 +14,7 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
         self.tableView.addSubview(refreshControl)
     }
     
-    func handleRefresh(refreshControl: UIRefreshControl) {
-        loadActivities()
-        
-        self.tableView.reloadData()
-        refreshControl.endRefreshing()
-    }
+    
     
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return activitiesDay?.activities?.count ?? 1

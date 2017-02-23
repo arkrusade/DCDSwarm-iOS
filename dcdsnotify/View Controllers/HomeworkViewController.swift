@@ -18,7 +18,6 @@ struct DaySchedule {
 typealias Block = (name: String, time: String)
 class HomeworkViewController: UIViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleBar: UINavigationItem!
     @IBOutlet weak var yesterdayButton: UIButton!
@@ -27,7 +26,7 @@ class HomeworkViewController: UIViewController {
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(loadActivities), for: .valueChanged)
         
         return refreshControl
     }()
@@ -58,8 +57,6 @@ class HomeworkViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureArrowButtons()
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.stopAnimating()
         loadActivities()
         self.tableView.reloadData()
 
@@ -146,8 +143,6 @@ class HomeworkViewController: UIViewController {
 
         self.navigationItem.leftBarButtonItem = scheduleButton
 
-        self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.stopAnimating()
 
         topConstraint.constant = -(self.navigationController?.navigationBar.frame.height)! - UIApplication.shared.statusBarFrame.size.height
     }

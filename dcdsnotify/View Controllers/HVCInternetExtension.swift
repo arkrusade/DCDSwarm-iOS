@@ -9,16 +9,16 @@
 import UIKit
 extension HomeworkViewController {
     func loadActivities() {
-        if !activityIndicator.isAnimating {
-            activityIndicator.startAnimating()
-        }
+        refreshControl.beginRefreshing()
+        
         //while loading, if in cache, use that; else, clear the day to show activity loader
         if let day = CacheHelper.sharedInstance.retrieveDay(activitiesDay?.date ?? Date()) {
             self.activitiesDay = day
         }
+        
         //until task is finished, inserts this before everything else
         let loadingActivity = Activity(classString: "", title: "Loading", subtitle: "")
-        self.activitiesDay?.activities?.insert(loadingActivity, at: 0)
+        activitiesDay?.activities?.insert(loadingActivity, at: 0)
         tableView.reloadData()
 
         //TODO: also send request after some refresh button
@@ -27,7 +27,7 @@ extension HomeworkViewController {
         portalTask?.cancel()
         portalTask = URLSession.shared.dataTask(with: homeworkURL!, completionHandler: { (data, response, error) -> Void in
             OperationQueue.main.addOperation() {
-                self.activityIndicator.stopAnimating()
+                self.refreshControl.endRefreshing()
             }
             if let urlContent = PortalHelper.checkResponse(data, response: response, error: error as NSError?, sender: self)
             {

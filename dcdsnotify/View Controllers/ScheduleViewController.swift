@@ -13,12 +13,17 @@ class ScheduleViewController: UIViewController {
     
     @IBOutlet weak var yesterdayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
-    var date: Date!
+    var date: Date! {
+        didSet {
+            
+        }
+    }
     fileprivate var daySchedule: DaySchedule? = DaySchedule()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //means no schedule exists for this day, usually weekends
+        
+        //nil means no schedule exists for this day, usually weekends
         updateBlocks(nil)
         configureArrows()
         
@@ -40,6 +45,7 @@ class ScheduleViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = datePickerButton
         
         self.titleBar.title = "Schedule"
+        self.titleBar.backBarButtonItem?.title = "asdf"
     }
     func configureArrows() {
         self.view.bringSubview(toFront: yesterdayButton)

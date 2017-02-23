@@ -12,16 +12,13 @@ class AppState {
     
     private var loggedIn = false {
         didSet {
-            
-
             UserDefaults.standard.set(self.loggedIn, forKey: LOGIN_STATUS_KEY)
-
         }
     }
     var credentials: Credentials? = nil
     
     //TODO: change date for app to appwide, sharedinstance
-    //TODO: make network loss error only appear every 5 minutes
+    
     func login(login:Credentials)
 	{
         if UserDefaults.standard.bool(forKey: LOGIN_STATUS_KEY)
