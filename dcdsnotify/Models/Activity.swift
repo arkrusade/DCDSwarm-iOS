@@ -12,7 +12,6 @@ struct Activity: CustomStringConvertible {
 	let classString: String!
 	let title: String!
 	let subtitle: String!
-	//TODO: in future, add date, location, etc?
 	
 	init(classString: String, title: String, subtitle: String)
 	{

@@ -111,9 +111,9 @@ extension CacheHelper {
         storeLogin(login.username, password: login.password)
     }
     func storeLogin(_ username: String, password: String) {
-        if !UserDefaults.standard.bool(forKey: "hasLoginKey") {//TODO: beware, will not overwrite
+        //if !UserDefaults.standard.bool(forKey: "hasLoginKey") {//TODO: beware, will not overwrite
             UserDefaults.standard.setValue(username, forKey: "username")
-        }
+        //}
 
         MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
         MyKeychainWrapper.writeToKeychain()
@@ -152,7 +152,6 @@ extension CacheHelper {
     }
     func retrieveDay(_ date: Date) -> Day? {
         let todoDictionary = UserDefaults.standard.dictionary(forKey: DAYS_KEY) as? [String:[[String]]] ?? [:]
-        //		let keys = Array(todoDictionary.keys)
         if let dayString = todoDictionary[date.asSlashedDate()] {
             var activities: [Activity] = []
             for values in dayString {
@@ -164,37 +163,5 @@ extension CacheHelper {
             return nil
         }
     }
-    //TODO: remove date from hwschedule
-    //    static func storeSchedule(schedule: [DaySchedule]) {
-    //
-    //    }
-    //
-    //    static func storeDaySchedule(daySchedule: DaySchedule) {
-    //
-    //        var scheduleDict = UserDefaults.standard.dictionaryForKey(SCHEDULE_KEY) ?? Dictionary()
-    //        if let day = daySchedule.date {
-    //            let dayDict: [Block] = daySchedule.blocks
-    //
-    //
-    //            scheduleDict[day.asSlashedDate()] = dayDict as? AnyObject
-    //        }
-    //        UserDefaults.standard.synchronize()
-    //
-    //    }
-    //    static func retrieveSchedule(forDay: NSDate) -> DaySchedule?
-    //    {
-    //        let scheduleDict = UserDefaults.standard.dictionaryForKey(SCHEDULE_KEY) ?? [:]
-    //        if let dayString = scheduleDict[forDay.asSlashedDate()] as? [[String]] {
-    //            var activities: [Activity] = []
-    //            for values in dayString {
-    //                activities.append(Activity(fromValues: values))
-    //            }
-    //            return Day(activities: activities, date: forDay)
-    //        }
-    //
-    //        else {
-    //            return nil
-    //        }
-    //    }
-
+    
 }

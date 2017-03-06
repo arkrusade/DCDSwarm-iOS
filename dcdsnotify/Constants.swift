@@ -6,14 +6,29 @@
 //  Copyright © 2016 orctech. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 public let DAYS_KEY = "daysKey"
 public let LOGS_KEY = "logsKey"
 public let LOGIN_STATUS_KEY = "statusKey"
 public let SCHEDULE_KEY = "scheduleKey"
+
 typealias Credentials = (username: String, password: String)
+typealias Block = (name: String, time: String)
+typealias SettingsCategory = (category: String, list: [SettingsAction])
+typealias SettingsAction = (title: String, action: ClosureVoid )
+typealias Closure = ()
+typealias ClosureVoid = () -> Void
+
+struct DaySchedule {
+    var date: Date?
+    var blocks: [Block]
+    init() {
+        blocks = []
+    }
+}
+
+
 class Constants {
 	static let userLoginURL = URL(string: "https://www.dcds.edu/userlogin.cfm")!
 	static let invalidLoginURL = URL(string: "https://www.dcds.edu/userlogin.cfm?do=login&p=413")!

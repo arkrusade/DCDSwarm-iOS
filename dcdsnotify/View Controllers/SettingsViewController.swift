@@ -7,10 +7,7 @@
 //
 
 import UIKit
-typealias SettingsCategory = (category: String, list: [SettingsAction])
-typealias SettingsAction = (title: String, action: ClosureVoid )
-typealias Closure = ()
-typealias ClosureVoid = () -> Void
+
 
 class SettingsViewController: UIViewController {
     var settingsList: [SettingsCategory]! = nil

@@ -7,15 +7,6 @@
 //
 
 import UIKit
-import Foundation
-struct DaySchedule {
-    var date: Date?
-    var blocks: [Block]
-    init() {
-        blocks = []
-    }
-}
-typealias Block = (name: String, time: String)
 class HomeworkViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
