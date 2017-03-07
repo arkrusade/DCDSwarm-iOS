@@ -17,10 +17,10 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
     
     
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return activitiesDay?.activities?.count ?? 1
+		return activities?.list?.count ?? 1
 	}
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return activitiesDay?.activities?[section].classString
+		return activities?.list?[section].classString
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,9 +30,9 @@ extension HomeworkViewController: UITableViewDelegate, UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell") as! ActivityTableViewCell
-		if activitiesDay != nil && activitiesDay!.activities != nil
+		if activities != nil && activities!.list != nil
 		{
-			cell.activity = activitiesDay?.activities?[indexPath.section]
+			cell.activity = activities?.list?[indexPath.section]
 		}
 		else {
             cell.activity = Activity(classString: "", title: "", subtitle: "No Data")//TODO: change to "Refreshing automatically in \(count))

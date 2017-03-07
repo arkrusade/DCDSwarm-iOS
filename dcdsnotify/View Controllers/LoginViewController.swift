@@ -140,8 +140,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let login: Credentials = (username, password)
         let main = UIStoryboard.init(name: "Main", bundle: nil)
         if let nav = main.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Navigation) as? UINavigationController{
-        if let HWVC = nav.topViewController as? HomeworkViewController{
-            HWVC.activitiesDay = Day(date: AppState.sharedInstance.date)
+        if (nav.topViewController as? HomeworkViewController) != nil{
+
             self.present(nav, animated: true, completion: ({
                 AppState.sharedInstance.login(login: login, sender: nav)
             }))

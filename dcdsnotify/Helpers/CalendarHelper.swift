@@ -9,7 +9,7 @@
 import Foundation
 
 class CalendarHelper {
-	static func processCalendarString(_ htmlString: String) -> Day
+	static func processCalendarString(_ htmlString: String) -> ActivitiesDay
 		//TODO: add param for diff calendar lengths
 	{
 		//MARK: set date
@@ -25,7 +25,7 @@ class CalendarHelper {
 		//MARK: check for empty day
 		guard (htmlString.crop(emptyStart, end: emptyEnd)) == nil else{
 						//TODO: remove hotfix
-			let emptyDay = Day.emptyDay(date)
+			let emptyDay = ActivitiesDay.emptyDay()
 			return emptyDay
 		}
         let log: HTMLLog = HTMLLog(date: date, log: htmlString)
@@ -46,18 +46,16 @@ class CalendarHelper {
 		*/
 		
 		
-		//MARK: Day divider
+		//MARK: activitiesDay divider
 		
 		let dayStartString = "<span class=\"listcap"
 		let dayEndString = "</div>"//TODO: will not work on week or greater periods
         let tempDayString: String? = htmlString.cropExclusive(dayStartString, end: dayEndString)?.cropExclusive(">")
         guard tempDayString != nil else {
-            return Day.emptyDay(date)
+            return ActivitiesDay.emptyDay()
         }
         var dayString: String? = tempDayString
-		let tempDay = Day(date: date)
-		tempDay.activities = []
-		
+		let tempDay = ActivitiesDay(list: [])
 		
 		
 		//MARK: Activity Divider
@@ -187,7 +185,7 @@ class CalendarHelper {
                     }
                 }
             
-			tempDay.activities!.append(Activity(classString: activityClass ?? "No Title Found", title: activityTitle ?? "Title not found", subtitle: activityDesc ?? "Description not found"))
+			tempDay.list!.append(Activity(classString: activityClass ?? "No Title Found", title: activityTitle ?? "Title not found", subtitle: activityDesc ?? "Description not found"))
 			
 			//while loop logic
 			//gets the next activity

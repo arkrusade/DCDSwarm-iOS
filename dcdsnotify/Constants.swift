@@ -20,7 +20,7 @@ typealias SettingsAction = (title: String, action: ClosureVoid )
 typealias Closure = ()
 typealias ClosureVoid = () -> Void
 
-struct DaySchedule {
+struct DaySchedule{
     var date: Date?
     var blocks: [Block]
     init() {

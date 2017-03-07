@@ -29,13 +29,12 @@ class HomeworkViewController: UIViewController {
     //TODO: separate activities from date
     var currentDate: Date {
         get {
-            return AppState.sharedInstance.date
+            return AppState.sharedInstance.getDate()
         }
     }
-    var activitiesDay: Day! {
+    var activities: ActivitiesDay! {
         didSet {
-            titleBar.title = Date.dateFormatterSlashedAndDay().string(from: activitiesDay.date)//TODO: shorten for iphone 5
-            if self.isViewLoaded && activitiesDay.activities != nil {
+            if self.isViewLoaded && activities.list != nil {
                 OperationQueue.main.addOperation {
                     self.tableView.reloadData()
                 }
@@ -47,7 +46,7 @@ class HomeworkViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        changeDate(currentDate)
         configureNavigationBar()
         configureArrowButtons()
         loadActivities()
@@ -67,27 +66,27 @@ class HomeworkViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        self.activitiesDay = Day(date: Date())
+        self.activities = ActivitiesDay.emptyDay()
 
-        //TODO: is this right?? p sure im supposed to separate NSDate from activities array, so that changing date from elsewhere is ez
         // Dispose of any resources that can be recreated.
     }
 
     func changeDate(_ date: Date?) {//asdf:
-        if date != nil{
-            activitiesDay = Day(date: date)
+        if let date = date {
+            titleBar.title = Date.dateFormatterSlashedAndDay().string(from: date)//TODO: shorten for iphone 5
+            AppState.sharedInstance.changeDate(date: date)
             loadActivities()
         }
         
     }
     func nextPeriod(_ sender: AnyObject?) {
-        let tomorrow = activitiesDay?.date.tomorrow()
-        changeDate(tomorrow as Date?)
+        let tomorrow = currentDate.tomorrow()
+        changeDate(tomorrow)
     }
 
     func prevPeriod(_ sender: AnyObject?) {
-        let yesterday = activitiesDay?.date.yesterday()
-        changeDate(yesterday as Date?)
+        let yesterday = currentDate.yesterday()
+        changeDate(yesterday)
     }
 
     func segueToDatePicker(_ sender: AnyObject?) {//TODO: make ids constants
@@ -105,7 +104,6 @@ class HomeworkViewController: UIViewController {
 
     func segueToSchedule(_ sender: AnyObject?) {
         let scheduleVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Schedule) as! ScheduleViewController
-        scheduleVC.date = self.activitiesDay.date
         self.navigationController?.pushViewController(scheduleVC, animated: true)
     }
 
@@ -165,7 +163,7 @@ class HomeworkViewController: UIViewController {
             case UISwipeGestureRecognizerDirection.left:
                 print("Swiped left")
                 nextPeriod(self)
-                //				let toViewController = yesterday
+                //				let toViewController = yesteractivitiesDay
                 //				let fromViewController = self
                 //
                 //				let containerView = fromViewController.view.superview

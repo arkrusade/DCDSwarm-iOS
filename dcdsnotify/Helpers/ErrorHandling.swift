@@ -29,10 +29,10 @@ struct ErrorHandling {
         ErrorHandling.defaultError(ErrorTitle, desc: error.localizedDescription, sender: sender)
     }
     static func defaultError(_ error: NSError, sender: UIViewController, completion: ClosureVoid?) {
-        ErrorHandling.displayAlert(ErrorTitle, desc: error.localizedDescription, sender: sender, completion: completion)
+        _ = ErrorHandling.displayAlert(ErrorTitle, desc: error.localizedDescription, sender: sender, completion: completion)
     }
     static func defaultError(_ title: String, desc: String, sender: UIViewController) {
-        displayAlert(title, desc: desc, sender: sender, completion: nil)
+        _ = displayAlert(title, desc: desc, sender: sender, completion: nil)
     }
     static func displayAlert(_ title: String, desc: String, sender: UIViewController, completion: ClosureVoid?) -> UIAlertController {
         let alert = UIAlertController(title: title, message: desc, preferredStyle: UIAlertControllerStyle.alert)

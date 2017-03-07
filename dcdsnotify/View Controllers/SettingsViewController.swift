@@ -83,11 +83,9 @@ class SettingsViewController: UIViewController {
         if let id = segue.identifier {
             if id == Constants.Segues.SettingsToSchedule {
                 let scheduleVC = segue.destination as! ScheduleViewController
-                if let hVC = self.navigationController?.viewControllers[0] as? HomeworkViewController {
-
-                    let currentDateOfHVC = hVC.activitiesDay.date
-                    scheduleVC.date = currentDateOfHVC
-                }
+//                if let hVC = self.navigationController?.viewControllers[0] as? HomeworkViewController {
+//
+//                }
             }
         }
     }

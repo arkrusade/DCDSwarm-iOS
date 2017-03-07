@@ -18,7 +18,13 @@ class AppState {
     var credentials: Credentials? = nil
     
     //TODO: change date for app to appwide, sharedinstance
-    var date: Date = Date()
+    private var date: Date = Date()
+    func changeDate(date: Date) {
+        self.date = date
+    }
+    func getDate() -> Date {
+        return date
+    }
     func login(login:Credentials, sender: UIViewController)
 	{
         if UserDefaults.standard.bool(forKey: LOGIN_STATUS_KEY)

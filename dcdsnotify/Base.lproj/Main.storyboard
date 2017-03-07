@@ -216,7 +216,7 @@
                         <outlet property="titleBar" destination="9yk-lu-d0O" id="gkf-u3-7e2"/>
                         <outlet property="tomorrowButton" destination="BBo-DE-us1" id="dBp-aU-mzR"/>
                         <outlet property="topConstraint" destination="gdz-tN-vTR" id="sdw-9D-uaQ"/>
-                        <outlet property="yesterdayButton" destination="kx8-Hh-cvI" id="xu7-5e-10t"/>
+                        <outlet property="yesterdayButton" destination="kx8-Hh-cvI" id="rh6-Wo-cLv"/>
                         <segue destination="UYD-rJ-tQL" kind="show" identifier="HomeworkToSettings" id="v1x-Vz-niw"/>
                     </connections>
                 </viewController>

@@ -34,7 +34,7 @@ extension Date {
         )
         return date
     }
-	func yesterday() -> Date?
+	func yesterday() -> Date
 	{
 		let yesterday = (Calendar.current as NSCalendar)
 			.date(
@@ -43,9 +43,9 @@ extension Date {
 				to: self,
 				options: NSCalendar.Options(rawValue: 0)
 		)
-		return yesterday
+		return yesterday!
 	}
-	func tomorrow() -> Date?
+	func tomorrow() -> Date
 	{
 		let tomorrow = (Calendar.current as NSCalendar)
 			.date(
@@ -54,7 +54,7 @@ extension Date {
 				to: self,
 				options: NSCalendar.Options(rawValue: 0)
 		)
-		return tomorrow
+		return tomorrow!
 	}
 	func asSlashedDate() -> String {
 		return Date.dateFormatterSlashed().string(from: self)

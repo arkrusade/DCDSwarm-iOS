@@ -14,8 +14,8 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var yesterdayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
     var date: Date! {
-        didSet {
-            
+        get {
+            return AppState.sharedInstance.getDate()
         }
     }
     fileprivate var daySchedule: DaySchedule? = DaySchedule()
@@ -41,11 +41,7 @@ class ScheduleViewController: UIViewController {
         tableView.reloadData()
     }
     func configureNavBar() {
-        let datePickerButton = UIBarButtonItem(image: Constants.Images.calendar, style: .plain, target: self, action: #selector(segueToDatePicker(_: )))
-        self.navigationItem.rightBarButtonItem = datePickerButton
-        
-        self.titleBar.title = "Schedule"
-        self.titleBar.backBarButtonItem?.title = "asdf"
+        self.titleBar.title = "Block Schedule"
     }
     func configureArrows() {
         self.view.bringSubview(toFront: yesterdayButton)
@@ -60,17 +56,16 @@ class ScheduleViewController: UIViewController {
         tomorrowButton.addTarget(self, action: #selector(tomorrowSchedule(_:)), for: .touchUpInside)
     }
     func yesterdaySchedule(_ sender: AnyObject?) {
-        date = date?.yesterday()
+        AppState.sharedInstance.changeDate(date: date.yesterday())
         updateBlocks(nil)
     }
     func tomorrowSchedule(_ sender: AnyObject?) {
-        date = date?.tomorrow()
+        AppState.sharedInstance.changeDate(date: date.yesterday())
         updateBlocks(nil)
     }
     func segueToDatePicker(_ sender: AnyObject?)
     {
         let dateVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Date) as! DatePickerViewController
-        dateVC.date = self.date
         dateVC.sendingVC = self
         self.navigationController?.pushViewController(dateVC, animated: true)
     }
@@ -88,7 +83,7 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
         titleView.textAlignment = .center
 
         if section == 0 {
-            titleView.text = "\(date.dayOfTheWeek() ?? "Day") - \(date.asSlashedDate())"
+            titleView.text = "\(date.dayOfTheWeek() ?? "activitiesDay") - \(date.asSlashedDate())"
             titleView.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
             let gradient: CAGradientLayer = CAGradientLayer.init(layer: titleView)
             gradient.frame = headerView.bounds

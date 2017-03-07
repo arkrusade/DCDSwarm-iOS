@@ -9,26 +9,27 @@
 import UIKit
 extension HomeworkViewController {
     func loadActivities() {
-        refreshControl.beginRefreshing()
         
         //while loading, if in cache, use that; else, clear the day to show activity loader
-        if let day = CacheHelper.sharedInstance.retrieveDay(activitiesDay?.date ?? Date()) {
-            self.activitiesDay = day
+        if let day = CacheHelper.sharedInstance.retrieveDay(currentDate) {
+            self.activities = day
         }
         
-        //until task is finished, inserts this before everything else
-        let loadingActivity = Activity(classString: "", title: "Loading", subtitle: "")
-        activitiesDay?.activities?.insert(loadingActivity, at: 0)
-        tableView.reloadData()
+        self.refreshControl.beginRefreshing()
 
-        //TODO: also send request after some refresh button
-
-        let homeworkURL = (activitiesDay?.date ?? Date()).toDCDSURL()
+        
+        let homeworkURL = (currentDate).toDCDSURL()
         portalTask?.cancel()
         portalTask = URLSession.shared.dataTask(with: homeworkURL!, completionHandler: { (data, response, error) -> Void in
-            OperationQueue.main.addOperation() {
-                self.refreshControl.endRefreshing()
-            }
+            
+            //until task is finished or cancelled, inserts this before everything else
+
+//            let loadingActivity = Activity(classString: "", title: "Loading", subtitle: "")
+//            self.activities?.list?.insert(loadingActivity, at: 0)
+//            self.tableView.reloadData()
+
+
+            
             if let urlContent = PortalHelper.checkResponse(data, response: response, error: error as NSError?, sender: self)
             {
                 let isAPage = PortalHelper.checkLoggedIn(urlContent)
@@ -43,7 +44,7 @@ extension HomeworkViewController {
                 if !isProperPage {
 
                     let loggingInActivity = Activity(classString: "", title: "Webpage timed out", subtitle: "Logging in again...")
-                    self.activitiesDay?.activities = [loggingInActivity]
+                    self.activities?.list = [loggingInActivity]
                     let checkLogin = CacheHelper.sharedInstance.retrieveLogin()
 
                     //logged in without a cached login
@@ -69,7 +70,7 @@ extension HomeworkViewController {
                             //check right page
                             guard PortalHelper.checkLoggedIn(checkLoginString) == true else {
                                 print("Failed Login")
-                                ErrorHandling.displayAlert("Invalid Username/Password", desc: "Stored login does not suceed", sender: self, completion: {() -> Void in
+                                _ = ErrorHandling.displayAlert("Invalid Username/Password", desc: "Stored login does not suceed", sender: self, completion: {() -> Void in
                                     AppState.sharedInstance.logout(self)
                                     return
                                 })
@@ -84,14 +85,14 @@ extension HomeworkViewController {
                     checkLoginTask.resume()
                 }
                 else {
-                    self.activitiesDay = CalendarHelper.processCalendarString(urlContent)
+                    self.refreshControl.endRefreshing()
+                    self.activities = CalendarHelper.processCalendarString(urlContent)
                     self.lastLoaded = Date() //TODO: make this didSet of currentDate? and also use this (15 minutes, then refresh automatically)
-                    CacheHelper.sharedInstance.addDay(self.activitiesDay)
+                    CacheHelper.sharedInstance.addDay(self.activities, date: self.currentDate)
                 }
             }
             
         })
         portalTask!.resume()
-        
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 class DatePickerViewController: UIViewController {
-    var date: Date! = Date()
+    var date: Date! = AppState.sharedInstance.getDate()
     var sendingVC: UIViewController!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -28,10 +28,11 @@ class DatePickerViewController: UIViewController {
     }
     func returnToVC(_ date: Date) {
         if let HWVC = sendingVC as? HomeworkViewController {
+            AppState.sharedInstance.changeDate(date: date)
             HWVC.changeDate(date)
         }
         else if let ScheduleVC = sendingVC as? ScheduleViewController {
-            ScheduleVC.date = date
+            AppState.sharedInstance.changeDate(date: date)
             ScheduleVC.viewDidLoad()
         }
         _ = self.navigationController?.popViewController(animated: true)

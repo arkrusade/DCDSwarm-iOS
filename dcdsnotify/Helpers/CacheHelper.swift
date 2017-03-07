@@ -20,7 +20,7 @@ class CacheHelper {
     static func clearUserCache(_ sender: UIViewController) {
         clearDays()
         clearNotifs()
-        ErrorHandling.displayAlert("Cache Cleared!", desc: "", sender: sender, completion: nil)
+        _ = ErrorHandling.displayAlert("Cache Cleared!", desc: "", sender: sender, completion: nil)
     }
 
 
@@ -130,34 +130,34 @@ extension CacheHelper {
         return UserDefaults.standard.dictionary(forKey: DAYS_KEY) != nil
     }
 
-    func addDay(_ day: Day?) {
+    func addDay(_ day: ActivitiesDay?, date: Date) {
 
         if let day = day {
             // persist a representation of this todo item in NSUserDefaults
             var todoDictionary = UserDefaults.standard.dictionary(forKey: DAYS_KEY) ?? Dictionary() // if todoItems hasn't been set in user defaults, initialize todoDictionary to an empty dictionary using nil-coalescing operator (??)
-            todoDictionary[day.date.asSlashedDate()] = day.activitiesArray // store NSData representation of todo item in dictionary with UUID as key
+            todoDictionary[date.asSlashedDate()] = day.activitiesArray // store NSData representation of todo item in dictionary with UUID as key
 
             UserDefaults.standard.set(todoDictionary, forKey: DAYS_KEY) 
 
           let notification = UILocalNotification()
-            notification.alertBody = "Homework for \(day.date.asSlashedDate()):\n\(day.activitiesDescription)" // text that will be displayed in the notification
+            notification.alertBody = "Homework for \(date.asSlashedDate()):\n\(day.activitiesDescription)" // text that will be displayed in the notification
             notification.alertAction = "view" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-            notification.fireDate = Day(date: Date()).date // todo item due date (when notification will be fired)
+            notification.fireDate = date //TODO: item due date (when notification will be fired)
             //TODO: set notif time with input time
             notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-            notification.userInfo = ["slashedDate": day.date.asSlashedDate()] // assign a unique identifier to the notification so that we can retrieve it later
+            notification.userInfo = ["slashedDate": date.asSlashedDate()] // assign a unique identifier to the notification so that we can retrieve it later
             //TODO: notifs
             //			UIApplication.sharedApplication().scheduleLocalNotification(notification)
         }
     }
-    func retrieveDay(_ date: Date) -> Day? {
+    func retrieveDay(_ date: Date) -> ActivitiesDay? {
         let todoDictionary = UserDefaults.standard.dictionary(forKey: DAYS_KEY) as? [String:[[String]]] ?? [:]
         if let dayString = todoDictionary[date.asSlashedDate()] {
             var activities: [Activity] = []
             for values in dayString {
                 activities.append(Activity(fromValues: values))
             }
-            return Day(activities: activities, date: date)
+            return ActivitiesDay(list: activities)
         }
         else {
             return nil
