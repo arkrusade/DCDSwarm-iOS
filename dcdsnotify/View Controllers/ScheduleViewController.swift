@@ -69,7 +69,7 @@ class ScheduleViewController: UIViewController {
     }
     func segueToDatePicker(_ sender: AnyObject?)
     {
-        let dateVC = self.storyboard?.instantiateViewController(withIdentifier: "datePicker") as! DatePickerViewController
+        let dateVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Date) as! DatePickerViewController
         dateVC.date = self.date
         dateVC.sendingVC = self
         self.navigationController?.pushViewController(dateVC, animated: true)

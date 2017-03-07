@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let login = CacheHelper.sharedInstance.retrieveLogin() {
             UsernameTextField.text = login.username
             PasswordTextField.text = login.password
-            hwLogin()
+            onLoginButtonTap(self)
         }
 
     }
@@ -68,17 +68,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
 
         }
-        hwLogin()
-    }
-    func loggedIn(username: String, password: String) {
-        let creds = (username, password)
-        AppState.sharedInstance.credentials = creds
-        CacheHelper.sharedInstance.storeLogin(creds)
-        self.performSegue(withIdentifier: Constants.Segues.LoginToHomeworkView, sender: self)
-        
-    }
-    func hwLogin()
-    {
+   
         let login: Credentials = (self.UsernameTextField.text!, self.PasswordTextField.text!)
         //login if cache exists
         if let cacheLogin = CacheHelper.sharedInstance.retrieveLogin(), cacheLogin == login {
@@ -142,25 +132,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }) 
         task.resume()
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func loggedIn(username: String, password: String) {//TODO: figure out how to make hwview present alert
         self.UsernameTextField.text = ""
         self.PasswordTextField.text = ""
-
-        if segue.identifier == Constants.Segues.LoginToHomeworkView
-        {
-            print("seguing to HomeworkViewController")
-            let nav = segue.destination as? UINavigationController
-            let vc = nav?.topViewController as? HomeworkViewController
-            guard vc != nil else {
-                ErrorHandling.defaultError("Bug!", desc: "Improper segue - \(segue.identifier)", sender: self)
-                return
-            }
-
-
-            vc!.activitiesDay = Day(date: Date())
-
+        
+        
+        let login: Credentials = (username, password)
+        let main = UIStoryboard.init(name: "Main", bundle: nil)
+        if let nav = main.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Navigation) as? UINavigationController{
+        if let HWVC = nav.topViewController as? HomeworkViewController{
+            HWVC.activitiesDay = Day(date: AppState.sharedInstance.date)
+            self.present(nav, animated: true, completion: ({
+                AppState.sharedInstance.login(login: login, sender: nav)
+            }))
+        }
+        }
+        else {
+            ErrorHandling.defaultError("Bug!", desc: "Improper segue", sender: self)
+            return
         }
         
+        
     }
+    
 }
 

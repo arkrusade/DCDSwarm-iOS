@@ -22,18 +22,19 @@ class HomeworkViewController: UIViewController {
         return refreshControl
     }()
     
+    var login: Credentials!
     
     var portalTask: URLSessionDataTask?
     var lastLoaded: Date?
     //TODO: separate activities from date
     var currentDate: Date {
         get {
-            return activitiesDay.date as Date
+            return AppState.sharedInstance.date
         }
     }
     var activitiesDay: Day! {
         didSet {
-            titleBar.title = Date.dateFormatterSlashedAndDay().string(from: activitiesDay.date)
+            titleBar.title = Date.dateFormatterSlashedAndDay().string(from: activitiesDay.date)//TODO: shorten for iphone 5
             if self.isViewLoaded && activitiesDay.activities != nil {
                 OperationQueue.main.addOperation {
                     self.tableView.reloadData()
@@ -46,6 +47,7 @@ class HomeworkViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         configureNavigationBar()
         configureArrowButtons()
         loadActivities()
@@ -71,7 +73,7 @@ class HomeworkViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func changeDate(_ date: Date?) {
+    func changeDate(_ date: Date?) {//asdf:
         if date != nil{
             activitiesDay = Day(date: date)
             loadActivities()
@@ -90,7 +92,7 @@ class HomeworkViewController: UIViewController {
 
     func segueToDatePicker(_ sender: AnyObject?) {//TODO: make ids constants
         
-        let pickerVC = self.storyboard?.instantiateViewController(withIdentifier: "datePicker") as! DatePickerViewController
+        let pickerVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Date) as! DatePickerViewController
         pickerVC.date = currentDate
         pickerVC.sendingVC = self
         self.navigationController?.pushViewController(pickerVC, animated: true)
@@ -102,7 +104,7 @@ class HomeworkViewController: UIViewController {
     }
 
     func segueToSchedule(_ sender: AnyObject?) {
-        let scheduleVC = self.storyboard?.instantiateViewController(withIdentifier: "schedule") as! ScheduleViewController
+        let scheduleVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Schedule) as! ScheduleViewController
         scheduleVC.date = self.activitiesDay.date
         self.navigationController?.pushViewController(scheduleVC, animated: true)
     }

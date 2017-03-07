@@ -13,7 +13,7 @@
         <!--Login-->
         <scene sceneID="2qT-gc-mK3">
             <objects>
-                <viewController title="Login" useStoryboardIdentifierAsRestorationIdentifier="YES" id="djG-bU-WW7" customClass="LoginViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" title="Login" useStoryboardIdentifierAsRestorationIdentifier="YES" id="djG-bU-WW7" customClass="LoginViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PYK-6j-Y6Z"/>
                         <viewControllerLayoutGuide type="bottom" id="zk9-SS-KcX"/>
@@ -118,7 +118,7 @@
         <!--Homework View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Homework View Controller" id="BYZ-38-t0r" customClass="HomeworkViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="hw" title="Homework View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HomeworkViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -227,7 +227,7 @@
         <!--Settings-->
         <scene sceneID="jCc-bl-t89">
             <objects>
-                <viewController title="Settings" id="UYD-rJ-tQL" customClass="SettingsViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settings" title="Settings" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UYD-rJ-tQL" customClass="SettingsViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nNY-Kq-6ah"/>
                         <viewControllerLayoutGuide type="bottom" id="bKV-aW-Ig4"/>
@@ -293,10 +293,10 @@
             </objects>
             <point key="canvasLocation" x="2817" y="311"/>
         </scene>
-        <!--Send Report-->
+        <!--Send Feedback-->
         <scene sceneID="xzu-vT-g5t">
             <objects>
-                <viewController storyboardIdentifier="report" title="Send Report" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1YU-MN-YaJ" customClass="ReportViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="report" title="Send Feedback" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1YU-MN-YaJ" customClass="ReportViewController" customModule="dcdsnotify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="o6Q-Ag-wcO"/>
                         <viewControllerLayoutGuide type="bottom" id="P9Q-cr-Sbv"/>
@@ -311,19 +311,19 @@
                                     <constraint firstAttribute="height" constant="75" id="2rh-yG-1em"/>
                                     <constraint firstAttribute="width" constant="250" id="ocs-ed-7bj"/>
                                 </constraints>
-                                <state key="normal" title="Send Report"/>
+                                <state key="normal" title="Send Feedback"/>
                                 <connections>
                                     <action selector="sendReportButtonTapped:" destination="1YU-MN-YaJ" eventType="touchUpInside" id="dza-cJ-zbD"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add info about what you did, when it crashed, etc." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fzu-FX-X3V">
-                                <rect key="frame" x="15" y="178" width="345" height="250"/>
+                                <rect key="frame" x="15" y="179" width="345" height="249"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include Logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdQ-Dv-M6R">
-                                <rect key="frame" x="15" y="78" width="296" height="20.5"/>
+                                <rect key="frame" x="15" y="78" width="296" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -545,7 +545,7 @@
         <!--Navigation Controller-->
         <scene sceneID="IR4-hP-GqP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mJA-R2-8tx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="nav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mJA-R2-8tx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FPW-mO-1Vr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -44,9 +44,8 @@ class SettingsViewController: UIViewController {
 
         let clearCacheAction: SettingsAction = ("Clear Cache", clearCacheClosure)
         let logoutAction: SettingsAction = ("Logout", logoutClosure)
-        let reportAction: SettingsAction = ("Send Report", reportClosure)
 
-        userCategory.list = [clearCacheAction, logoutAction, reportAction]
+        userCategory.list = [clearCacheAction, logoutAction]
 
 
         let scheduleCategory: SettingsCategory
@@ -54,7 +53,14 @@ class SettingsViewController: UIViewController {
 
         let scheduleAction: SettingsAction = ("Block Schedule", scheduleClosure)
         scheduleCategory.list = [scheduleAction]
-        settingsList = [userCategory, scheduleCategory]
+        
+        let feedbackCategory: SettingsCategory
+        feedbackCategory.category = "Feedback"
+        
+        let reportAction: SettingsAction = ("Send Feedback", reportClosure)
+        feedbackCategory.list = [reportAction]
+
+        settingsList = [userCategory, scheduleCategory, feedbackCategory]
         //,("Notifications", ["Set Notification Time"])]
         //TODO: view in week, month
         //TODO: add note taking
@@ -62,7 +68,7 @@ class SettingsViewController: UIViewController {
 
     }
     func showReportVC() {
-        if let reportVC = self.storyboard?.instantiateViewController(withIdentifier: "report") as? ReportViewController//TODO: constant
+        if let reportVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Report) as? ReportViewController//TODO: constant
         {
             self.navigationController?.pushViewController(reportVC, animated: true)
         }

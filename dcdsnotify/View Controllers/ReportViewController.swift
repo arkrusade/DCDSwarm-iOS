@@ -20,6 +20,7 @@ class ReportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Send Feedback"
         reportButton.bringSubview(toFront: reportButton)
     }
 
@@ -28,7 +29,7 @@ class ReportViewController: UIViewController {
     }
     
     func sendReport(withLogs: Bool) {
-        let subjectString = "[User sent report] Username: \(AppState.sharedInstance.credentials?.username ?? "not found")"
+        let subjectString = "[User sent] Username: \(AppState.sharedInstance.credentials?.username ?? "not found")"
         let message = (messageTextField.text ?? "")
         //TODO: change to attatchment
         var dataString = ""

@@ -36,7 +36,16 @@ class Constants {
 	static let homeworkWeek = URL(string: "http://www.dcds.edu/page.cfm?p=8256&period=week")!
 	static let homeworkDay = URL(string: "https://www.dcds.edu/page.cfm?p=8256&period=day")!
 	static let homeworkYear = URL(string: "http://www.dcds.edu/page.cfm?p=8256&period=year")!
-	
+    struct ViewControllerIdentifiers {
+        static let Navigation = "nav"
+        static let Homework = "hw"
+        static let Login = "login"
+        static let Schedule = "schedule"
+        static let Settings = "settings"
+        static let Date = "datePicker"
+        static let Report = "report"
+
+    }
 	struct Segues {
 		static let LoginToHomeworkView = "LoginToHomeworkView"
 		static let HomeworkToSettings = "HomeworkToSettings"

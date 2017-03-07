@@ -34,7 +34,7 @@ struct ErrorHandling {
     static func defaultError(_ title: String, desc: String, sender: UIViewController) {
         displayAlert(title, desc: desc, sender: sender, completion: nil)
     }
-    static func displayAlert(_ title: String, desc: String, sender: UIViewController, completion: ClosureVoid?) {
+    static func displayAlert(_ title: String, desc: String, sender: UIViewController, completion: ClosureVoid?) -> UIAlertController {
         let alert = UIAlertController(title: title, message: desc, preferredStyle: UIAlertControllerStyle.alert)
         var handler: ((UIAlertAction) -> Void)?
         if let completion = completion {
@@ -55,6 +55,7 @@ struct ErrorHandling {
 
             })
         }
+        return alert
     }
     
 }
