@@ -16,7 +16,7 @@ class ExcelHelper {
     static let sharedInstance = ExcelHelper()
     var schedule: [DaySchedule]?
     var loaded = false
-
+    
     func getSchedule(_ forDay: Date, sender: UIViewController) -> DaySchedule?{
         if !loaded || schedule == nil {
             do  {
@@ -218,5 +218,5 @@ class ExcelHelper {
         
         self.schedule = (fullSchedule.count == 0 ? nil : fullSchedule)
     }
-
+    
 }

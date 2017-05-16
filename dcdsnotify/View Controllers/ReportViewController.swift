@@ -23,7 +23,7 @@ class ReportViewController: UIViewController {
         self.title = "Send Feedback"
         reportButton.bringSubview(toFront: reportButton)
     }
-
+    
     @IBAction func onViewTapped(_ sender: Any) {
         messageTextField.resignFirstResponder()
     }
@@ -42,7 +42,7 @@ class ReportViewController: UIViewController {
             }
         }
         let data = dataString.data(using: .utf8)!
-
+        
         sendMail(subject: subjectString, message: message, data: data)
         
     }

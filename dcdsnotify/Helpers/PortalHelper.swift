@@ -12,24 +12,24 @@ class PortalHelper {
     static var lastChecked: Date? = nil
     
     //returns true if logged in, false if not, nil if unknown page
-	static func checkLoggedIn(_ htmlString: String) -> Bool? {
-		let tempLoginCheck = htmlString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
+    static func checkLoggedIn(_ htmlString: String) -> Bool? {
+        let tempLoginCheck = htmlString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
         guard tempLoginCheck != nil else {
             return nil
         }
         let loginCheck = tempLoginCheck!
-		if loginCheck == "Member Login" {
-			return false
-		}
-		else if loginCheck == "STUDENT PORTAL" {
-			//TODO: check for parents too
-			return true
-		}
+        if loginCheck == "Member Login" {
+            return false
+        }
+        else if loginCheck == "STUDENT PORTAL" {
+            //TODO: check for parents too
+            return true
+        }
         else if loginCheck == "Academics Individual Classes Calendar" {
             return true
         }
-		return nil
-	}
+        return nil
+    }
     static func checkResponse(_ data: Data?, response: URLResponse?, error: NSError?, sender: UIViewController) -> String?
     {
         guard error?.code != -999 else {
@@ -48,7 +48,7 @@ class PortalHelper {
                             ErrorHandling.defaultError(error!, sender: sender)
                             lastChecked = Date()
                         }
-                    
+                        
                     }
                     else {
                         ErrorHandling.defaultError(error!, sender: sender)
@@ -68,7 +68,7 @@ class PortalHelper {
                 return nil
             }
         }
-
+        
         if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
             print("statusCode should be 200, but is \(httpStatus.statusCode)")
             if httpStatus.statusCode == 404{
@@ -84,6 +84,6 @@ class PortalHelper {
         }
         
         return NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as String!
-
+        
     }
 }

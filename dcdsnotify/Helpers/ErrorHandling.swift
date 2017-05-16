@@ -9,17 +9,17 @@
 import UIKit
 
 struct ErrorHandling {
-	
-	static let ErrorTitle           = "Error"
-	static let ErrorOKButtonTitle   = "Ok"
-	static let ErrorDefaultMessage  = "Something unexpected happened, sorry for that!"
-	
-	static let DelayedFeatureTitle		= "Delayed Feature"
-	static let DelayedFeatureMessage	= "Sorry, this feature is not yet available"
-	
-	/**
-	This default error handler presents an Alert View on the sending View Controller
-	*/
+    
+    static let ErrorTitle           = "Error"
+    static let ErrorOKButtonTitle   = "Ok"
+    static let ErrorDefaultMessage  = "Something unexpected happened, sorry for that!"
+    
+    static let DelayedFeatureTitle		= "Delayed Feature"
+    static let DelayedFeatureMessage	= "Sorry, this feature is not yet available"
+    
+    /**
+     This default error handler presents an Alert View on the sending View Controller
+     */
     //TODO: add report error ability
     static func delayedFeatureAlert(_ sender: UIViewController)
     {
@@ -48,11 +48,11 @@ struct ErrorHandling {
         }
         
         alert.addAction(UIAlertAction(title: ErrorOKButtonTitle, style: UIAlertActionStyle.default, handler: handler))
-
+        
         
         OperationQueue.main.addOperation {
             sender.present(alert, animated: true, completion: {
-
+                
             })
         }
         return alert

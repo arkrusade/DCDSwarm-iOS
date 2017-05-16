@@ -16,19 +16,19 @@ extension HomeworkViewController {
         }
         
         self.refreshControl.beginRefreshing()
-
+        
         
         let homeworkURL = (currentDate).toDCDSURL()
         portalTask?.cancel()
         portalTask = URLSession.shared.dataTask(with: homeworkURL!, completionHandler: { (data, response, error) -> Void in
             
             //until task is finished or cancelled, inserts this before everything else
-
-//            let loadingActivity = Activity(classString: "", title: "Loading", subtitle: "")
-//            self.activities?.list?.insert(loadingActivity, at: 0)
-//            self.tableView.reloadData()
-
-
+            
+            //            let loadingActivity = Activity(classString: "", title: "Loading", subtitle: "")
+            //            self.activities?.list?.insert(loadingActivity, at: 0)
+            //            self.tableView.reloadData()
+            
+            
             
             if let urlContent = PortalHelper.checkResponse(data, response: response, error: error as NSError?, sender: self)
             {
@@ -42,25 +42,25 @@ extension HomeworkViewController {
                 //MARK: Login Checking
                 //if login fails, expires, or otherwise goes to login page again
                 if !isProperPage {
-
+                    
                     let loggingInActivity = Activity(classString: "", title: "Webpage timed out", subtitle: "Logging in again...")
                     self.activities?.list = [loggingInActivity]
                     let checkLogin = CacheHelper.sharedInstance.retrieveLogin()
-
+                    
                     //logged in without a cached login
                     guard checkLogin != nil else {
-
+                        
                         AppState.sharedInstance.logout(self)
                         return
                     }
-
+                    
                     //else continue logging in; make url request
                     let login = checkLogin!
                     var request = URLRequest(url: Constants.userLoginURL)
                     request.httpMethod = "POST"
                     let postString = "do=login&p=413&username=\(login.username)&password=\(login.password)&submit=login"
                     request.httpBody = postString.data(using: String.Encoding.utf8)
-
+                    
                     //start task
                     let checkLoginTask = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error3: Error?) in
                         let error = error3 as? NSError
@@ -81,7 +81,7 @@ extension HomeworkViewController {
                         OperationQueue.main.addOperation({
                             self.loadActivities()
                         })
-                    }) 
+                    })
                     checkLoginTask.resume()
                 }
                 else {

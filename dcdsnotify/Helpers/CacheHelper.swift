@@ -11,7 +11,7 @@ import UIKit
 class CacheHelper {
     static let sharedInstance = CacheHelper()
     let MyKeychainWrapper = KeychainWrapper()
-       static func clearAll() {
+    static func clearAll() {
         clearDays()
         clearLogin()
         clearLogs()
@@ -22,8 +22,8 @@ class CacheHelper {
         clearNotifs()
         _ = ErrorHandling.displayAlert("Cache Cleared!", desc: "", sender: sender, completion: nil)
     }
-
-
+    
+    
     static func clearNotifs() {
         UIApplication.shared.cancelAllLocalNotifications()
     }
@@ -43,13 +43,13 @@ extension CacheHelper {
             var dates: [Date] = []
             let dateDict = UserDefaults.standard.dictionary(forKey: LOGS_KEY)
             
-                for key in dateDict!.keys 
-                {
-                    if let dateK = Date.dateFormatterSlashed().date(from: key) {
-                        dates.append(dateK)
-                    }
+            for key in dateDict!.keys
+            {
+                if let dateK = Date.dateFormatterSlashed().date(from: key) {
+                    dates.append(dateK)
                 }
-                return dates
+            }
+            return dates
             
             
         }
@@ -61,13 +61,13 @@ extension CacheHelper {
             var todoDictionary = UserDefaults.standard.dictionary(forKey: LOGS_KEY) ?? Dictionary()
             todoDictionary[log.date.asSlashedDate()] = log.htmlData
             UserDefaults.standard.set(todoDictionary, forKey: LOGS_KEY) // save/overwrite todo item list
-            }
+        }
     }
     func retrieveLog(date: Date) -> HTMLLog? {
         let todoDictionary = UserDefaults.standard.dictionary(forKey: LOGS_KEY) as? [String:String] ?? [:]
         if let log: String = todoDictionary[date.asSlashedDate()] {
-                return HTMLLog(date: date, log: log)
-        	}
+            return HTMLLog(date: date, log: log)
+        }
         else {
             return nil
         }
@@ -86,7 +86,7 @@ extension CacheHelper {
         }
         return nil
     }
-
+    
 }
 //MARK: Login storage
 extension CacheHelper {
@@ -102,7 +102,7 @@ extension CacheHelper {
         {
             return (username, pass)
         }
-
+            
         else {
             return nil
         }
@@ -112,9 +112,9 @@ extension CacheHelper {
     }
     func storeLogin(_ username: String, password: String) {
         //if !UserDefaults.standard.bool(forKey: "hasLoginKey") {//TODO: beware, will not overwrite
-            UserDefaults.standard.setValue(username, forKey: "username")
+        UserDefaults.standard.setValue(username, forKey: "username")
         //}
-
+        
         MyKeychainWrapper.mySetObject(password, forKey: kSecValueData)
         MyKeychainWrapper.writeToKeychain()
         UserDefaults.standard.set(true, forKey: "hasLoginKey")
@@ -129,17 +129,17 @@ extension CacheHelper {
     func hasDays() -> Bool {
         return UserDefaults.standard.dictionary(forKey: DAYS_KEY) != nil
     }
-
+    
     func addDay(_ day: ActivitiesDay?, date: Date) {
-
+        
         if let day = day {
             // persist a representation of this todo item in NSUserDefaults
             var todoDictionary = UserDefaults.standard.dictionary(forKey: DAYS_KEY) ?? Dictionary() // if todoItems hasn't been set in user defaults, initialize todoDictionary to an empty dictionary using nil-coalescing operator (??)
             todoDictionary[date.asSlashedDate()] = day.activitiesArray // store NSData representation of todo item in dictionary with UUID as key
-
-            UserDefaults.standard.set(todoDictionary, forKey: DAYS_KEY) 
-
-          let notification = UILocalNotification()
+            
+            UserDefaults.standard.set(todoDictionary, forKey: DAYS_KEY)
+            
+            let notification = UILocalNotification()
             notification.alertBody = "Homework for \(date.asSlashedDate()):\n\(day.activitiesDescription)" // text that will be displayed in the notification
             notification.alertAction = "view" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
             notification.fireDate = date //TODO: item due date (when notification will be fired)

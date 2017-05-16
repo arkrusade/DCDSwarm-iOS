@@ -75,13 +75,13 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
         let titleView = UITextView(frame: headerView.frame)
         titleView.textAlignment = .center
-
+        
         if section == 0 {
             titleView.text = "\(date.dayOfTheWeek() ?? "activitiesDay") - \(date.asSlashedDate())"
             titleView.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
@@ -89,11 +89,11 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
             gradient.frame = headerView.bounds
             gradient.colors = [(UIColor(red: 0.89, green: 0.90, blue: 0.92, alpha: 1.00).cgColor as AnyObject), (UIColor(red: 0.82, green: 0.82, blue: 0.85, alpha: 1.00).cgColor as AnyObject)]
             titleView.layer.insertSublayer(gradient, at: 0)
-
+            
         }
         headerView.addSubview(titleView)
         return headerView
-
+        
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return (section == 1 ? 0 : 40)
@@ -101,20 +101,20 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (section == 1 ? (daySchedule?.blocks.count ?? 0) : 1)
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "BlockCell") as! BlockCell
         cell.backgroundColor = UIColor(colorLiteralRed: 230/256, green: 230/256, blue: 230/256, alpha: 1)
-
+        
         guard indexPath.section == 1 else {
             cell.block = ("Block", "Time")
             return cell
         }
-
+        
         cell.block = daySchedule?.blocks[indexPath.row]
         return cell
     }
-
+    
 }
