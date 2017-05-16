@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		3621AB431DA8050600CF67CA /* BlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621AB421DA8050600CF67CA /* BlockCell.swift */; };
 		3621AB451DA8063E00CF67CA /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621AB441DA8063E00CF67CA /* ScheduleViewController.swift */; };
-		362B4EB61E2E640B00F09FC6 /* goal3 copy.json in Resources */ = {isa = PBXBuildFile; fileRef = 362B4EB51E2E640B00F09FC6 /* goal3 copy.json */; };
 		362B4EB81E2E6CC300F09FC6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362B4EB71E2E6CC300F09FC6 /* DatePickerViewController.swift */; };
 		3650C20D1DA68A9900882801 /* DictionarySorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3650C20C1DA68A9900882801 /* DictionarySorting.swift */; };
 		3650C20F1DA696D900882801 /* ExcelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3650C20E1DA696D900882801 /* ExcelHelper.swift */; };
 		365DA0291E3A358E00B964EF /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365DA0281E3A358E00B964EF /* ReportViewController.swift */; };
 		365F3F4B1DA8DB340085B5A6 /* HVCInternetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F3F4A1DA8DB340085B5A6 /* HVCInternetExtension.swift */; };
 		3683CFD31E4B9A2300F234F9 /* HTMLLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3683CFD21E4B9A2300F234F9 /* HTMLLog.swift */; };
+		36CC84A01EC3726A00125766 /* calendar in Resources */ = {isa = PBXBuildFile; fileRef = 36CC849F1EC3726A00125766 /* calendar */; };
 		36E1E2931D98C3A000674F91 /* dcdsnotifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */; };
 		36E1E29B1D98CBD500674F91 /* CropError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1E29A1D98CBD500674F91 /* CropError.swift */; };
 		36E6E45D1E6E552600E2224C /* ActivitiesDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6E45C1E6E552600E2224C /* ActivitiesDay.swift */; };
@@ -58,13 +58,13 @@
 		06BEF4DC15F583550186905C /* Pods-dcdsnotifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dcdsnotifyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dcdsnotifyTests/Pods-dcdsnotifyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3621AB421DA8050600CF67CA /* BlockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCell.swift; sourceTree = "<group>"; };
 		3621AB441DA8063E00CF67CA /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
-		362B4EB51E2E640B00F09FC6 /* goal3 copy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "goal3 copy.json"; sourceTree = "<group>"; };
 		362B4EB71E2E6CC300F09FC6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		3650C20C1DA68A9900882801 /* DictionarySorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySorting.swift; sourceTree = "<group>"; };
 		3650C20E1DA696D900882801 /* ExcelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcelHelper.swift; sourceTree = "<group>"; };
 		365DA0281E3A358E00B964EF /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		365F3F4A1DA8DB340085B5A6 /* HVCInternetExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HVCInternetExtension.swift; sourceTree = "<group>"; };
 		3683CFD21E4B9A2300F234F9 /* HTMLLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLLog.swift; sourceTree = "<group>"; };
+		36CC849F1EC3726A00125766 /* calendar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = calendar; sourceTree = "<group>"; };
 		36E1E2901D98C3A000674F91 /* dcdsnotifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dcdsnotifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E1E2921D98C3A000674F91 /* dcdsnotifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dcdsnotifyTests.swift; sourceTree = "<group>"; };
 		36E1E2941D98C3A000674F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 		ADA986F51D6A642300C26E6B /* dcdsnotify */ = {
 			isa = PBXGroup;
 			children = (
-				362B4EB51E2E640B00F09FC6 /* goal3 copy.json */,
+				36CC849F1EC3726A00125766 /* calendar */,
 				AD053ACD1D7A428100CBAB8C /* dcdsnotify-Bridging-Header.h */,
 				36F936F21D91A1C6007BCF21 /* dcdsnotify.entitlements */,
 				ADA986F61D6A642300C26E6B /* AppDelegate.swift */,
@@ -368,8 +368,8 @@
 			files = (
 				ADA987011D6A642300C26E6B /* LaunchScreen.storyboard in Resources */,
 				ADA986FE1D6A642300C26E6B /* Assets.xcassets in Resources */,
+				36CC84A01EC3726A00125766 /* calendar in Resources */,
 				ADA986FC1D6A642300C26E6B /* Main.storyboard in Resources */,
-				362B4EB61E2E640B00F09FC6 /* goal3 copy.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
