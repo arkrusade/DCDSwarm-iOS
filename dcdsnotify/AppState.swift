@@ -29,29 +29,29 @@ class AppState {
     {
         if UserDefaults.standard.bool(forKey: LOGIN_STATUS_KEY)
         {
-            //TODO: crash detected
-            let alert = UIAlertController(title: "Crash Detected", message: "Send report to developer?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(UIAlertAction) -> Void in
-                let main = UIStoryboard(name: "Main", bundle: nil)
-                
-                if let nav = sender.navigationController ?? sender as? UINavigationController {
-                    let RVC = main.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Report) as! ReportViewController
-                    nav.pushViewController(RVC, animated: true)
-                    RVC.title = "Send Report"
-                    RVC.loadView()
-                    RVC.sendReport(withLogs: true)
-                }
-                    
-                else {//TODO: fix to make sure RVC can go back
-                    let RVC = main.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Report) as! ReportViewController
-                    
-                    sender.present(RVC, animated: true, completion: ({
-                        RVC.sendReport(withLogs: true)
-                    }))
-                }
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-            sender.present(alert, animated: true)
+            //MARK: crash detected
+//            let alert = UIAlertController(title: "Crash Detected", message: "Send report to developer?", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(UIAlertAction) -> Void in
+//                let main = UIStoryboard(name: "Main", bundle: nil)
+//                
+//                if let nav = sender.navigationController ?? sender as? UINavigationController {
+//                    let RVC = main.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Report) as! ReportViewController
+//                    nav.pushViewController(RVC, animated: true)
+//                    RVC.title = "Send Report"
+//                    RVC.loadView()
+//                    RVC.sendReport(withLogs: true)
+//                }
+//                    
+//                else {//TODO: fix to make sure RVC can go back
+//                    let RVC = main.instantiateViewController(withIdentifier: Constants.ViewControllerIdentifiers.Report) as! ReportViewController
+//                    
+//                    sender.present(RVC, animated: true, completion: ({
+//                        RVC.sendReport(withLogs: true)
+//                    }))
+//                }
+//            }))
+//            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+//            sender.present(alert, animated: true)
         }
         CacheHelper.sharedInstance.storeLogin(login)
         credentials = login
@@ -60,9 +60,8 @@ class AppState {
     }
     
     func logout(_ sender: UIViewController?) {
-        OperationQueue.main.addOperation({
             CacheHelper.clearAll()
-        })
+        
         //TODO: constants
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginVC = storyboard.instantiateInitialViewController() as! LoginViewController
