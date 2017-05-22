@@ -10,7 +10,7 @@ import UIKit
 class AppState {
     static var sharedInstance = AppState()
     
-    private var loggedIn = false {
+    private var loggedIn = false {//TODO: most people will exit/crash teh app anyway, probably should remove this
         didSet {
             UserDefaults.standard.set(self.loggedIn, forKey: LOGIN_STATUS_KEY)
         }
