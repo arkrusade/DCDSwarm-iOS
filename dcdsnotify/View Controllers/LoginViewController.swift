@@ -97,7 +97,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 //cancelled task
                 return
             }
-            guard error == nil || data != nil else {// check for fundamental networking error
+            guard error == nil || data != nil else 	{// check for fundamental networking error
                 print("error=\(error == nil ? "\(error)" : "data is nil")")
                 if error?.code == -1009 {
                     print("no internet")//dealing with offline
@@ -110,7 +110,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 { // check for http errors
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 302 && httpStatus.statusCode != 200{ // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
                 return
@@ -120,8 +120,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //data has been checked for nil
             let urlContentString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) ?? "" as NSString
             let loginCheck = urlContentString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
-            guard loginCheck == "STUDENT PORTAL" else {
-                //TODO: check for parents too
+            guard loginCheck == "STUDENT PORTAL" || loginCheck == "PARENT PORTAL" else {
                 print("Failed Login")
                 ErrorHandling.defaultError("Invalid Username/Password", desc: "Please enter a valid username and password combination", sender: self)
                 return

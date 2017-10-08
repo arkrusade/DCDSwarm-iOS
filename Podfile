@@ -6,8 +6,10 @@ target 'dcdsnotify' do
 #  use_frameworks!
 
   # Pods for dcdsnotify
-
-
+  
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  
  target 'dcdsnotifyTests' do
     inherit! :search_paths
     # Pods for testing
