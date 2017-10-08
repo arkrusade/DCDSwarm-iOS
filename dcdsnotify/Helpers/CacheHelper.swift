@@ -91,7 +91,7 @@ extension CacheHelper {
 //MARK: Login storage
 extension CacheHelper {
     static func clearLogin() {
-        sharedInstance.MyKeychainWrapper.mySetObject("password", forKey: kSecValueData)
+        sharedInstance.MyKeychainWrapper.mySetObject("e", forKey: kSecValueData)
         sharedInstance.MyKeychainWrapper.writeToKeychain()
         UserDefaults.standard.removeObject(forKey: "username")
         UserDefaults.standard.set(false, forKey: "hasLoginKey")

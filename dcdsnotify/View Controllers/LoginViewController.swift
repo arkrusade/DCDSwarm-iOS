@@ -81,11 +81,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         activityIndicator.startAnimating()
         
-        var request = URLRequest(url: Constants.userLoginURL as URL)
+        var request = URLRequest(url: Constants.invalidLoginURL as URL)
         request.httpMethod = "POST"
         let postString = "do=login&p=413&username=\(UsernameTextField.text!)&password=\(PasswordTextField.text!)&submit=login"
         request.httpBody = postString.data(using: String.Encoding.utf8)
-        
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//       request.addValue("application/json", forHTTPHeaderField: "Accept")
+//        request.addValue("\(postString.characters.count)", forHTTPHeaderField: "Content-Length")
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error3: Error?) in
             
             let error = error3 as? NSError

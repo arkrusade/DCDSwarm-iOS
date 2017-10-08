@@ -15,6 +15,7 @@ enum ExcelParsingError: Error	 {
 class ExcelHelper {
     static let sharedInstance = ExcelHelper()
     var schedule: [DaySchedule]?
+    //TODO: changed to cached schedule (via files maybe) 
     var loaded = false
     
     func getSchedule(_ forDay: Date, sender: UIViewController) -> DaySchedule?{
