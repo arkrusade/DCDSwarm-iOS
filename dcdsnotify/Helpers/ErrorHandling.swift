@@ -25,6 +25,9 @@ struct ErrorHandling {
     {
         ErrorHandling.defaultError(DelayedFeatureTitle, desc: DelayedFeatureMessage, sender: sender)
     }
+    static func defaultError(_ error: Error, sender: UIViewController) {
+        ErrorHandling.defaultError(ErrorTitle, desc: error.localizedDescription, sender: sender)
+    }
     static func defaultError(_ error: NSError, sender: UIViewController) {
         ErrorHandling.defaultError(ErrorTitle, desc: error.localizedDescription, sender: sender)
     }
