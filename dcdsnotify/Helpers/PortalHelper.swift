@@ -21,8 +21,7 @@ class PortalHelper {
         if loginCheck == "Member Login" {
             return false
         }
-        else if loginCheck == "STUDENT PORTAL" {
-            //TODO: check for parents too
+        else if loginCheck == "STUDENT PORTAL" || loginCheck == "PARENT PORTAL" {
             return true
         }
         else if loginCheck == "Academics Individual Classes Calendar" {

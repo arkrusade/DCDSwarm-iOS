@@ -120,9 +120,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
             //MARK: Login Check
             //data has been checked for nil
-            let urlContentString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) ?? "" as NSString
-            let loginCheck = urlContentString.cropExclusive("<meta name=\"description\" content=\"", end: " - Detroit")
-            guard loginCheck == "STUDENT PORTAL" || loginCheck == "PARENT PORTAL" else {
+            let urlContentString = String(data: data!, encoding: String.Encoding.utf8) ?? ""
+            if let loginCheck = PortalHelper.checkLoggedIn(urlContentString) {
+                guard loginCheck else {
+                    print("Failed Login")
+                    ErrorHandling.defaultError("Invalid Username/Password", desc: "Please enter a valid username and password combination", sender: self)
+                    return
+                }
+            } else {
                 print("Failed Login")
                 ErrorHandling.defaultError("Invalid Username/Password", desc: "Please enter a valid username and password combination", sender: self)
                 return
